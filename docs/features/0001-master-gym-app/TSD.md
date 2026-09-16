@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-16"
-approved_sha256: "7b23a0c6765ce8f03842cdda3ffcb9fa64f9aeb33f7a1cddea921f061530df0a"
+approved_sha256: "abdee69e8bac5b4e77f37d6f499f7be1ca8fc6026166dcab511d82dec1de82a8"
 ---
 # TSD 0001 — Static Gym App MVP
 > Behavior + contracts ONLY. Never name the library/method/pattern (over-spec = defeats spec-first).
