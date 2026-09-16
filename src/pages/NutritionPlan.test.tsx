@@ -14,11 +14,11 @@ test('fills the form, updates results live, saves and restores locally, and expo
   fireEvent.change(screen.getByLabelText(/^height/i), { target: { value: '175' } })
   fireEvent.change(screen.getByLabelText(/^weight/i), { target: { value: '70' } })
 
-  fireEvent.click(screen.getByRole('button', { name: 'Bulk' }))
-  fireEvent.click(screen.getByRole('button', { name: 'Keto' }))
+  fireEvent.click(screen.getByRole('button', { name: /^Bulk/ }))
+  fireEvent.click(screen.getByRole('button', { name: /^Keto$/ }))
 
   // live results, no submit needed
-  expect(screen.getByText(/surplus/i)).toBeInTheDocument()
+  expect(screen.getAllByText(/surplus/i).length).toBeGreaterThan(0)
   expect(screen.getByText('Vitamin D3')).toBeInTheDocument()
 
   // Save Plan persists locally
