@@ -36,6 +36,12 @@ test('equipment + mechanics narrows to matching exercises only', () => {
   }
 })
 
+// B-2: AC-2: a filter combination with no matching exercises returns an empty list.
+test('a filter combination with no matches returns an empty list', () => {
+  const results = filterExercises({ muscle: 'core', equipment: 'barbell' })
+  expect(results).toEqual([])
+})
+
 test('no filters returns the full exercise set', () => {
   const all = filterExercises({})
   const withAll = filterExercises({ muscle: 'all', difficulty: 'all', equipment: 'all', mechanics: 'any' })
