@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-16"
-approved_sha256: "a43260a0ef1b34c17fc57d83985b6d5141c9ad41bb6a218b75cedfa631339450"
+approved_sha256: "2e4bb1cf75344cacdd19f72e617427bb1c3a2511ad88ee16ff6c513890b67ec8"
 ---
 # PRD 0001 — Static Gym App MVP
 > User stories + acceptance criteria + success metrics. Signed off by PM + SA + DS.
@@ -12,7 +12,19 @@ approved_sha256: "a43260a0ef1b34c17fc57d83985b6d5141c9ad41bb6a218b75cedfa6313394
 
 ---
 
-## Story S-0001.01 — Goal-based routine builder
+## Story S-0001.01 — Shared Tailwind design system
+As a developer I want one Tailwind-based design system (tokens + reusable components) so that all three pages look and behave consistently.
+
+**Acceptance criteria:**
+- [ ] AC-1 [invariant] — Design tokens (color palette, spacing, type scale) are defined once in Tailwind config and are the only source of visual styling values (no ad-hoc hex codes/pixel values in components).
+- [ ] AC-2 [behavior] — A shared component library (e.g. Button, Card, Input, Select, Badge, PageLayout) is reused across all three pages; no page defines its own one-off styled equivalents.
+- [ ] AC-3 [non-functional] — The app is usable and visually consistent at common viewport widths (mobile ~375px, desktop ~1280px).
+
+**Success metric:** all three pages import components exclusively from the shared component library; zero page-local component/style duplication.
+
+---
+
+## Story S-0001.02 — Goal-based routine builder
 As a gym user I want to pick a fitness goal so that I get a workout routine matched to that goal.
 
 **Acceptance criteria:**
@@ -25,7 +37,7 @@ As a gym user I want to pick a fitness goal so that I get a workout routine matc
 
 ---
 
-## Story S-0001.02 — Nutrition plan calculator
+## Story S-0001.03 — Nutrition plan calculator
 As a gym user I want to enter my gender, age, height, and weight so that I get a personalized nutrition plan (calories, macros, key vitamins).
 
 **Acceptance criteria:**
@@ -38,7 +50,7 @@ As a gym user I want to enter my gender, age, height, and weight so that I get a
 
 ---
 
-## Story S-0001.03 — Exercise library by target muscle
+## Story S-0001.04 — Exercise library by target muscle
 As a gym user I want to browse exercises by target muscle/body part so that I can find exercises for the area I want to train, with a demo video.
 
 **Acceptance criteria:**
@@ -48,18 +60,6 @@ As a gym user I want to browse exercises by target muscle/body part so that I ca
 - [ ] AC-4 [e2e] — A user opens the Exercise Library page, picks a muscle group, and sees the filtered list with working video links.
 
 **Success metric:** every muscle group filter returns at least 3 exercises, each with a valid YouTube URL.
-
----
-
-## Story S-0001.04 — Shared Tailwind design system
-As a developer I want one Tailwind-based design system (tokens + reusable components) so that all three pages look and behave consistently.
-
-**Acceptance criteria:**
-- [ ] AC-1 [invariant] — Design tokens (color palette, spacing, type scale) are defined once in Tailwind config and are the only source of visual styling values (no ad-hoc hex codes/pixel values in components).
-- [ ] AC-2 [behavior] — A shared component library (e.g. Button, Card, Input, Select, Badge, PageLayout) is reused across all three pages; no page defines its own one-off styled equivalents.
-- [ ] AC-3 [non-functional] — The app is usable and visually consistent at common viewport widths (mobile ~375px, desktop ~1280px).
-
-**Success metric:** all three pages import components exclusively from the shared component library; zero page-local component/style duplication.
 
 ---
 
