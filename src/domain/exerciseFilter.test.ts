@@ -1,16 +1,44 @@
-import { filterByMuscle, MUSCLE_GROUPS } from './exerciseFilter'
+import { filterExercises } from './exerciseFilter'
 
 const YOUTUBE_URL_RE = /^https:\/\/(www\.)?youtube\.com\/watch\?v=[\w-]+$/
 
-// B-1 (tracer bullet): given a target muscle/body part, filtering returns only
-// exercises targeting that muscle, at least 3 per group, each with a well-formed
-// YouTube URL.
-test.each(MUSCLE_GROUPS)('filters at least 3 well-formed exercises for "%s"', (muscle) => {
-  const exercises = filterByMuscle(muscle)
+// B-1 (tracer bullet): AC-1 + AC-3: filtering returns only exercises matching every
+// active filter, each with a well-formed video reference and non-empty cues.
+test('search + anatomy group narrows to matching exercises only', () => {
+  const results = filterExercises({ search: 'press', muscle: 'chest' })
 
-  expect(exercises.length).toBeGreaterThanOrEqual(3)
-  for (const exercise of exercises) {
-    expect(exercise.targetMuscle).toBe(muscle)
+  expect(results.length).toBeGreaterThan(0)
+  for (const exercise of results) {
+    expect(exercise.targetMuscle).toBe('chest')
+    expect(exercise.name.toLowerCase()).toContain('press')
     expect(exercise.videoUrl).toMatch(YOUTUBE_URL_RE)
+    expect(exercise.cues.length).toBeGreaterThan(0)
   }
+})
+
+test('anatomy group + difficulty narrows to matching exercises only', () => {
+  const results = filterExercises({ muscle: 'core', difficulty: 'beginner' })
+
+  expect(results.length).toBeGreaterThan(0)
+  for (const exercise of results) {
+    expect(exercise.targetMuscle).toBe('core')
+    expect(exercise.difficulty).toBe('beginner')
+  }
+})
+
+test('equipment + mechanics narrows to matching exercises only', () => {
+  const results = filterExercises({ equipment: 'bodyweight', mechanics: 'isolation' })
+
+  expect(results.length).toBeGreaterThan(0)
+  for (const exercise of results) {
+    expect(exercise.equipment).toBe('bodyweight')
+    expect(exercise.mechanics).toBe('isolation')
+  }
+})
+
+test('no filters returns the full exercise set', () => {
+  const all = filterExercises({})
+  const withAll = filterExercises({ muscle: 'all', difficulty: 'all', equipment: 'all', mechanics: 'any' })
+  expect(withAll).toEqual(all)
+  expect(all.length).toBeGreaterThan(0)
 })
