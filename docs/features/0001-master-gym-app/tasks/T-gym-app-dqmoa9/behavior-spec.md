@@ -9,18 +9,18 @@
 > non-functional ACs are not RED→GREEN cycles — any are listed in their own section.
 
 ## B-1 (tracer bullet): AC-1 [behavior]: given a target muscle/body part, filtering returns only exercises targeting that muscle, at least 3 per group.
-- Given:
-- When:
-- Then:
+- Given: each of the seven supported muscle-group identifiers (chest, back, legs, shoulders, arms, core, full-body)
+- When: the exercise-filtering function is called with that muscle group
+- Then: it returns a list of at least 3 exercises, every one of which targets exactly that muscle group, and every exercise carries a well-formed YouTube URL
 
 ## B-2: AC-3 [e2e]: a user opens the Exercise Library page, picks a muscle group, and sees the filtered list with working video links/embeds.
-- Given:
-- When:
-- Then:
+- Given: the Exercise Library screen is rendered, with its muscle-group Select showing no list yet
+- When: the user selects a muscle group (e.g. "chest") from the Select
+- Then: the screen renders the exercises returned by the filtering function for "chest", each with a link/embed pointing at its YouTube URL
 
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
 > behavior above (state which) or is locked by a guard test recorded off-ledger with
 > `lane red --regression`. Non-functional ACs are validated out-of-band (load test, etc.).
-- AC-2 [invariant]: every returned exercise carries a well-formed YouTube video URL; no external API call is made to list/filter. — coverage:
+- AC-2 [invariant]: every returned exercise carries a well-formed YouTube video URL; no external API call is made to list/filter. — coverage: property of B-1/B-2 — the filter is a pure synchronous array filter over bundled static data; verified by code review of the diff (no fetch/XHR/async I/O in `exerciseFilter.ts`), and the URL well-formedness is directly asserted in B-1's test.
 
