@@ -22,3 +22,8 @@ test.each(GOALS)('generates a non-empty, goal-appropriate routine for "%s"', (go
     }
   }
 })
+
+// B-2: generating a routine twice for the same goal returns an identical routine.
+test.each(GOALS)('is deterministic for "%s"', (goal) => {
+  expect(generateRoutine(goal)).toEqual(generateRoutine(goal))
+})
