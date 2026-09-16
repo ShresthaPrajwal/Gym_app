@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-16"
+approved_sha256: "89254145b8c5f3200ac0123e664554eb292a555d6ba26303dc9d4de47a656246"
+---
 ## Task T-gym-app-4b2q6y — Exercise & anatomy library: search, filters, inspector, technique modal
 **Parent:** story S-0001.04 · feature 0001-master-gym-app (docs/features/0001-master-gym-app/ — its PRD + TSD)
 **Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
