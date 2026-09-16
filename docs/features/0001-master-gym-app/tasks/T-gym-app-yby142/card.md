@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-16"
+approved_sha256: "a4edc968cbb3c09f9f141496dadf964ca67b3dd42d7b009d0ccdf83f9d5d6043"
+---
 ## Task T-gym-app-yby142 — Routine Builder: full deterministic weekly plan (threshold/cadence/hardware/target → 7-day plan with instructions + video)
 **Parent:** story S-0001.02 · feature 0001-master-gym-app (docs/features/0001-master-gym-app/ — its PRD + TSD)
 **Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
