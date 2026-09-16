@@ -1,7 +1,8 @@
 ---
-approved_by: ""
-approved_at: ""
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-16"
 planned_behaviors: "1"
+approved_sha256: "0bb89ab683137e9a75fd67b1982a8e182f40024490a52c795cf0a431e8da54b0"
 ---
 ## Exec Plan — Task T-gym-app-781z12
 > Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
