@@ -9,9 +9,9 @@
 > non-functional ACs are not RED→GREEN cycles — any are listed in their own section.
 
 ## B-1 (tracer bullet): AC-1 [behavior]: given a goal (abs, bulk, cut-lean, general-fitness, strength, endurance), generating a routine returns a non-empty weekly routine whose exercises match that goal's expected focus.
-- Given:
-- When:
-- Then:
+- Given: each of the six supported goal identifiers
+- When: the routine-generation function is called with that goal
+- Then: it returns a non-empty list of workout days, each with a non-empty list of exercises, and the exercises' target muscles/movement types match that goal's expected focus (e.g. "abs" -> only core-focused exercises; "bulk" -> includes compound lifts)
 
 ## B-2: AC-2 [behavior]: generating a routine twice for the same goal returns an identical routine (deterministic).
 - Given:
@@ -27,5 +27,5 @@
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
 > behavior above (state which) or is locked by a guard test recorded off-ledger with
 > `lane red --regression`. Non-functional ACs are validated out-of-band (load test, etc.).
-- AC-3 [invariant]: routine generation makes no network call. — coverage:
+- AC-3 [invariant]: routine generation makes no network call. — coverage: property of B-1/B-2 — the generator is a pure synchronous function over bundled static data; verified by code review of the diff (no fetch/XHR/async I/O in `routineGenerator.ts`).
 
