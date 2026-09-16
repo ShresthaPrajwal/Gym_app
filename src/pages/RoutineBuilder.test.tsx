@@ -1,13 +1,26 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { RoutineBuilder } from './RoutineBuilder'
 
-// B-3 (e2e): a user opens the Routine Builder page, selects a goal, and sees the
-// generated routine rendered on screen.
-test('selecting a goal renders the generated routine', () => {
+// B-3 (e2e): a user picks threshold/cadence/hardware, then a target, sees the full
+// 7-day plan (rest days included), drills into a training day, and plays a video.
+test('selecting threshold/cadence/hardware then a target renders the full week and lets a user drill into a day and play a video', () => {
   render(<RoutineBuilder />)
 
-  const select = screen.getByLabelText(/goal/i)
-  fireEvent.change(select, { target: { value: 'abs' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Beginner' }))
+  fireEvent.click(screen.getByRole('button', { name: '3 Days' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Bodyweight/Home' }))
+  fireEvent.click(screen.getByRole('button', { name: /core shred/i }))
 
+  // full 7-day week, rest days included and clearly labeled
+  expect(screen.getAllByText(/^Day \d/).length).toBe(7)
+  expect(screen.getByText(/Rest & Recovery/i)).toBeInTheDocument()
+
+  // drill into a training day
+  fireEvent.click(screen.getByRole('button', { name: /Day 1 —/i }))
   expect(screen.getByText('Plank')).toBeInTheDocument()
+
+  // play a video in place
+  const thumbnail = screen.getByRole('button', { name: /play plank demo/i })
+  fireEvent.click(thumbnail)
+  expect(screen.getByTitle(/plank demo video/i)).toBeInTheDocument()
 })
