@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-16"
-planned_behaviors: "1"
+planned_behaviors: "2"
 approved_sha256: "42693af9178afcf7774c6bd6865f1c79d4beaab7d6ad0a29e91c4e176d315f5f"
 ---
 ## Exec Plan — Task T-gym-app-rbydc8
