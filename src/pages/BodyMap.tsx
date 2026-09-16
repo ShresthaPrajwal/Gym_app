@@ -15,12 +15,12 @@ export function BodyMap({ onSelect }: { onSelect: (muscle: MuscleGroup) => void 
   return (
     <div
       data-ds="body-map"
-      className="relative mx-auto aspect-[2/3] w-full max-w-xs rounded-lg border border-slate-200 bg-slate-50"
+      className="relative mx-auto aspect-[2/3] w-full max-w-xs rounded-md border border-white/10 bg-surface-container-low"
     >
       <svg
         aria-hidden="true"
         viewBox="0 0 100 150"
-        className="absolute inset-0 h-full w-full text-slate-300"
+        className="absolute inset-0 h-full w-full text-surface-container-highest"
       >
         <circle cx="50" cy="12" r="10" fill="currentColor" />
         <rect x="30" y="24" width="40" height="55" rx="8" fill="currentColor" />

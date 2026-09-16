@@ -19,7 +19,7 @@ export function ExerciseLibrary() {
 
   return (
     <PageLayout>
-      <h1 className="text-2xl font-semibold">Exercise Library</h1>
+      <h1 className="font-display text-headline-lg text-white">Exercise Library</h1>
 
       <BodyMap onSelect={setMuscle} />
 
@@ -50,7 +50,7 @@ export function ExerciseLibrary() {
                 href={exercise.videoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm text-brand-700 underline"
+                className="text-sm text-secondary underline"
               >
                 {exercise.name} demo
               </a>

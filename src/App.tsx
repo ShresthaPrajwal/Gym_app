@@ -9,8 +9,8 @@ function App() {
   const [section, setSection] = useState<Section>('routine-builder')
 
   return (
-    <div>
-      <nav className="flex justify-center gap-sm p-md">
+    <div className="min-h-screen bg-surface">
+      <nav className="flex justify-center gap-sm bg-surface-container-lowest p-md">
         <Button
           variant={section === 'routine-builder' ? 'primary' : 'secondary'}
           onClick={() => setSection('routine-builder')}

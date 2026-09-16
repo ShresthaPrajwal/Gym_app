@@ -17,7 +17,7 @@ export function RoutineBuilder() {
 
   return (
     <PageLayout>
-      <h1 className="text-2xl font-semibold">Routine Builder</h1>
+      <h1 className="font-display text-headline-lg text-white">Routine Builder</h1>
       <Select
         aria-label="Goal"
         value={goal}
@@ -37,13 +37,13 @@ export function RoutineBuilder() {
         <div className="flex flex-col gap-md">
           {routine.map((day) => (
             <Card key={day.day}>
-              <h2 className="text-lg font-medium">{day.day}</h2>
+              <h2 className="font-display text-headline-sm text-white">{day.day}</h2>
               <ul className="flex flex-col gap-sm">
                 {day.exercises.map((exercise) => (
                   <li key={exercise.name} className="flex items-center gap-sm">
                     <span>{exercise.name}</span>
                     <Badge>{exercise.targetMuscle}</Badge>
-                    <span className="text-sm">
+                    <span className="text-sm text-on-surface-variant">
                       {exercise.sets} × {exercise.reps} · rest {exercise.rest}
                     </span>
                   </li>

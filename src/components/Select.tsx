@@ -4,7 +4,7 @@ export function Select({ className = '', ...props }: SelectHTMLAttributes<HTMLSe
   return (
     <select
       data-ds="select"
-      className={`w-full rounded-md border border-slate-300 px-md py-sm text-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 ${className}`}
+      className={`w-full rounded border border-outline-variant bg-surface-container-lowest px-md py-sm font-body text-sm text-on-surface focus:border-primary-container focus:shadow-[0_0_12px_rgba(195,244,0,0.25)] focus:outline-none ${className}`}
       {...props}
     />
   )

@@ -3,9 +3,10 @@ import type { ButtonHTMLAttributes } from 'react'
 type Variant = 'primary' | 'secondary' | 'ghost'
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-brand-600 text-white hover:bg-brand-700',
-  secondary: 'bg-white text-brand-700 border border-brand-600 hover:bg-brand-50',
-  ghost: 'bg-brand-500/20 text-brand-800 hover:bg-brand-500/40',
+  primary:
+    'bg-primary-container text-surface hover:shadow-[0_0_20px_rgba(195,244,0,0.35)] hover:-translate-y-px',
+  secondary: 'bg-white/[0.04] border border-outline-variant text-white hover:border-secondary',
+  ghost: 'bg-primary-container/10 text-primary-container hover:bg-primary-container/20',
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -16,7 +17,7 @@ export function Button({ variant = 'primary', className = '', ...props }: Button
   return (
     <button
       data-ds="button"
-      className={`inline-flex items-center justify-center rounded-md px-md py-sm text-sm font-medium transition-colors ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-sm rounded px-md py-sm font-display text-label-md font-bold uppercase tracking-wide transition-all duration-150 ${variantClasses[variant]} ${className}`}
       {...props}
     />
   )
