@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Button } from './components'
 import { ExerciseLibrary } from './pages/ExerciseLibrary'
+import { NutritionPlan } from './pages/NutritionPlan'
 import { RoutineBuilder } from './pages/RoutineBuilder'
 
-type Section = 'routine-builder' | 'exercise-library'
+type Section = 'routine-builder' | 'exercise-library' | 'nutrition-plan'
 
 function App() {
   const [section, setSection] = useState<Section>('routine-builder')
@@ -23,8 +24,16 @@ function App() {
         >
           Exercise Library
         </Button>
+        <Button
+          variant={section === 'nutrition-plan' ? 'primary' : 'secondary'}
+          onClick={() => setSection('nutrition-plan')}
+        >
+          Nutrition Plan
+        </Button>
       </nav>
-      {section === 'routine-builder' ? <RoutineBuilder /> : <ExerciseLibrary />}
+      {section === 'routine-builder' && <RoutineBuilder />}
+      {section === 'exercise-library' && <ExerciseLibrary />}
+      {section === 'nutrition-plan' && <NutritionPlan />}
     </div>
   )
 }
