@@ -19,9 +19,9 @@
 - Then: both calls return deep-equal routines
 
 ## B-3: AC-4 [e2e]: a user opens the Routine Builder page, selects a goal, and sees the generated routine rendered on screen.
-- Given:
-- When:
-- Then:
+- Given: the Routine Builder screen is rendered, with its goal Select showing no routine yet
+- When: the user selects a goal (e.g. "abs") from the Select
+- Then: the screen renders the days/exercises returned by `generateRoutine('abs')` (e.g. "Plank" appears on screen)
 
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
