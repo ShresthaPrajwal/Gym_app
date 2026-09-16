@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-16"
+approved_sha256: "61364125211243ac2b0a1c6ec5afe0a2947c36028f6273654fb6767cb378867d"
+---
 ## Task T-gym-app-dmxlo7 — Nutrition & macro calculator
 **Parent:** story S-0001.03 · feature 0001-master-gym-app (docs/features/0001-master-gym-app/ — its PRD + TSD)
 **Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
