@@ -12,8 +12,8 @@ test('selecting threshold/cadence/hardware then a target renders the full week a
   fireEvent.click(screen.getByRole('button', { name: /core shred/i }))
 
   // full 7-day week, rest days included and clearly labeled
-  expect(screen.getAllByText(/^Day \d/).length).toBe(7)
-  expect(screen.getByText(/Rest & Recovery/i)).toBeInTheDocument()
+  expect(screen.getAllByRole('button', { name: /^Day \d/ }).length).toBe(7)
+  expect(screen.getAllByText(/Rest & Recovery/i).length).toBeGreaterThan(0)
 
   // drill into a training day
   fireEvent.click(screen.getByRole('button', { name: /Day 1 —/i }))

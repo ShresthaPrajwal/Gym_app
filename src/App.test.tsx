@@ -13,11 +13,10 @@ test('app screen uses only shared design-system components, no raw duplicates', 
   expect(container.querySelectorAll('select:not([data-ds="select"])')).toHaveLength(0)
 
   expect(container.querySelector('[data-ds="page-layout"]')).toBeTruthy()
-  expect(container.querySelector('[data-ds="select"]')).toBeTruthy()
 })
 
 test('selecting a goal in the app renders the generated routine', () => {
   render(<App />)
-  fireEvent.change(screen.getByLabelText(/goal/i), { target: { value: 'abs' } })
+  fireEvent.click(screen.getByRole('button', { name: /core shred/i }))
   expect(screen.getByText('Plank')).toBeInTheDocument()
 })
