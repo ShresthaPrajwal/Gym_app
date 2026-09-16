@@ -9,9 +9,9 @@
 > non-functional ACs are not RED→GREEN cycles — any are listed in their own section.
 
 ## B-1 (tracer bullet): AC-1 [behavior]: given gender, age, height, weight, and activity level, calculating a plan returns BMR, TDEE, calorie target, and a protein/carb/fat gram breakdown.
-- Given:
-- When:
-- Then:
+- Given: a male, 30 years old, 180cm tall, 80kg, moderately-active
+- When: `calculateNutritionPlan(input)` is called
+- Then: the result has positive numeric `bmr`, `tdee`, `calorieTarget`, and `macros.{protein,carbs,fat}` gram values, with macro calories (protein*4 + carbs*4 + fat*9) approximately equal to `calorieTarget`
 
 ## B-2: AC-2 [behavior]: the returned plan includes baseline daily vitamin/mineral guidance values.
 - Given:
