@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-16"
-approved_sha256: "b294793fffc2d037625caad8d0f5a6bf1e9606d0cbd0819e67a72b6054ea27d2"
+approved_sha256: "0f03c2c3e68272d8cf9e4b32165b81c5acf8f0b0fb938756e17f5780b59fa37e"
 ---
 # TSD 0001 — Static Gym App MVP
 > Behavior + contracts ONLY. Never name the library/method/pattern (over-spec = defeats spec-first).
@@ -10,12 +10,12 @@ approved_sha256: "b294793fffc2d037625caad8d0f5a6bf1e9606d0cbd0819e67a72b6054ea27
 ## TSD S-0001.01 — Shared design system (PRD §S-0001.01)
 | Aspect | Spec |
 |--------|------|
-| Interfaces | A shared set of visual design tokens (color palette, spacing scale, type scale) and a shared library of reusable UI building blocks (e.g. button, card, text input, select, badge, page layout) consumed by all three views. |
+| Interfaces | A shared set of visual design tokens (color palette, spacing scale, type scale, responsive breakpoints) and a shared library of reusable UI building blocks (e.g. button, card, text input, select, badge, page layout) consumed by all three views. |
 | Data / State | None — presentational only. |
-| Behavior | Every page's visual styling (color, spacing, typography) derives from the shared tokens; no page defines a competing, page-local visual value or duplicate of a shared building block. The app remains legible and usable at common mobile (~375px) and desktop (~1280px) viewport widths. |
+| Behavior | Every page's visual styling (color, spacing, typography, layout) derives from the shared tokens; no page defines a competing, page-local visual value, breakpoint, or duplicate of a shared building block. Layout, spacing, and typography adapt fluidly across mobile (~375px), tablet (~768px), and desktop (~1280px+) viewport widths with no horizontal scrolling or overlapping content. |
 | Access | N/A — internal implementation constraint, not user-facing behavior. |
 | Boundaries | None. |
-| Tests | unit: none (presentational/structural — enforced by code review and story S-0001.05's build check, see PRD AC). integration: a rendered instance of each page uses only shared building blocks (no duplicate/one-off equivalents), verified by a smoke-level render check per page. |
+| Tests | unit: none (presentational/structural — enforced by code review and story S-0001.05's build check, see PRD AC). integration: a rendered instance of each page uses only shared building blocks (no duplicate/one-off equivalents) and renders without layout defects at mobile, tablet, and desktop breakpoints, verified by a smoke-level render check per page. |
 
 ## TSD S-0001.02 — Goal-based routine builder (PRD §S-0001.02)
 | Aspect | Spec |
