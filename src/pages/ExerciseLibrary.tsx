@@ -1,63 +1,230 @@
-import { useState } from 'react'
-import { Badge, Card, PageLayout, Select } from '../components'
-import { MUSCLE_GROUPS, filterExercises, type MuscleGroup } from '../domain/exerciseFilter'
-import { BodyMap } from './BodyMap'
+import { useState, type ReactNode } from 'react'
+import { Badge, Button, Card, Input, PageLayout, VideoThumbnail } from '../components'
+import {
+  DIFFICULTIES,
+  EQUIPMENT_TYPES,
+  MECHANICS,
+  MUSCLE_GROUPS,
+  filterExercises,
+  type Difficulty,
+  type Exercise,
+  type EquipmentType,
+  type Mechanics,
+  type MuscleGroup,
+} from '../domain/exerciseFilter'
+import { AnatomyInspector } from './AnatomyInspector'
+import { ExerciseTechniqueModal } from './ExerciseTechniqueModal'
 
-const MUSCLE_LABELS: Record<MuscleGroup, string> = {
+const ANATOMY_LABELS: Record<MuscleGroup, string> = {
   chest: 'Chest',
-  back: 'Back',
-  legs: 'Legs',
-  shoulders: 'Shoulders',
+  back: 'Back & Lats',
+  legs: 'Legs & Quads',
+  shoulders: 'Shoulders & Delts',
   arms: 'Arms',
-  core: 'Core',
-  'full-body': 'Full body',
+  core: 'Core & Abs',
+  'full-body': 'Full Body & Compound',
+}
+
+const DIFFICULTY_LABELS: Record<Difficulty, string> = {
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+}
+
+const EQUIPMENT_LABELS: Record<EquipmentType, string> = {
+  barbell: 'Barbell',
+  dumbbell: 'Dumbbell',
+  cable: 'Cable',
+  bodyweight: 'Bodyweight',
+}
+
+const MECHANICS_LABELS: Record<Mechanics, string> = {
+  compound: 'Compound',
+  isolation: 'Isolation',
+}
+
+const DEFAULT_FILTERS = {
+  search: '',
+  muscle: 'all' as MuscleGroup | 'all',
+  difficulty: 'all' as Difficulty | 'all',
+  equipment: 'all' as EquipmentType | 'all',
+  mechanics: 'any' as Mechanics | 'any',
 }
 
 export function ExerciseLibrary() {
-  const [muscle, setMuscle] = useState<MuscleGroup | ''>('')
-  const exercises = muscle ? filterExercises({ muscle }) : null
+  const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const [modalExercise, setModalExercise] = useState<Exercise | null>(null)
+  const [added, setAdded] = useState<Set<string>>(new Set())
+
+  const results = filterExercises(filters)
+
+  function update<K extends keyof typeof filters>(key: K, value: (typeof filters)[K]) {
+    setFilters((f) => ({ ...f, [key]: value }))
+  }
+
+  function reset() {
+    setFilters(DEFAULT_FILTERS)
+  }
+
+  function toggleAdded(name: string) {
+    setAdded((prev) => {
+      const next = new Set(prev)
+      if (next.has(name)) next.delete(name)
+      else next.add(name)
+      return next
+    })
+  }
 
   return (
     <PageLayout>
-      <h1 className="font-display text-headline-lg text-white">Exercise Library</h1>
+      <div className="flex flex-col justify-between gap-md lg:flex-row lg:items-end">
+        <div className="flex flex-col gap-xs">
+          <span className="w-fit rounded bg-surface-container-high px-sm py-0.5 font-display text-label-caps uppercase tracking-wider text-primary-container">
+            Static Biomechanic Kinematics
+          </span>
+          <h1 className="font-display text-headline-xl text-white">Exercise &amp; Anatomy Library</h1>
+          <p className="max-w-2xl text-body-md text-on-surface-variant">
+            Movement information, execution guidance, and safety cues for every exercise in the library.
+          </p>
+        </div>
+        <div className="flex gap-md">
+          <div className="rounded bg-surface-container-low p-sm">
+            <div className="font-display text-label-caps uppercase text-on-surface-variant">Active Sector</div>
+            <div className="font-display text-base font-bold text-white">
+              {filters.muscle === 'all' ? 'All' : ANATOMY_LABELS[filters.muscle]}
+            </div>
+          </div>
+          <div className="rounded bg-surface-container-low p-sm">
+            <div className="font-display text-label-caps uppercase text-on-surface-variant">Indexed Drills</div>
+            <div className="font-display text-base font-bold text-primary-container">Indexed Drills: {results.length}</div>
+          </div>
+        </div>
+      </div>
 
-      <BodyMap onSelect={setMuscle} />
+      <Card className="flex flex-col gap-sm">
+        <Input
+          aria-label="Search exercises"
+          placeholder="Search by name, muscle, or equipment…"
+          value={filters.search}
+          onChange={(e) => update('search', e.target.value)}
+        />
 
-      <Select
-        aria-label="Muscle group"
-        value={muscle}
-        onChange={(e) => setMuscle(e.target.value as MuscleGroup)}
-      >
-        <option value="" disabled>
-          Select a muscle group
-        </option>
-        {MUSCLE_GROUPS.map((m) => (
-          <option key={m} value={m}>
-            {MUSCLE_LABELS[m]}
-          </option>
-        ))}
-      </Select>
-
-      {exercises && (
-        <div className="flex flex-col gap-md">
-          {exercises.map((exercise) => (
-            <Card key={exercise.name}>
-              <div className="flex items-center gap-sm">
-                <span>{exercise.name}</span>
-                <Badge>{exercise.targetMuscle}</Badge>
-              </div>
-              <a
-                href={exercise.videoUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm text-secondary underline"
-              >
-                {exercise.name} demo
-              </a>
-            </Card>
+        <div role="group" aria-label="Anatomy Group" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+          <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>
+            All
+          </PillButton>
+          {MUSCLE_GROUPS.map((m) => (
+            <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
+              {ANATOMY_LABELS[m]}
+            </PillButton>
           ))}
         </div>
-      )}
+
+        <div className="grid grid-cols-1 gap-sm sm:grid-cols-3">
+          <div role="group" aria-label="Difficulty" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+            <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>
+              All
+            </PillButton>
+            {DIFFICULTIES.map((d) => (
+              <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
+                {DIFFICULTY_LABELS[d]}
+              </PillButton>
+            ))}
+          </div>
+          <div role="group" aria-label="Equipment" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+            <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>
+              All
+            </PillButton>
+            {EQUIPMENT_TYPES.map((e) => (
+              <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
+                {EQUIPMENT_LABELS[e]}
+              </PillButton>
+            ))}
+          </div>
+          <div role="group" aria-label="Mechanics" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+            <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>
+              Any
+            </PillButton>
+            {MECHANICS.map((m) => (
+              <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
+                {MECHANICS_LABELS[m]}
+              </PillButton>
+            ))}
+          </div>
+        </div>
+
+        <Button variant="secondary" onClick={reset} className="self-start">
+          Reset Matrix
+        </Button>
+      </Card>
+
+      <div className="grid grid-cols-1 items-start gap-md lg:grid-cols-12">
+        <div className="flex flex-col gap-sm lg:col-span-8">
+          {results.length === 0 ? (
+            <Card className="flex flex-col items-center gap-sm py-xl text-center">
+              <span className="text-2xl">🔍</span>
+              <h2 className="font-display text-headline-sm text-white">No Matching Exercises</h2>
+              <p className="text-body-sm text-on-surface-variant">
+                No exercise matches the current search and filters. Try loosening a filter or resetting the matrix.
+              </p>
+              <Button variant="secondary" onClick={reset}>
+                Reset Filter Matrix
+              </Button>
+            </Card>
+          ) : (
+            results.map((exercise) => (
+              <Card key={exercise.name} className="flex gap-sm">
+                <VideoThumbnail name={exercise.name} videoUrl={exercise.videoUrl} className="shrink-0" />
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-sm">
+                    <h3 className="font-display text-base font-bold text-white">{exercise.name}</h3>
+                    <Badge>{exercise.targetMuscle}</Badge>
+                    <Badge>{DIFFICULTY_LABELS[exercise.difficulty]}</Badge>
+                    <Badge>{EQUIPMENT_LABELS[exercise.equipment]}</Badge>
+                    <Badge>{MECHANICS_LABELS[exercise.mechanics]}</Badge>
+                  </div>
+                  <div className="mt-sm">
+                    <span className="font-display text-label-caps uppercase text-on-surface-variant">
+                      Cues &amp; Kinematic Path
+                    </span>
+                    <ol className="mt-1 list-decimal space-y-0.5 pl-md text-body-sm text-on-surface-variant">
+                      {exercise.cues.map((cue) => (
+                        <li key={cue}>{cue}</li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div className="mt-sm flex gap-sm">
+                    <Button variant="secondary" onClick={() => setModalExercise(exercise)}>
+                      Watch Demo
+                    </Button>
+                    <Button variant={added.has(exercise.name) ? 'primary' : 'ghost'} onClick={() => toggleAdded(exercise.name)}>
+                      {added.has(exercise.name) ? 'Added ✓' : '+ Add to Routine'}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))
+          )}
+        </div>
+
+        <div className="lg:sticky lg:top-md lg:col-span-4">
+          <AnatomyInspector selected={filters.muscle} onSelect={(m) => update('muscle', m)} />
+        </div>
+      </div>
+
+      {modalExercise && <ExerciseTechniqueModal exercise={modalExercise} onClose={() => setModalExercise(null)} />}
     </PageLayout>
+  )
+}
+
+function PillButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <Button
+      variant="pill"
+      onClick={onClick}
+      className={active ? 'bg-surface-container-high text-primary-container shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}
+    >
+      {children}
+    </Button>
   )
 }

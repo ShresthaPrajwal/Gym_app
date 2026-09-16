@@ -56,3 +56,9 @@ export function filterExercises(filters: ExerciseFilters): Exercise[] {
     return true
   })
 }
+
+// Real, constructed YouTube search (not a curated video) — the technique modal's
+// "Watch on YouTube" action doesn't need a per-exercise curated video reference.
+export function buildTechniqueSearchUrl(exerciseName: string): string {
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(`${exerciseName} technique tutorial`)}`
+}
