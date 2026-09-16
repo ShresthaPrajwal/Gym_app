@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { Badge, Button, Card, PageLayout, Select } from '../components'
-import { GOALS, generateRoutine, type Goal } from '../domain/routineGenerator'
+import { GOALS, generateWeeklyPlan, type Goal, type WeekDay } from '../domain/routineGenerator'
+
+// TODO(B-3): temporary fixed threshold/cadence/hardware until the pill controls +
+// rest-day/video UI land — see task T-gym-app-yby142.
+function isTrainingDay(d: WeekDay): d is Extract<WeekDay, { isRest: false }> {
+  return !d.isRest
+}
 
 const GOAL_META: Record<Goal, { label: string; description: string }> = {
   abs: { label: 'Core Shred', description: 'Visceral density & rotational stability' },
@@ -14,7 +20,7 @@ const GOAL_META: Record<Goal, { label: string; description: string }> = {
 export function RoutineBuilder() {
   const [goal, setGoal] = useState<Goal | ''>('')
   const [dayIndex, setDayIndex] = useState(0)
-  const routine = goal ? generateRoutine(goal) : null
+  const routine = goal ? generateWeeklyPlan(goal, 'intermediate', 5, 'full').filter(isTrainingDay) : null
   const day = routine?.[Math.min(dayIndex, routine.length - 1)]
 
   function selectGoal(g: Goal) {

@@ -1,36 +1,26 @@
 # Behavior Spec — T-gym-app-yby142: Routine Builder: full deterministic weekly plan (threshold/cadence/hardware/target → 7-day plan with instructions + video)
-> Source: task card ACs + docs/features/0001-master-gym-app/tasks/T-gym-app-yby142/snapshot-TSD.md
+> Source: task card ACs + docs/features/0001-master-gym-app/tasks/T-gym-app-yby142/snapshot-TSD.md + exec-plan.md
 > One test at a time. B-1 = tracer bullet. Never write B-N+1 before B-N is GREEN.
-> Fill a behavior's Given/When/Then JUST BEFORE you `lane red` it — `lane red` checks
-> only the behavior it's about to prove, so later B-N may stay stubs until their turn.
-> B-N below seed from the card's drivable ACs (behavior / e2e) — a starting point, not
-> final. One AC may be several behaviors (split it); the Critic may surface more (add
-> them). B-numbering is the Coordinator's, not fixed by AC count. Invariant /
-> non-functional ACs are not RED→GREEN cycles — any are listed in their own section.
+> Renumbered from the exec plan: B-1 covers AC-2+AC-4 (domain shape + determinism), B-2
+> covers AC-3 (hardware constraint), B-3 covers AC-1+AC-5 (full UI e2e).
 
-## B-1 (tracer bullet): AC-1 [behavior]: a user selects an adaptation threshold (Beginner/Intermediate/Advanced), a microcycle cadence (3/4/5/6 Days), and available hardware (Full Facility/Dumbbell Only/Bodyweight-Home) before choosing a primary target.
-- Given:
-- When:
-- Then:
+## B-1 (tracer bullet): AC-2 [behavior] + AC-4 [invariant]: generating a weekly plan returns a full 7-day week with exactly `cadence` training days and the rest explicit rest days, deterministically.
+- Given: goal `bulk`, experience `intermediate`, cadence `5`, hardware `full`
+- When: the weekly plan is generated for these inputs
+- Then: the result has exactly 7 entries; exactly 5 are training days (non-empty exercise lists) and exactly 2 are explicit rest days; calling generation again with the same 4 inputs returns an identical result
 
-## B-2: AC-2 [behavior]: after the three selections above, choosing a primary target (Core Shred/Mass Hypertrophy/Lean Definition/Total Health/Peak Strength/Endurance) produces a full 7-day plan — exactly `cadence` days are training days matched to the target's focus, and the remaining days are explicit, clearly labeled rest/recovery days (never blank or missing days).
-- Given:
-- When:
-- Then:
+## B-2: AC-3 [behavior]: no exercise in the produced plan requires hardware outside the selected constraint.
+- Given: goal `bulk`, experience `intermediate`, cadence `5`, hardware `bodyweight`
+- When: the weekly plan is generated for these inputs
+- Then: every exercise across every training day has a hardware requirement of `bodyweight` only (never `dumbbell` or `full`)
 
-## B-3: AC-3 [behavior]: no exercise in the produced plan requires hardware outside the selected constraint (e.g. Bodyweight/Home never includes a barbell- or machine-only exercise).
-- Given:
-- When:
-- Then:
-
-## B-4: AC-5 [e2e]: selecting a day in the plan shows that day's exercises in a left column, each with its target muscle, sets/reps/rest, a short instructional cue for performing it, and a video thumbnail that plays in place (no navigating away from the page).
-- Given:
-- When:
-- Then:
+## B-3 (e2e): AC-1 [behavior] + AC-5 [e2e]: a user picks threshold/cadence/hardware, then a target, sees the full 7-day plan, and can inspect a day's exercises with a playable video thumbnail.
+- Given: the Routine Builder page is open
+- When: the user selects an adaptation threshold, a microcycle cadence, available hardware, then a primary target, then clicks a training day in the day list, then clicks an exercise's video thumbnail
+- Then: the full 7-day plan is rendered (rest days visibly labeled, no day missing); the selected day's exercises appear with target muscle, sets/reps/rest, and instructions; the clicked video thumbnail is replaced by a playable embed
 
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
 > behavior above (state which) or is locked by a guard test recorded off-ledger with
 > `lane red --regression`. Non-functional ACs are validated out-of-band (load test, etc.).
-- AC-4 [invariant]: the same four selections always produce the identical 7-day plan (deterministic, no randomness); changing any one of the four selections recomputes and replaces the entire displayed plan. — coverage:
-
+- AC-4 [invariant]: determinism — covered directly inside B-1's test (repeated-call assertion), not a separate cycle.
