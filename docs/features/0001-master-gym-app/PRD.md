@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-16"
-approved_sha256: "2e4bb1cf75344cacdd19f72e617427bb1c3a2511ad88ee16ff6c513890b67ec8"
+approved_sha256: "7589784ce84247a777728d58a67866a066a8d3e44d9f6a339b94dda40497a8b1"
 ---
 # PRD 0001 — Static Gym App MVP
 > User stories + acceptance criteria + success metrics. Signed off by PM + SA + DS.
@@ -18,9 +18,9 @@ As a developer I want one Tailwind-based design system (tokens + reusable compon
 **Acceptance criteria:**
 - [ ] AC-1 [invariant] — Design tokens (color palette, spacing, type scale) are defined once in Tailwind config and are the only source of visual styling values (no ad-hoc hex codes/pixel values in components).
 - [ ] AC-2 [behavior] — A shared component library (e.g. Button, Card, Input, Select, Badge, PageLayout) is reused across all three pages; no page defines its own one-off styled equivalents.
-- [ ] AC-3 [non-functional] — The app is usable and visually consistent at common viewport widths (mobile ~375px, desktop ~1280px).
+- [ ] AC-3 [non-functional] — The app is responsive: layout, spacing, and typography adapt fluidly across viewport widths (mobile ~375px, tablet ~768px, desktop ~1280px+) with no horizontal scrolling or overlapping content, using the design system's responsive breakpoints rather than page-specific media queries.
 
-**Success metric:** all three pages import components exclusively from the shared component library; zero page-local component/style duplication.
+**Success metric:** all three pages import components exclusively from the shared component library; zero page-local component/style duplication; every page passes a visual check at mobile, tablet, and desktop breakpoints with no layout defects.
 
 ---
 
