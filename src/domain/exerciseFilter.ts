@@ -4,9 +4,19 @@ export const MUSCLE_GROUPS = ['chest', 'back', 'legs', 'shoulders', 'arms', 'cor
 export type MuscleGroup = (typeof MUSCLE_GROUPS)[number]
 
 // bodyweight ⊂ dumbbell ⊂ full — an exercise tagged 'bodyweight' is includable under any
-// hardware selection; 'full'-tagged only when Full Facility is selected.
+// hardware selection; 'full'-tagged only when Full Facility is selected. (Routine Builder's
+// coarse hardware-availability tier — distinct from the granular `equipment` field below.)
 export const HARDWARE_TIERS = ['bodyweight', 'dumbbell', 'full'] as const
 export type HardwareTier = (typeof HARDWARE_TIERS)[number]
+
+export const DIFFICULTIES = ['beginner', 'intermediate', 'advanced'] as const
+export type Difficulty = (typeof DIFFICULTIES)[number]
+
+export const EQUIPMENT_TYPES = ['barbell', 'dumbbell', 'cable', 'bodyweight'] as const
+export type EquipmentType = (typeof EQUIPMENT_TYPES)[number]
+
+export const MECHANICS = ['compound', 'isolation'] as const
+export type Mechanics = (typeof MECHANICS)[number]
 
 export type Exercise = {
   name: string
@@ -17,8 +27,32 @@ export type Exercise = {
   baseSets: number
   baseReps: string
   baseRest: string
+  difficulty: Difficulty
+  equipment: EquipmentType
+  mechanics: Mechanics
+  cues: string[]
 }
 
-export function filterByMuscle(muscle: MuscleGroup): Exercise[] {
-  return EXERCISES.filter((exercise) => exercise.targetMuscle === muscle)
+export type ExerciseFilters = {
+  search?: string
+  muscle?: MuscleGroup | 'all'
+  difficulty?: Difficulty | 'all'
+  equipment?: EquipmentType | 'all'
+  mechanics?: Mechanics | 'any'
+}
+
+export function filterExercises(filters: ExerciseFilters): Exercise[] {
+  const search = filters.search?.trim().toLowerCase()
+
+  return EXERCISES.filter((exercise) => {
+    if (filters.muscle && filters.muscle !== 'all' && exercise.targetMuscle !== filters.muscle) return false
+    if (filters.difficulty && filters.difficulty !== 'all' && exercise.difficulty !== filters.difficulty) return false
+    if (filters.equipment && filters.equipment !== 'all' && exercise.equipment !== filters.equipment) return false
+    if (filters.mechanics && filters.mechanics !== 'any' && exercise.mechanics !== filters.mechanics) return false
+    if (search) {
+      const haystack = `${exercise.name} ${exercise.targetMuscle} ${exercise.equipment}`.toLowerCase()
+      if (!haystack.includes(search)) return false
+    }
+    return true
+  })
 }

@@ -11,6 +11,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '6-8',
     baseRest: '2min',
+    difficulty: 'intermediate',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Set up on the bench with feet flat, shoulder blades retracted and pinned down.',
+      'Unrack and lower the bar with control to mid-chest.',
+      'Press explosively back to lockout while keeping shoulders retracted.',
+    ],
   },
   {
     name: 'Push-up',
@@ -21,6 +29,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '12-15',
     baseRest: '45s',
+    difficulty: 'beginner',
+    equipment: 'bodyweight',
+    mechanics: 'compound',
+    cues: [
+      'Hands slightly wider than shoulders, body in a straight line.',
+      'Lower your chest to just above the floor, elbows at ~45°.',
+      'Press back up without letting your hips sag.',
+    ],
   },
   {
     name: 'Incline Dumbbell Press',
@@ -31,6 +47,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '10',
     baseRest: '75s',
+    difficulty: 'intermediate',
+    equipment: 'dumbbell',
+    mechanics: 'compound',
+    cues: [
+      'Set the bench to a 30-45° incline.',
+      'Lower the dumbbells with control to chest level.',
+      'Press up and slightly inward over your upper chest.',
+    ],
   },
 
   // back
@@ -43,6 +67,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 5,
     baseReps: '5',
     baseRest: '3min',
+    difficulty: 'advanced',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Set up with the bar over mid-foot, shins close to the bar.',
+      'Brace your core and grip the bar just outside your knees.',
+      'Drive through your heels, keeping the bar close, to stand tall.',
+    ],
   },
   {
     name: 'Barbell Row',
@@ -53,6 +85,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '8',
     baseRest: '90s',
+    difficulty: 'intermediate',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Hinge at the hips to roughly 45°, flat back.',
+      'Pull the bar to your lower ribcage, elbows close to the body.',
+      'Squeeze your shoulder blades together at the top before lowering.',
+    ],
   },
   {
     name: 'Pull-up',
@@ -63,6 +103,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '8-10',
     baseRest: '90s',
+    difficulty: 'intermediate',
+    equipment: 'bodyweight',
+    mechanics: 'compound',
+    cues: [
+      'Hang from the bar with an overhand grip, shoulders active.',
+      'Pull your chin over the bar, leading with your elbows.',
+      'Lower with control to a full dead hang.',
+    ],
   },
 
   // legs
@@ -75,6 +123,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 5,
     baseReps: '5',
     baseRest: '3min',
+    difficulty: 'advanced',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Bar on your upper back, feet shoulder-width apart.',
+      'Brace your core and sit back and down, hips below knees.',
+      'Drive through your whole foot to stand back up.',
+    ],
   },
   {
     name: 'Lunge',
@@ -85,6 +141,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '12 each leg',
     baseRest: '45s',
+    difficulty: 'beginner',
+    equipment: 'bodyweight',
+    mechanics: 'compound',
+    cues: [
+      'Step forward into a long stride, torso upright.',
+      'Lower until both knees are bent to roughly 90°.',
+      'Push through the front heel back to standing.',
+    ],
   },
   {
     name: 'Leg Press',
@@ -95,6 +159,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '10',
     baseRest: '90s',
+    difficulty: 'beginner',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Feet shoulder-width on the platform, lower back flat against the pad.',
+      'Lower the sled until your knees reach about 90°.',
+      'Press through your heels back to the start, without locking out hard.',
+    ],
   },
 
   // shoulders
@@ -107,6 +179,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '6-8',
     baseRest: '2min',
+    difficulty: 'intermediate',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Bar at collarbone height, grip just outside shoulders.',
+      'Brace your core and press the bar straight overhead.',
+      'Lock out with your head through the "window" between your arms.',
+    ],
   },
   {
     name: 'Lateral Raise',
@@ -117,6 +197,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '12-15',
     baseRest: '45s',
+    difficulty: 'beginner',
+    equipment: 'dumbbell',
+    mechanics: 'isolation',
+    cues: [
+      'Stand tall, dumbbells at your sides, slight bend in the elbows.',
+      'Raise both arms out to the sides to shoulder height.',
+      'Lower with control — don’t use momentum to swing the weight up.',
+    ],
   },
   {
     name: 'Face Pull',
@@ -127,6 +215,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '15',
     baseRest: '45s',
+    difficulty: 'beginner',
+    equipment: 'cable',
+    mechanics: 'isolation',
+    cues: [
+      'Set the cable at roughly face height with a rope attachment.',
+      'Pull the rope toward your face, flaring your elbows out wide.',
+      'Squeeze your rear delts/upper back at the end of the movement.',
+    ],
   },
 
   // arms
@@ -139,6 +235,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '10',
     baseRest: '60s',
+    difficulty: 'beginner',
+    equipment: 'barbell',
+    mechanics: 'isolation',
+    cues: [
+      'Stand tall, grip shoulder-width, elbows pinned to your sides.',
+      'Curl the bar up without swinging your torso.',
+      'Lower with control back to a full stretch.',
+    ],
   },
   {
     name: 'Tricep Pushdown',
@@ -149,6 +253,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '12',
     baseRest: '60s',
+    difficulty: 'beginner',
+    equipment: 'cable',
+    mechanics: 'isolation',
+    cues: [
+      'Set the cable high with a straight or rope attachment.',
+      'Keep your elbows pinned to your sides throughout.',
+      'Extend your arms fully and squeeze your triceps at the bottom.',
+    ],
   },
   {
     name: 'Hammer Curl',
@@ -159,6 +271,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '10 each arm',
     baseRest: '60s',
+    difficulty: 'beginner',
+    equipment: 'dumbbell',
+    mechanics: 'isolation',
+    cues: [
+      'Stand tall holding dumbbells with a neutral (palms-in) grip.',
+      'Curl with your upper arms stationary against your sides.',
+      'Lower with control back to a full stretch.',
+    ],
   },
 
   // core
@@ -171,6 +291,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '45s',
     baseRest: '30s',
+    difficulty: 'beginner',
+    equipment: 'bodyweight',
+    mechanics: 'isolation',
+    cues: [
+      'Forearms and toes on the ground, elbows under shoulders.',
+      'Brace your core and squeeze your glutes.',
+      'Hold a straight line from head to heels — no sagging hips.',
+    ],
   },
   {
     name: 'Bicycle Crunch',
@@ -181,6 +309,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '20',
     baseRest: '30s',
+    difficulty: 'beginner',
+    equipment: 'bodyweight',
+    mechanics: 'isolation',
+    cues: [
+      'Lie on your back, hands lightly behind your head.',
+      'Rotate to bring opposite elbow toward the opposite knee.',
+      'Extend the other leg out and alternate in a controlled pedaling motion.',
+    ],
   },
   {
     name: 'Hanging Leg Raise',
@@ -191,6 +327,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '12',
     baseRest: '45s',
+    difficulty: 'intermediate',
+    equipment: 'bodyweight',
+    mechanics: 'isolation',
+    cues: [
+      'Hang from a bar with a firm overhand grip.',
+      'Raise your legs to hip height or higher, keeping them straight if possible.',
+      'Lower with control — avoid swinging for momentum.',
+    ],
   },
 
   // full-body
@@ -203,6 +347,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 3,
     baseReps: '15',
     baseRest: '30s',
+    difficulty: 'intermediate',
+    equipment: 'bodyweight',
+    mechanics: 'compound',
+    cues: [
+      'Drop into a squat and place your hands on the floor.',
+      'Kick your feet back into a plank position.',
+      'Jump feet back in and explode upward into a jump.',
+    ],
   },
   {
     name: 'Kettlebell Swing',
@@ -213,6 +365,14 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '15',
     baseRest: '45s',
+    difficulty: 'intermediate',
+    equipment: 'dumbbell',
+    mechanics: 'compound',
+    cues: [
+      'Hinge at the hips with the weight between your knees.',
+      'Snap your hips forward explosively to swing the weight up.',
+      'Let the weight swing back down and repeat the hip hinge.',
+    ],
   },
   {
     name: 'Clean and Press',
@@ -223,5 +383,13 @@ export const EXERCISES: Exercise[] = [
     baseSets: 4,
     baseReps: '6',
     baseRest: '2min',
+    difficulty: 'advanced',
+    equipment: 'barbell',
+    mechanics: 'compound',
+    cues: [
+      'Set up over the bar as in a deadlift, shins close.',
+      'Pull the bar explosively and receive it at your shoulders.',
+      'Drive the bar overhead in one fluid motion to lockout.',
+    ],
   },
 ]

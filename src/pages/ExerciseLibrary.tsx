@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Badge, Card, PageLayout, Select } from '../components'
-import { MUSCLE_GROUPS, filterByMuscle, type MuscleGroup } from '../domain/exerciseFilter'
+import { MUSCLE_GROUPS, filterExercises, type MuscleGroup } from '../domain/exerciseFilter'
 import { BodyMap } from './BodyMap'
 
 const MUSCLE_LABELS: Record<MuscleGroup, string> = {
@@ -15,7 +15,7 @@ const MUSCLE_LABELS: Record<MuscleGroup, string> = {
 
 export function ExerciseLibrary() {
   const [muscle, setMuscle] = useState<MuscleGroup | ''>('')
-  const exercises = muscle ? filterByMuscle(muscle) : null
+  const exercises = muscle ? filterExercises({ muscle }) : null
 
   return (
     <PageLayout>
