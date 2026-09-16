@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-16"
+approved_sha256: "32347e6f6a650bcaab132af2cd3139a1d08788edc3a16d4bd60be3b4f079a836"
+---
 ## Verification — Task T-gym-app-dqmoa9 — 2026-09-16
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
 
