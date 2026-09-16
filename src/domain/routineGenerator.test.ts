@@ -20,3 +20,16 @@ test('generates a full 7-day week with exactly `cadence` training days, determin
 
   expect(generateWeeklyPlan('bulk', 'intermediate', 5, 'full')).toEqual(plan)
 })
+
+// B-2: no exercise in a hardware-constrained plan exceeds the selected hardware tier.
+test('respects the bodyweight/home hardware constraint', () => {
+  const plan = generateWeeklyPlan('bulk', 'intermediate', 5, 'bodyweight')
+
+  for (const day of plan) {
+    if (!day.isRest) {
+      for (const exercise of day.exercises) {
+        expect(exercise.hardware).toBe('bodyweight')
+      }
+    }
+  }
+})
