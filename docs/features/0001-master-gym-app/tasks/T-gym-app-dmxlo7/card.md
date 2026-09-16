@@ -1,17 +1,14 @@
----
-approved_by: "ShresthaPrajwal"
-approved_at: "2026-09-16"
-approved_sha256: "5e84992b1efa31fbe84a7f5b45683d45c84b7c14b6711451338c4aad3e3eeea2"
----
-## Task T-gym-app-dmxlo7 — Nutrition plan calculator
+## Task T-gym-app-dmxlo7 — Nutrition & macro calculator
 **Parent:** story S-0001.03 · feature 0001-master-gym-app (docs/features/0001-master-gym-app/ — its PRD + TSD)
 **Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
 **Acceptance criteria:** (tag each `behavior`/`invariant`/`non-functional`/`e2e`; behavior ACs = observable outcome through an interface — NO "calls X / saves to table Y / uses lib Z")
-- [ ] AC-1 [behavior]: given gender, age, height, weight, and activity level, calculating a plan returns BMR, TDEE, calorie target, and a protein/carb/fat gram breakdown.
-- [ ] AC-2 [behavior]: the returned plan includes baseline daily vitamin/mineral guidance values.
-- [ ] AC-3 [non-functional]: BMR/TDEE/macro output matches hand-calculated reference values (one male case, one female case) within 1%.
-- [ ] AC-4 [e2e]: a user opens the Nutrition page, submits the form, and sees the computed plan rendered with no network request made.
-**End-to-end AC:** AC-4 [e2e] — reachable through the running app.
-**Tests:** AC-3, AC-1, AC-2, AC-4
+- [ ] AC-1 [behavior]: given biological sex, age, height, weight (metric or imperial), and activity level, calculating returns BMR and TDEE.
+- [ ] AC-2 [behavior]: given a fitness goal (Cut, Maintenance, or Bulk), the target daily calories reflect that goal's adjustment to TDEE (deficit, maintenance, or surplus respectively), and the result is labeled with which one it is.
+- [ ] AC-3 [behavior]: given a macro preset (High Carb, Moderate, Low Carb, or Keto), the protein/carbohydrate/fat breakdown (grams, calories, percentage of target calories, and grams per kg bodyweight, for each) reflects that preset, and the three macros' calories sum to the target calories within rounding.
+- [ ] AC-4 [behavior]: the results include a micronutrient/supplement reference list covering Vitamin D3, Calcium, Magnesium Glycinate, Iron, Zinc, Omega-3, and Creatine Monohydrate, each with its recommended athletic intake and purpose.
+- [ ] AC-5 [non-functional]: BMR/TDEE/macro output matches hand-calculated reference values (one male case, one female case, at least one non-default goal, at least one non-default macro preset) within 1%.
+- [ ] AC-6 [e2e]: a user opens the Nutrition page, fills the form, picks a goal and a macro preset, sees the results update with no network request made, uses Save Plan (state persists locally — e.g. survives a remount), and uses Export JSON (produces a file/blob containing the biometrics, calorie calculations, macro breakdown, and micronutrient list).
+**End-to-end AC:** AC-6 [e2e] — reachable through the running app.
+**Tests:** AC-1, AC-2, AC-3, AC-4, AC-5, AC-6
 **Test scope:** tests/T-gym-app-dmxlo7/
 **Done =** reviewable PR, all tests pass, links to chain. One PR per task (default).
