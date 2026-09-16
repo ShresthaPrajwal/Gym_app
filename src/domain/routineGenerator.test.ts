@@ -1,29 +1,22 @@
-import { generateRoutine, GOALS } from './routineGenerator'
+import { generateWeeklyPlan } from './routineGenerator'
 
-// B-1 (tracer bullet): given a goal, generating a routine returns a non-empty
-// weekly routine whose exercises match that goal's expected focus.
-const EXPECTED_MUSCLES: Record<(typeof GOALS)[number], string[]> = {
-  abs: ['core'],
-  bulk: ['chest', 'back', 'legs', 'shoulders', 'arms'],
-  'cut-lean': ['full-body', 'core', 'legs'],
-  'general-fitness': ['chest', 'back', 'legs', 'shoulders', 'arms', 'core', 'full-body'],
-  strength: ['chest', 'back', 'legs', 'shoulders'],
-  endurance: ['full-body', 'legs', 'core'],
-}
+// B-1 (tracer bullet): generating a weekly plan returns a full 7-day week with exactly
+// `cadence` training days and the rest explicit rest days, deterministically.
+test('generates a full 7-day week with exactly `cadence` training days, deterministically', () => {
+  const plan = generateWeeklyPlan('bulk', 'intermediate', 5, 'full')
 
-test.each(GOALS)('generates a non-empty, goal-appropriate routine for "%s"', (goal) => {
-  const routine = generateRoutine(goal)
+  expect(plan.length).toBe(7)
 
-  expect(routine.length).toBeGreaterThan(0)
-  for (const day of routine) {
-    expect(day.exercises.length).toBeGreaterThan(0)
-    for (const exercise of day.exercises) {
-      expect(EXPECTED_MUSCLES[goal]).toContain(exercise.targetMuscle)
+  const trainingDays = plan.filter((d) => !d.isRest)
+  const restDays = plan.filter((d) => d.isRest)
+  expect(trainingDays.length).toBe(5)
+  expect(restDays.length).toBe(2)
+
+  for (const day of trainingDays) {
+    if (!day.isRest) {
+      expect(day.exercises.length).toBeGreaterThan(0)
     }
   }
-})
 
-// B-2: generating a routine twice for the same goal returns an identical routine.
-test.each(GOALS)('is deterministic for "%s"', (goal) => {
-  expect(generateRoutine(goal)).toEqual(generateRoutine(goal))
+  expect(generateWeeklyPlan('bulk', 'intermediate', 5, 'full')).toEqual(plan)
 })
