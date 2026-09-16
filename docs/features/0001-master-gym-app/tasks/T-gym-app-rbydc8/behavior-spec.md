@@ -14,9 +14,9 @@
 - Then: it returns a non-empty list of workout days, each with a non-empty list of exercises, and the exercises' target muscles/movement types match that goal's expected focus (e.g. "abs" -> only core-focused exercises; "bulk" -> includes compound lifts)
 
 ## B-2: AC-2 [behavior]: generating a routine twice for the same goal returns an identical routine (deterministic).
-- Given:
-- When:
-- Then:
+- Given: any supported goal identifier
+- When: the routine-generation function is called twice with that same goal
+- Then: both calls return deep-equal routines
 
 ## B-3: AC-4 [e2e]: a user opens the Routine Builder page, selects a goal, and sees the generated routine rendered on screen.
 - Given:
