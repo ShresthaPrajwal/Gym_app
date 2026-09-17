@@ -350,6 +350,7 @@ export function AnatomyInspector({
   return (
     <div
       data-ds="anatomy-inspector"
+      data-testid="anatomy-inspector"
       className="rounded-md border border-white/10 bg-surface-container-lowest p-md"
     >
       <svg

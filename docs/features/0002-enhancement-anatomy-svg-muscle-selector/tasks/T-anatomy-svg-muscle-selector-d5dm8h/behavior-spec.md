@@ -47,9 +47,11 @@
   guards that design rather than driving it. Recorded rather than presented as test-first.
 
 ## B-4: AC-5 [e2e]: in the running app a user opens the Exercise Library, clicks a muscle on the anatomy diagram, and sees the list narrow to that muscle's exercises with the legend naming the selection.
-- Given:
-- When:
-- Then:
+- Given: the Exercise Library page rendered with no filters applied
+- When: the user clicks a region directly on the anatomy diagram — not the filter chips — choosing
+  a back-only region (`glutes`) so the click can only have come from the diagram's back panel
+- Then: the listing narrows to exactly that region's exercises, the count the page reports equals
+  the number of exercises rendered, and the diagram's legend names the selection back to the user
 
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a

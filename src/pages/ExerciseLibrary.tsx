@@ -170,8 +170,12 @@ export function ExerciseLibrary() {
         </Button>
       </Card>
 
-      <div className="grid grid-cols-1 items-start gap-md lg:grid-cols-12">
-        <div className="flex flex-col gap-sm lg:col-span-8">
+      {/* The anatomy diagram is a two-panel landscape figure: it gets a full-width band above the
+          results rather than the narrow sidebar it used to share with them. */}
+      <AnatomyInspector selected={filters.muscle} onSelect={(m) => update('muscle', m)} />
+
+      <div className="grid grid-cols-1 items-start gap-md">
+        <div className="flex flex-col gap-sm">
           {results.length === 0 ? (
             <Card className="flex flex-col items-center gap-sm py-xl text-center">
               <span className="text-2xl">🔍</span>
@@ -217,10 +221,6 @@ export function ExerciseLibrary() {
               </Card>
             ))
           )}
-        </div>
-
-        <div className="lg:sticky lg:top-md lg:col-span-4">
-          <AnatomyInspector selected={filters.muscle} onSelect={(m) => update('muscle', m)} />
         </div>
       </div>
 
