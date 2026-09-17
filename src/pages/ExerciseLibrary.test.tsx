@@ -65,3 +65,30 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.getByRole('button', { name: /lats region/i })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
 })
+
+// ── 0002 S-0002.01 ────────────────────────────────────────────────────────────
+// B-4: AC-4 [e2e]: a user selects one specific muscle region in the Exercise Library and the
+// listing narrows to exactly that region, with the reported count matching what is shown.
+// Driven through 'Calves' — a region this feature introduces — because selecting one of the
+// surviving coarse areas would have passed before the change and proved nothing.
+test('selecting a specific muscle region narrows the listing and the reported count matches', () => {
+  render(<ExerciseLibrary />)
+
+  const anatomyGroup = screen.getByRole('group', { name: /anatomy group/i })
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /^calves$/i }))
+
+  const listed = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+
+  // every calves exercise and nothing else
+  expect(listed).toContain('Standing Calf Raise')
+  expect(listed).not.toContain('Bench Press')
+  expect(listed).not.toContain('Back Squat')
+
+  // the count the page reports is the count it actually rendered
+  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+
+  // and the active-sector readout names the chosen region back to the user (scoped, since
+  // the region's name also appears on its filter control)
+  const sector = screen.getByText('Active Sector').parentElement as HTMLElement
+  expect(within(sector).getByText('Calves')).toBeInTheDocument()
+})
