@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "a63829b0b35c4ee65416d42110094f97af12dd1fbca6dab9844034f4a19bd132"
+---
 ## Verification — Task T-anatomy-svg-muscle-selector-d5dm8h — 2026-09-17
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
 
