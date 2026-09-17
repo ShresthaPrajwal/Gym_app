@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "214e676bc28f3e3bb823edf3d418365d2e343fc962bd51fc9a9ba7d7791d8074"
+---
 ## Task T-design-renovate-nprdy3 — Large cinematic exercise video cards
 **Parent:** story S-0004.01 · feature 0004-enhancement-design-renovate
 **Slice:** Restyle exercise result cards in ExerciseLibrary to a large two-column layout (thumbnail left, metadata right) matching the reference design
