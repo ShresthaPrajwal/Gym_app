@@ -113,9 +113,31 @@ test('every selectable muscle region returns at least one exercise', () => {
 const YOUTUBE_ID_RE = /^https:\/\/www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}$/
 
 test('every exercise has a structurally valid YouTube video reference', () => {
-  const malformed = filterExercises({})
+  const all = filterExercises({})
+
+  // guard the guard: without this the assertion below passes vacuously on an empty catalogue
+  expect(all.length).toBeGreaterThan(0)
+
+  const malformed = all
     .filter((exercise) => !YOUTUBE_ID_RE.test(exercise.videoUrl))
     .map((exercise) => `${exercise.name}: ${exercise.videoUrl}`)
 
   expect(malformed).toEqual([])
+})
+
+// Two exercises pointing at the same demo video means either a copy-paste slip or two records
+// describing the same movement — both of which a shape check happily accepts.
+test('no two exercises share the same demo video', () => {
+  const byVideo = new Map<string, string[]>()
+  for (const exercise of filterExercises({})) {
+    const names = byVideo.get(exercise.videoUrl) ?? []
+    names.push(exercise.name)
+    byVideo.set(exercise.videoUrl, names)
+  }
+
+  const shared = [...byVideo.entries()]
+    .filter(([, names]) => names.length > 1)
+    .map(([url, names]) => `${names.join(' + ')} -> ${url}`)
+
+  expect(shared).toEqual([])
 })
