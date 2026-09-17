@@ -1,7 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-17"
-approved_sha256: "e9c01c89542c7f7202fa4b722dce42042a0f6bd9b316f96b86232c80f198afee"
+approved_sha256: "1c858f8c8043a496c70c9e430fed5c5a5986715fc37599de85d97c566f21a838"
 ---
 ## Verification — Task T-anatomy-svg-muscle-selector-0brfns — 2026-09-17
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
@@ -98,13 +98,23 @@ this an R→L override — **SA co-sign required on this report**, per the exec-
 |----------|--------|---------|--------------------------|----------------------|----------------------|
 | B-1 (AC-1): filter by one specific region | ✅ `6a23b1e`→ RED failed `expected 0 to be greater than 0` | ✅ `a7dd333` | ✅ asserts filter output, not internals | ✅ `filterExercises` only | ✅ none used — Boundaries empty |
 | B-2 (AC-2): no region is a dead end | ✅ `91e04b5`, re-anchored `ed29677` after test refinement | ✅ `e53b1fb` | ✅ enumerated regions, resists vacuous pass | ✅ `filterExercises` + `MUSCLE_GROUPS` | ✅ none used |
+| B-3 (Critic round 1): every record has a valid video reference | ✅ RED listed the malformed records | ✅ GREEN with the re-sourced IDs | ✅ asserts the data contract over every record | ✅ `filterExercises` | ✅ none used |
+| B-4 (Critic round 2): no two exercises share a demo video | ✅ RED failed on the one duplicated video | ✅ GREEN after removing the duplicate record | ✅ asserts the data contract, incl. a non-empty guard | ✅ `filterExercises` | ✅ none used |
 | AC-3: no empty training day | ⬜ **off-ledger regression guard** `130ce27` — lane independently confirmed the behaviour existed at base | n/a | ✅ asserts generated plans | ✅ `generateWeeklyPlan` | ✅ none used |
 | AC-4: e2e page narrowing | ⬜ **off-ledger back-fill** `e01bba4` — behaviour was already implemented before its test was written | n/a | ✅ asserts rendered output | ✅ via rendered page | ✅ none used |
 
-Net ledger: **2 proven RED→GREEN cycles, 1 regression guard, 1 back-fill.** The plan as first
-approved claimed 4 cycles; both reclassifications are recorded in exec-plan AMENDMENT 1 and the
-behaviour-spec note, and the back-fill is a process shortfall (the total label map forced the
-vocabulary labels into B-1's GREEN, pre-satisfying AC-4).
+Net ledger: **4 proven RED→GREEN cycles, 1 regression guard, 1 back-fill.** The plan as first
+approved claimed 4 cycles but a different four: AC-3 and AC-4 were reclassified off-ledger
+(exec-plan AMENDMENT 1 and the behaviour-spec note), while review surfaced two genuinely new
+behaviours (B-3, B-4) that no card AC covered. The back-fill is a process shortfall — the total
+label map forced the vocabulary labels into B-1's GREEN, pre-satisfying AC-4.
+
+`lane red` twice corrected a misclassification of mine and both corrections stand in the ledger:
+B-2 required a re-anchor after I refined its test post-RED, and the B-3 guard was refused as
+`--regression` because it fails against the *committed* state — I had reasoned about the task base.
+Authoring order for B-3 and B-4 was implementation-then-test; lane set the implementation aside and
+confirmed each test fails without it, so the proof is mechanically sound, but intent-first ordering
+was not followed for those two.
 
 **Critic checklist:** (checkboxes — `done` only enforces checkboxes; resolve each)
 - [x] Mocks only at boundaries — no asserts on internal collaborators / call-counts — *no mocks at all; TSD Boundaries is empty, static data used real throughout*
@@ -115,17 +125,58 @@ vocabulary labels into B-1's GREEN, pre-satisfying AC-4).
 
 **Human verdict:** each item confirmed/dismissed (Path R: + SA) — the lane approve stamp records who signed
 
-*Unresolved and awaiting the owner — this report is NOT ready to stamp as-is:*
-1. **The two BLOCKING video-reference flags.** ~104 of 167 exercises have a broken demo video
-   (92 structurally invalid + 12 fabricated-but-dead). Options put to the owner: (a) source and
-   network-verify real IDs for every record; (b) treat the curated video as genuinely optional and
-   fall back to the existing per-exercise YouTube *search* link, which already exists in the domain
-   layer — no fabricated data, degrades honestly, but it is a design change needing a spec
-   amendment or a follow-up task; (c) accept known-broken now, widen the URL guard, and file a
-   follow-up to curate. This session recommends (b) over (a): its own attempt at (a) produced a
-   12-of-19 failure rate, which is the defect, not the fix.
-2. **Whether to widen the URL-shape guard in this task or the follow-up.**
-3. **Whether any flagged muscle tag should be re-assigned** (`Deadlift`, the Farmer's split, the
-   single-leg squat variants).
+### Round 1 flags — ALL RESOLVED (owner chose: source real IDs; fix the named tags)
 
-**Outcome:** divergence → Amendment (.lane/templates/AMENDMENT.md) → re-spec → re-run
+1. **Video references — RESOLVED.** Every record now carries an exactly-11-character ID and
+   **165/165 resolve** against YouTube's oEmbed endpoint — verified here, then independently
+   re-verified by a second Critic pass that scripted the check across the whole file rather than
+   sampling. The 112 broken records were re-sourced by six parallel agents, each required to verify
+   every candidate and return `NOT_FOUND` rather than guess; every returned ID was re-checked here.
+   Name coverage was checked explicitly (112 expected / 112 received / 0 missing / 0 extra /
+   0 duplicated) because two of those agents reported colliding on a shared scratchpad filename.
+   Driven as cycle **B-3**.
+2. **URL guard widened — RESOLVED.** Now asserts the 11-character shape over **every** record
+   (was `[\w-]+` over three chest records), plus a non-empty assertion and a shared-video check.
+3. **Muscle tags — RESOLVED.** `Deadlift` → `hamstrings`; `Farmer's Walk` → `forearms` with the
+   duplicate `Farmer's Carry` removed; `Glute-Ham Raise` → `compound`; `Pistol`/`Cossack`/`Shrimp
+   Squat` → `quadriceps`. All 18 regions remain non-empty, so AC-2 still holds.
+
+### Round 2 — second Critic pass on the fix: `RESOLVED WITH CONCERNS`, concerns now addressed
+
+A second independent Critic (fresh context, asked to verify the remediation claims rather than trust
+them) confirmed claims 1, 2, 5, 6 and 7 but **REFUTED** "videos plausibly match", finding defects the
+fix itself introduced. All are now fixed and covered by cycle **B-4**:
+
+- 🚨 **`Kickback` (triceps) pointed at a glute-kickback video** — wrong muscle *and* equipment; an
+  agent resolved the ambiguous bare name "Kickback" to the wrong movement. Now
+  "How To: Tricep Kickback (Dumbbell)". **Introduced by the round-1 fix, not pre-existing.**
+- 🚨 **`Cable Overhead Tricep Extension` and `Rope Overhead Extension` shared one video and were
+  byte-identical in every field but `name`** — confirmed by direct comparison here. Resolved by
+  removing `Rope Overhead Extension`, the same consolidation the owner approved for the Farmer's
+  pair. Catalogue: 166 → **165** records.
+- ⚠️ **Two videos mis-stated equipment** — `Terminal Knee Extension` (`cable`) showed the banded
+  variant; `Chest-Supported Row` (`dumbbell`) showed the machine variant. Both re-sourced to
+  matching variants and confirmed by title.
+- ⚠️ **The B-3 guard was weaker than this report claimed** — vacuously passable on an empty
+  catalogue, and blind to duplicate IDs. Both gaps closed in B-4.
+
+### Still open — owner's call, deliberately NOT actioned
+
+- **Near-duplicates that are not byte-identical:** `Leg Raise` (core) vs `Lying Straight-Leg Raise`
+  (hip-flexors); `Hanging Leg Raise` (core) vs `Hanging Knee Raise` (hip-flexors). Each pair is
+  arguably one movement split across two regions to populate coverage. Left alone because — unlike
+  the two consolidations above — these are product judgement calls, not exact duplicates, and
+  collapsing them would push `hip-flexors` toward the AC-2 floor.
+- **`Leg Press` carries `equipment: 'barbell'`** while its video is a seated machine press and
+  `'machine'` is now a valid value. Pre-existing; untouched by this diff.
+- **`tsconfig.tsbuildinfo` is tracked**, so it dirties the tree on every build. Pre-existing repo
+  hygiene, outside this task's scope.
+
+### Process note the owner should read before re-stamping
+
+This report was stamped once already, while its text still read *"NOT ready to stamp as-is"* and
+listed the round-1 video defects as unresolved blockers. That stamp is void by design: this revision
+changes the content, so the hash no longer matches and the gate has reopened. Re-stamping is
+therefore a decision on the CURRENT text, in which every round-1 and round-2 flag is resolved.
+
+**Outcome:** clean → merge (subject to the re-stamp and the open judgement calls above)
