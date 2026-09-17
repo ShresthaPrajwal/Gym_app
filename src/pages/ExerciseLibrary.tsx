@@ -14,6 +14,7 @@ import {
 } from '../domain/exerciseFilter'
 import { AnatomyInspector } from './AnatomyInspector'
 import { ExerciseTechniqueModal } from './ExerciseTechniqueModal'
+import { VideoPlayerModal } from './VideoPlayerModal'
 
 const ANATOMY_LABELS: Record<MuscleGroup, string> = {
   neck: 'Neck',
@@ -66,6 +67,7 @@ const DEFAULT_FILTERS = {
 export function ExerciseLibrary() {
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
   const [modalExercise, setModalExercise] = useState<Exercise | null>(null)
+  const [playerExercise, setPlayerExercise] = useState<Exercise | null>(null)
   const [added, setAdded] = useState<Set<string>>(new Set())
 
   const results = filterExercises(filters)
@@ -195,7 +197,7 @@ export function ExerciseLibrary() {
                   <VideoThumbnail
                     name={exercise.name}
                     videoUrl={exercise.videoUrl}
-                    onPlay={() => setModalExercise(exercise)}
+                    onPlay={() => setPlayerExercise(exercise)}
                     className="h-full w-full rounded-none"
                   />
                 </div>
@@ -227,7 +229,7 @@ export function ExerciseLibrary() {
 
                   {/* Actions — pinned to bottom */}
                   <div className="mt-auto flex flex-wrap gap-sm pt-sm">
-                    <Button variant="secondary" onClick={() => setModalExercise(exercise)}>
+                    <Button variant="secondary" onClick={() => setPlayerExercise(exercise)}>
                       Open in YouTube / Demo
                     </Button>
                     <Button variant={added.has(exercise.name) ? 'primary' : 'ghost'} onClick={() => toggleAdded(exercise.name)}>
@@ -242,6 +244,13 @@ export function ExerciseLibrary() {
       </div>
 
       {modalExercise && <ExerciseTechniqueModal exercise={modalExercise} onClose={() => setModalExercise(null)} />}
+      {playerExercise && (
+        <VideoPlayerModal
+          name={playerExercise.name}
+          videoUrl={playerExercise.videoUrl}
+          onClose={() => setPlayerExercise(null)}
+        />
+      )}
     </PageLayout>
   )
 }
