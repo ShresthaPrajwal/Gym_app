@@ -1,26 +1,32 @@
 ---
-approved_by: ""
-approved_at: ""
-# planned_behaviors — machine-read count of RED→GREEN cycles (B-N). Leave empty to let
-# lane infer from B-N labels below; SET it when an AC becomes a regression guard so
-# `lane next` knows the remaining count (frontmatter edits need no re-approval).
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
 planned_behaviors: ""
+approved_sha256: "af074dba9b6702d9974762a803671c9bc4b355934bf3c46cc5515b4db05ca0a6"
 ---
 ## Exec Plan — Task T-design-renovate-nprdy3
-> Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
+> Tests: N/A — visual layout change. No TDD ledger. Gated by exec-plan approval + verification report.
 
-**Will build:** (mapped to each AC)
--
-**Approach:** high-level only — NOT implementation prescription
-**Boundaries & mocks:** (from TSD Boundaries) what's FAKED (network/external services, clock, randomness, filesystem) vs REAL. Each fake = an injected port. Boundaries non-empty ⇒ name the smoke AC that hits the real one in a realistic environment.
--
-**Behaviors (TDD order):** B-1 first (tracer bullet), then B-2, B-3 … ; include the `e2e` behavior
--
+**Will build:**
+- Restyled exercise result cards: two-column on desktop (thumbnail left ≥260px, metadata right), stacked on mobile
+
+**Approach:**
+- In `ExerciseLibrary.tsx`: change the card's flex layout from `flex gap-sm` to `flex-col md:flex-row`; make thumbnail `aspect-video w-full md:w-[280px] shrink-0`
+- `VideoThumbnail`: remove `playing` state (play fires `onPlay` prop instead); thumbnail fills its container via `w-full h-full object-cover`
+- Badges and cues stay in the right column; action buttons pin to the bottom of the right column
+
+**Boundaries & mocks:** YouTube thumbnail CDN — real in all environments (img.youtube.com). No fakes needed.
+
+**Behaviors:**
+- B-1: Desktop card (≥768px) shows thumbnail left ≥260px wide, content right — matches reference image layout
+- B-2: Mobile card (<768px) stacks thumbnail on top, content below, no overflow-x
+- B-3 [e2e]: Full exercise list renders correctly at both 1280px and 375px viewports
+
 **PR will contain:**
--
-**Open questions / ambiguities:** (MUST be resolved before execution)
--
-**Path:** L (lean, default) | R (rich)
-**Escalation signals hit (≥2 → R):** ambiguities≥3 · blast-radius≥3 · security · amendments≥2 · prior-fail · self-flag
-**If overriding R→L:** risk acknowledged here + SA co-signs Verification.
+- `src/components/VideoThumbnail.tsx` — remove internal playing state, accept `onPlay` callback
+- `src/pages/ExerciseLibrary.tsx` — new card layout, pass `onPlay` to VideoThumbnail
+
+**Open questions / ambiguities:** None
+
+**Path:** L (lean)
 - [ ] Refactor pass done (on green; tests unchanged) — before PR
