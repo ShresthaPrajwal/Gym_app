@@ -99,3 +99,23 @@ test('every selectable muscle region returns at least one exercise', () => {
   const dead = DIAGRAM_REGIONS.filter((muscle) => filterExercises({ muscle }).length === 0)
   expect(dead).toEqual([])
 })
+
+// Off-ledger regression guard (AC-2 review follow-up). The pre-existing URL-shape check used
+// `[\w-]+`, which accepts an ID of any length, and only ran over three chest records — so a
+// batch of 10-character placeholder IDs reached review undetected. A YouTube video ID is
+// ALWAYS exactly 11 characters, so length is the cheap structural signal that catches a
+// placeholder. Asserted over EVERY record, not a filtered subset.
+//
+// This guard is deliberately structural, not a liveness check: the ledger replay runs in a
+// fresh worktree and must stay hermetic (no network), and the spec's Boundaries are empty.
+// That each ID actually resolves was verified out-of-band against YouTube's oEmbed endpoint
+// (166/166 at the time of writing) — a test cannot own that without taking a network dependency.
+const YOUTUBE_ID_RE = /^https:\/\/www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}$/
+
+test('every exercise has a structurally valid YouTube video reference', () => {
+  const malformed = filterExercises({})
+    .filter((exercise) => !YOUTUBE_ID_RE.test(exercise.videoUrl))
+    .map((exercise) => `${exercise.name}: ${exercise.videoUrl}`)
+
+  expect(malformed).toEqual([])
+})
