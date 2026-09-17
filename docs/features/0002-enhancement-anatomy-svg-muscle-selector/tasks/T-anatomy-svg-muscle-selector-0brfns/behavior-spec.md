@@ -22,7 +22,25 @@
 - Then: every one of those filters returns at least one exercise, so no selectable region is a dead
   end; and the vocabulary contains exactly those regions and nothing else
 
-## B-3 — WITHDRAWN as a RED→GREEN cycle; recorded off-ledger instead (see Invariants below)
+## B-3 (surfaced by the Critic at review, not from the card): every exercise carries a structurally valid demo-video reference.
+> The card has no AC about video references, which is precisely why the defect survived to review:
+> the pre-existing shape check accepted an ID of any length and ran over only three records. The
+> Critic found 92 records sharing 10-character placeholder IDs (a YouTube ID is always exactly 11),
+> and network verification of the whole catalogue then found 112 of 167 records pointing at nothing.
+> Serves the spec's "Data / State" clause, which keeps a real per-exercise demo-video reference.
+- Given: the full bundled exercise set
+- When: every record's video reference is checked against the canonical YouTube watch-URL shape
+  with an exactly-11-character video ID
+- Then: no record is malformed — the assertion covers every exercise, not a filtered subset
+- Note on scope: the guard is structural only. Whether each ID actually resolves was verified
+  out-of-band against YouTube's oEmbed endpoint (166/166), because the ledger replay runs in a
+  fresh worktree and must stay hermetic — a liveness assertion would introduce a network
+  dependency the spec's empty Boundaries forbid.
+- Authoring-order caveat, recorded for the ledger's honesty: the data fix was written *before*
+  this test. `lane red` independently set the fix aside and confirmed the test fails without it,
+  so the RED→GREEN proof is mechanically sound, but the intent-first ordering was not followed here.
+
+## B-3 (original slot) — the AC-3 routine invariant that once sat here is WITHDRAWN as a cycle and recorded off-ledger (see Invariants below)
 
 ## B-4 — RECORDED AS A BACK-FILL, not a test-first cycle (see note at the bottom of this file)
 ## AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.

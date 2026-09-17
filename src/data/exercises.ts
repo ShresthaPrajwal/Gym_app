@@ -60,7 +60,7 @@ export const EXERCISES: Exercise[] = [
   // back
   {
     name: 'Deadlift',
-    targetMuscle: 'lats',
+    targetMuscle: 'hamstrings',
     videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q',
     hardware: 'full',
     instructions: 'Keep the bar close to your shins, brace your core, and drive through your heels to stand tall.',
@@ -377,7 +377,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Clean and Press',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=6xwGFyPneu4',
+    videoUrl: 'https://www.youtube.com/watch?v=a7FRXANpNEU',
     hardware: 'full',
     instructions: 'Pull the bar explosively to your shoulders, then drive it overhead in one fluid motion.',
     baseSets: 4,
@@ -414,7 +414,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Dumbbell Calf Raise',
     targetMuscle: 'calves',
-    videoUrl: 'https://www.youtube.com/watch?v=JbyjNymZOt0',
+    videoUrl: 'https://www.youtube.com/watch?v=hPA98_r-6e4',
     hardware: 'dumbbell',
     instructions: 'Hold dumbbells at your sides and rise onto the balls of your feet, controlling the descent.',
     baseSets: 3,
@@ -432,7 +432,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Barbell Calf Raise',
     targetMuscle: 'calves',
-    videoUrl: 'https://www.youtube.com/watch?v=k0j3iGyFvPE',
+    videoUrl: 'https://www.youtube.com/watch?v=3UWi44yN-wM',
     hardware: 'full',
     instructions: 'With a loaded bar on your upper back, rise onto the balls of your feet and lower under control.',
     baseSets: 4,
@@ -612,7 +612,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Chest-Supported Row',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=H75aCYp0RuA',
+    videoUrl: 'https://www.youtube.com/watch?v=FTwvmczf7bE',
     hardware: 'dumbbell',
     instructions: 'Lie face down on an incline bench and row the dumbbells to your sides, squeezing your back.',
     baseSets: 3,
@@ -648,7 +648,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Renegade Row',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=5UK0y71YZeM',
+    videoUrl: 'https://www.youtube.com/watch?v=4qEIChzM4ZA',
     hardware: 'dumbbell',
     instructions: 'In a plank position on dumbbells, row one dumbbell to your hip while keeping your hips stable.',
     baseSets: 3,
@@ -666,7 +666,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Meadows Row',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=5UK0y71YZeM',
+    videoUrl: 'https://www.youtube.com/watch?v=G-jU1aPVhnY',
     hardware: 'full',
     instructions: 'Stand perpendicular to a landmine barbell and row the end to your hip with a staggered stance.',
     baseSets: 3,
@@ -684,7 +684,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Pec Deck',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1P28Q6nHrfA',
+    videoUrl: 'https://www.youtube.com/watch?v=vJYkqD7a0gM',
     hardware: 'full',
     instructions: 'With arms extended, pull the handles back in a wide arc, squeezing your rear delts.',
     baseSets: 3,
@@ -720,7 +720,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Reverse Fly',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=0yP3p9JfJfE',
+    videoUrl: 'https://www.youtube.com/watch?v=FeERX9UwspY',
     hardware: 'full',
     instructions: 'With cables set at shoulder height, pull the handles apart in a wide arc, squeezing your rear delts.',
     baseSets: 3,
@@ -738,7 +738,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Prone Y-Raise',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=Jf6xW6X4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=YpE7HmoJ2wY',
     hardware: 'dumbbell',
     instructions: 'Lie face down on an incline bench and raise the dumbbells overhead in a Y shape.',
     baseSets: 3,
@@ -756,7 +756,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Barbell Shrug',
     targetMuscle: 'trapezius',
-    videoUrl: 'https://www.youtube.com/watch?v=cJRVVxmytaM',
+    videoUrl: 'https://www.youtube.com/watch?v=larn3Asl6oM',
     hardware: 'full',
     instructions: "Hold the bar at arm's length and shrug your shoulders up toward your ears, squeezing your traps.",
     baseSets: 3,
@@ -792,7 +792,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Shrug',
     targetMuscle: 'trapezius',
-    videoUrl: 'https://www.youtube.com/watch?v=2VX6X4Z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=YykmcX2b-LY',
     hardware: 'full',
     instructions: 'Stand facing a low pulley and shrug your shoulders up, squeezing your traps.',
     baseSets: 3,
@@ -809,7 +809,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: "Farmer's Walk",
-    targetMuscle: 'trapezius',
+    targetMuscle: 'forearms',
     videoUrl: 'https://www.youtube.com/watch?v=Fkzk_RqlYig',
     hardware: 'dumbbell',
     instructions: 'Hold heavy dumbbells at your sides and walk with an upright posture, keeping your shoulders back.',
@@ -846,7 +846,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Close-Grip Pulldown',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=IjoFCmLX7z0',
     hardware: 'full',
     instructions: 'Pull the V-bar down to your upper chest, squeezing your lats and keeping your torso upright.',
     baseSets: 3,
@@ -864,7 +864,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Single-Arm Lat Pulldown',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=8zA8DjHRaq0',
     hardware: 'full',
     instructions: 'Pull the handle down to your side with one arm, focusing on squeezing your lat.',
     baseSets: 3,
@@ -882,7 +882,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Kneeling Lat Pulldown',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=6Rh_F5Zk0MA',
     hardware: 'full',
     instructions: 'Kneel facing a high pulley and pull the bar down to your chest, squeezing your lats.',
     baseSets: 3,
@@ -900,7 +900,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Dumbbell Pullover',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=FK4rZQ8Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=jQjWlIwG4sI',
     hardware: 'dumbbell',
     instructions: 'Lie on a bench and lower a dumbbell behind your head with straight arms, then pull it back over your chest.',
     baseSets: 3,
@@ -918,7 +918,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Machine Pullover',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=FK4rZQ8Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=oxpAl14EYyc',
     hardware: 'full',
     instructions: 'Sit at the machine and pull the handles down in an arc, squeezing your lats.',
     baseSets: 3,
@@ -1044,7 +1044,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Sissy Squat',
     targetMuscle: 'quadriceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=AYN-U5nZieY',
     hardware: 'bodyweight',
     instructions: 'Lean back while bending your knees, keeping your hips extended, then drive back up.',
     baseSets: 3,
@@ -1098,7 +1098,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Seated Leg Curl',
     targetMuscle: 'hamstrings',
-    videoUrl: 'https://www.youtube.com/watch?v=1Tq3QdYUuHs',
+    videoUrl: 'https://www.youtube.com/watch?v=Orxowest56U',
     hardware: 'full',
     instructions: 'Curl your legs down and under, squeezing your hamstrings at the bottom.',
     baseSets: 3,
@@ -1116,7 +1116,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Nordic Hamstring Curl',
     targetMuscle: 'hamstrings',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=_e9vFU9-tkc',
     hardware: 'bodyweight',
     instructions: 'Kneel with your ankles secured and lower your torso forward, resisting with your hamstrings, then pull back up.',
     baseSets: 3,
@@ -1134,7 +1134,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Good Morning',
     targetMuscle: 'lower-back',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=f23vXjoG2e8',
     hardware: 'full',
     instructions: 'With the bar on your upper back, hinge at the hips, lowering your torso toward parallel, then return.',
     baseSets: 3,
@@ -1152,7 +1152,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Single-Leg Romanian Deadlift',
     targetMuscle: 'hamstrings',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=Zfr6wizR8rs',
     hardware: 'dumbbell',
     instructions: 'Balance on one leg and hinge at the hips, lowering the dumbbell toward the floor, then return.',
     baseSets: 3,
@@ -1170,7 +1170,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Glute-Ham Raise',
     targetMuscle: 'hamstrings',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=c2pWqsHR7FU',
     hardware: 'full',
     instructions: 'On a glute-ham developer, lower your torso forward and pull yourself back up using your hamstrings.',
     baseSets: 3,
@@ -1178,7 +1178,7 @@ export const EXERCISES: Exercise[] = [
     baseRest: '90s',
     difficulty: 'advanced',
     equipment: 'machine',
-    mechanics: 'isolation',
+    mechanics: 'compound',
     cues: [
       'Position yourself on the glute-ham developer with ankles secured.',
       'Lower your torso forward with control.',
@@ -1188,7 +1188,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Pull-Through',
     targetMuscle: 'hamstrings',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=pv8e6OSyETE',
     hardware: 'full',
     instructions: 'Stand facing away from a low pulley, hinge at the hips, and pull the rope through your legs, then return.',
     baseSets: 3,
@@ -1242,7 +1242,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Kickback',
     targetMuscle: 'glutes',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=n-cgsNePyFo',
     hardware: 'full',
     instructions: 'With an ankle strap, kick your leg back and up, squeezing your glute at the top.',
     baseSets: 3,
@@ -1260,7 +1260,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Hip Abduction Machine',
     targetMuscle: 'glutes',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=01HilwRf8m8',
     hardware: 'full',
     instructions: 'Sit at the machine and push your legs apart, squeezing your glutes.',
     baseSets: 3,
@@ -1278,7 +1278,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Sumo Deadlift',
     targetMuscle: 'glutes',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=JF3iwfK5WI0',
     hardware: 'full',
     instructions: 'With a wide stance and toes out, grip the bar inside your legs and drive up, squeezing your glutes.',
     baseSets: 4,
@@ -1332,7 +1332,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Lateral Raise',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=xrBcuPNTxLg',
     hardware: 'full',
     instructions: 'With a low pulley and handle, raise your arm out to the side to shoulder height.',
     baseSets: 3,
@@ -1350,7 +1350,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Machine Lateral Raise',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=NNAs8jx_zJI',
     hardware: 'full',
     instructions: 'Sit at the machine and push the pads out to your sides, raising to shoulder height.',
     baseSets: 3,
@@ -1368,7 +1368,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Front Raise',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=yHx8wPv4RPo',
     hardware: 'dumbbell',
     instructions: 'Raise the dumbbells forward to shoulder height, keeping your arms straight.',
     baseSets: 3,
@@ -1386,7 +1386,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Plate Front Raise',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=HN8HYJTOl8c',
     hardware: 'full',
     instructions: 'Hold a plate with both hands and raise it forward to shoulder height.',
     baseSets: 3,
@@ -1404,7 +1404,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Handstand Push-up',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=3sPxL5NbJis',
     hardware: 'bodyweight',
     instructions: 'Kick up into a handstand against a wall and lower your head to the floor, then press back up.',
     baseSets: 3,
@@ -1422,7 +1422,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Pike Push-up',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=lIZ_C4VJnmc',
     hardware: 'bodyweight',
     instructions: 'In a pike position, lower your head toward the floor and press back up.',
     baseSets: 3,
@@ -1440,7 +1440,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Bus Driver',
     targetMuscle: 'shoulders',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=HWdWJblKHqY',
     hardware: 'full',
     instructions: 'Hold a plate out in front of you and rotate it like a steering wheel.',
     baseSets: 3,
@@ -1458,7 +1458,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Overhead Tricep Extension',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=fYqswDVbJDg',
     hardware: 'dumbbell',
     instructions: 'Hold a dumbbell overhead with both hands and lower it behind your head, then extend back up.',
     baseSets: 3,
@@ -1476,7 +1476,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Overhead Tricep Extension',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=NTk0Igxqcsk',
     hardware: 'full',
     instructions: 'With a rope attachment, extend your arms overhead, squeezing your triceps.',
     baseSets: 3,
@@ -1494,7 +1494,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Skull Crusher',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=S0fmDR60X-o',
     hardware: 'full',
     instructions: 'Lie on a bench and lower the bar toward your forehead, then extend back up.',
     baseSets: 3,
@@ -1512,7 +1512,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Close-Grip Bench Press',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=sRcc5oaHqhk',
     hardware: 'full',
     instructions: 'Press the bar with a narrow grip, keeping your elbows close to your body.',
     baseSets: 3,
@@ -1530,7 +1530,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Tricep Dip',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=thx13oPVK5c',
     hardware: 'bodyweight',
     instructions: 'Lower your body by bending your elbows, then press back up, keeping your torso upright.',
     baseSets: 3,
@@ -1548,7 +1548,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Bench Dip',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=4ua3MzaU0QU',
     hardware: 'bodyweight',
     instructions: 'With your hands on a bench behind you, lower your body by bending your elbows, then press back up.',
     baseSets: 3,
@@ -1566,7 +1566,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Diamond Push-up',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=kGhDnFwMY3E',
     hardware: 'bodyweight',
     instructions: 'Perform a push-up with your hands close together, forming a diamond shape.',
     baseSets: 3,
@@ -1584,7 +1584,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Kickback',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=l4zReIOfPCQ',
     hardware: 'dumbbell',
     instructions: 'Hinge at the hips and extend your arm back, squeezing your triceps at the top.',
     baseSets: 3,
@@ -1602,7 +1602,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'JM Press',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=hOCW9cE-GJg',
     hardware: 'full',
     instructions: 'A hybrid of the close-grip bench press and skull crusher, lowering the bar toward your chin.',
     baseSets: 3,
@@ -1620,7 +1620,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Tate Press',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=cZJ-4Ll3uAo',
     hardware: 'dumbbell',
     instructions: 'Lie on a bench and press the dumbbells up while keeping your elbows flared out.',
     baseSets: 3,
@@ -1638,7 +1638,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Rope Overhead Extension',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=NTk0Igxqcsk',
     hardware: 'full',
     instructions: 'With a rope attachment, extend your arms overhead, squeezing your triceps.',
     baseSets: 3,
@@ -1656,7 +1656,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Dumbbell Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=iui51E31sX8',
     hardware: 'dumbbell',
     instructions: 'Curl the dumbbells up while keeping your elbows pinned to your sides.',
     baseSets: 3,
@@ -1674,7 +1674,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Preacher Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=fgYBENCgIME',
     hardware: 'full',
     instructions: 'With your upper arms on the preacher pad, curl the bar up, squeezing your biceps.',
     baseSets: 3,
@@ -1692,7 +1692,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Incline Dumbbell Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=DCe8f6vMe9A',
     hardware: 'dumbbell',
     instructions: 'Sit on an incline bench and curl the dumbbells up, keeping your elbows back.',
     baseSets: 3,
@@ -1710,7 +1710,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Concentration Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=TYrurDZTj9I',
     hardware: 'dumbbell',
     instructions: 'Sit and brace your elbow against your inner thigh, curl the dumbbell up, squeezing your biceps.',
     baseSets: 3,
@@ -1728,7 +1728,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=CrbTqNOlFgE',
     hardware: 'full',
     instructions: 'With a low pulley, curl the bar up, squeezing your biceps.',
     baseSets: 3,
@@ -1746,7 +1746,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Spider Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=CITtSuda0Fg',
     hardware: 'dumbbell',
     instructions: 'Lie face down on an incline bench and curl the dumbbells up, squeezing your biceps.',
     baseSets: 3,
@@ -1764,7 +1764,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Zottman Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=D7bMA4WEKMI',
     hardware: 'dumbbell',
     instructions: 'Curl up with palms facing up, then rotate to palms down and lower with control.',
     baseSets: 3,
@@ -1782,7 +1782,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=ypfd1kaI1AU',
     hardware: 'full',
     instructions: 'Curl the bar with an overhand grip, targeting your brachialis and forearms.',
     baseSets: 3,
@@ -1800,7 +1800,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Drag Curl',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=LMdNTHH6G8I',
     hardware: 'full',
     instructions: 'Curl the bar up while dragging it close to your body, keeping your elbows back.',
     baseSets: 3,
@@ -1818,7 +1818,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: '21s',
     targetMuscle: 'biceps',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=jgmESOA4J5E',
     hardware: 'full',
     instructions: 'Perform 7 reps in the bottom half, 7 in the top half, and 7 full reps.',
     baseSets: 3,
@@ -1836,7 +1836,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Wrist Curl',
     targetMuscle: 'forearms',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=3VLTzIrnb5g',
     hardware: 'dumbbell',
     instructions: 'With your forearms on a bench, curl your wrists up, squeezing your forearms.',
     baseSets: 3,
@@ -1854,7 +1854,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Wrist Curl',
     targetMuscle: 'forearms',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=FW7URAaC-vE',
     hardware: 'dumbbell',
     instructions: 'With your forearms on a bench, extend your wrists up, squeezing your forearms.',
     baseSets: 3,
@@ -1870,27 +1870,9 @@ export const EXERCISES: Exercise[] = [
     ],
   },
   {
-    name: "Farmer's Carry",
-    targetMuscle: 'forearms',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
-    hardware: 'dumbbell',
-    instructions: 'Hold heavy dumbbells at your sides and walk with an upright posture.',
-    baseSets: 3,
-    baseReps: '30m',
-    baseRest: '90s',
-    difficulty: 'intermediate',
-    equipment: 'dumbbell',
-    mechanics: 'compound',
-    cues: [
-      'Hold heavy dumbbells at your sides, shoulders back.',
-      'Walk with an upright posture, core braced.',
-      'Keep your grip tight throughout.',
-    ],
-  },
-  {
     name: 'Plate Pinch',
     targetMuscle: 'forearms',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=jFTV3DQf3HE',
     hardware: 'full',
     instructions: 'Pinch two smooth plates together and hold for time.',
     baseSets: 3,
@@ -1908,7 +1890,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Crunch',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=dkGwcfo9zto',
     hardware: 'full',
     instructions: 'Kneel facing a high pulley and crunch your torso down, squeezing your abs.',
     baseSets: 3,
@@ -1926,7 +1908,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Russian Twist',
     targetMuscle: 'obliques',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=LlccOWys8IU',
     hardware: 'bodyweight',
     instructions: 'Sit with your torso leaned back and rotate side to side, touching the floor beside you.',
     baseSets: 3,
@@ -1944,7 +1926,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Leg Raise',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=dGKbTKLnym4',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and raise your legs to 90 degrees, then lower with control.',
     baseSets: 3,
@@ -1962,7 +1944,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Flutter Kick',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=tPmybsDX8ZY',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and alternate raising and lowering your legs in a fluttering motion.',
     baseSets: 3,
@@ -1980,7 +1962,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Ab Wheel Rollout',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=MinlHnG7j4k',
     hardware: 'bodyweight',
     instructions: 'Kneel with the wheel in front of you and roll forward, extending your body, then pull back.',
     baseSets: 3,
@@ -1998,7 +1980,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Side Plank',
     targetMuscle: 'obliques',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=NXr4Fw8q60o',
     hardware: 'bodyweight',
     instructions: 'Lie on your side and hold your body in a straight line, supported by your forearm.',
     baseSets: 3,
@@ -2016,7 +1998,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Dead Bug',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=GbSC02oU3To',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and extend opposite arm and leg while keeping your lower back pressed to the floor.',
     baseSets: 3,
@@ -2034,7 +2016,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Pallof Press',
     targetMuscle: 'obliques',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=_2xWmYNnFS8',
     hardware: 'full',
     instructions: 'With a cable at chest height, press the handle straight out, resisting rotation.',
     baseSets: 3,
@@ -2052,7 +2034,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Hollow Body Hold',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=hf00_b2sRdc',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and lift your shoulders and legs off the floor, holding a hollow position.',
     baseSets: 3,
@@ -2070,7 +2052,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'V-Up',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=iP2fjvG0g3w',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and simultaneously raise your torso and legs to form a V shape.',
     baseSets: 3,
@@ -2088,7 +2070,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Toe Touch',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=rHEzFsLf4-o',
     hardware: 'bodyweight',
     instructions: 'Lie on your back with legs straight up and reach your hands toward your toes.',
     baseSets: 3,
@@ -2106,7 +2088,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Crunch',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=XY8KzdDcMFg',
     hardware: 'bodyweight',
     instructions: 'Lie on your back and bring your knees toward your chest, lifting your hips off the floor.',
     baseSets: 3,
@@ -2124,7 +2106,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Weighted Plank',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=H88Ip-MUWn0',
     hardware: 'full',
     instructions: 'Perform a plank with a weight plate on your back for added resistance.',
     baseSets: 3,
@@ -2142,7 +2124,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Dragon Flag',
     targetMuscle: 'core',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=yFiNw9EsJfI',
     hardware: 'bodyweight',
     instructions: 'Lie on a bench and hold the edge behind your head, then raise your body in a straight line.',
     baseSets: 3,
@@ -2160,7 +2142,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Thruster',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=z0PGxb8BSq8',
     hardware: 'full',
     instructions: 'Perform a front squat and then drive the bar overhead in one fluid motion.',
     baseSets: 3,
@@ -2178,7 +2160,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Snatch',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=yHZ1eZ8fJjc',
     hardware: 'full',
     instructions: 'Lift the bar from the floor to overhead in one explosive motion.',
     baseSets: 5,
@@ -2196,7 +2178,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Clean',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=E2z5zK5V-MM',
     hardware: 'full',
     instructions: 'Lift the bar from the floor to your shoulders in one explosive motion.',
     baseSets: 5,
@@ -2214,7 +2196,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Jerk',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=9-sdE3eQDLk',
     hardware: 'full',
     instructions: 'From the front rack position, dip and drive the bar overhead, splitting your legs.',
     baseSets: 5,
@@ -2232,7 +2214,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Turkish Get-Up',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=lpltjWHd0ek',
     hardware: 'dumbbell',
     instructions: 'Lie on your back holding a weight overhead and stand up in stages, then reverse the motion.',
     baseSets: 3,
@@ -2250,7 +2232,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Man Maker',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=2-6EPLtSLwU',
     hardware: 'dumbbell',
     instructions: 'A combination of a burpee, renegade row, squat clean, and press.',
     baseSets: 3,
@@ -2268,7 +2250,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Devil Press',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=ghacPZ9fuFU',
     hardware: 'dumbbell',
     instructions: 'A combination of a burpee and a dumbbell snatch.',
     baseSets: 3,
@@ -2286,7 +2268,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Bear Crawl',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=U3Y58Kyw7Xw',
     hardware: 'bodyweight',
     instructions: 'Crawl forward on hands and feet with your knees hovering off the floor.',
     baseSets: 3,
@@ -2304,7 +2286,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Crab Walk',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=XAHZRIoNsHE',
     hardware: 'bodyweight',
     instructions: 'Walk on your hands and feet with your hips raised and chest facing up.',
     baseSets: 3,
@@ -2322,7 +2304,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Box Jump',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=HJZh-12p6vg',
     hardware: 'bodyweight',
     instructions: 'Jump onto a box, landing softly, then step or jump back down.',
     baseSets: 3,
@@ -2340,7 +2322,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Broad Jump',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=uhz-ia-2UcM',
     hardware: 'bodyweight',
     instructions: 'Jump forward as far as you can, landing softly, then reset.',
     baseSets: 3,
@@ -2358,7 +2340,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Rope Climb',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=pdJ22dAy_xI',
     hardware: 'bodyweight',
     instructions: 'Climb a rope using your arms and legs, then descend with control.',
     baseSets: 3,
@@ -2376,7 +2358,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Sled Push',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=QwscR2BhdEg',
     hardware: 'full',
     instructions: 'Push a weighted sled forward, driving through your legs.',
     baseSets: 3,
@@ -2394,7 +2376,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Sled Pull',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=gdtO9qeaiCE',
     hardware: 'full',
     instructions: 'Pull a weighted sled toward you, leaning back and driving through your legs.',
     baseSets: 3,
@@ -2412,7 +2394,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Battle Ropes',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=pQb2xIGioyQ',
     hardware: 'full',
     instructions: 'Create waves with the ropes by alternating arm movements.',
     baseSets: 3,
@@ -2430,7 +2412,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Rowing Machine',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=4zWu1yuJ0_g',
     hardware: 'full',
     instructions: 'Drive with your legs, then pull the handle to your chest, then reverse.',
     baseSets: 3,
@@ -2448,7 +2430,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Assault Bike',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=RPY7HTGfOiU',
     hardware: 'full',
     instructions: 'Pedal and push/pull the handles simultaneously for a full-body cardio workout.',
     baseSets: 3,
@@ -2466,7 +2448,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Ski Erg',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=B0lIgT5PHc8',
     hardware: 'full',
     instructions: 'Pull the handles down and back in a skiing motion.',
     baseSets: 3,
@@ -2484,7 +2466,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Stair Climber',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=LM9lgFK4mkk',
     hardware: 'full',
     instructions: 'Climb stairs at a steady pace, driving through your legs.',
     baseSets: 3,
@@ -2502,7 +2484,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Treadmill Sprint',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=DoyRU5001d4',
     hardware: 'full',
     instructions: 'Sprint on the treadmill for short intervals.',
     baseSets: 5,
@@ -2520,7 +2502,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Jump Rope',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=kDOGb9C5kp0',
     hardware: 'bodyweight',
     instructions: 'Jump over the rope continuously, landing softly on the balls of your feet.',
     baseSets: 3,
@@ -2538,7 +2520,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'High Knees',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=GjTALVhkSuw',
     hardware: 'bodyweight',
     instructions: 'Run in place, driving your knees up to hip height.',
     baseSets: 3,
@@ -2556,7 +2538,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Butt Kicks',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=oMW59TKZvaI',
     hardware: 'bodyweight',
     instructions: 'Run in place, kicking your heels up toward your glutes.',
     baseSets: 3,
@@ -2574,7 +2556,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Mountain Climber',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=cnyTQDSE884',
     hardware: 'bodyweight',
     instructions: 'In a plank position, alternate driving your knees toward your chest.',
     baseSets: 3,
@@ -2592,7 +2574,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Jumping Jack',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=uLVt6u15L98',
     hardware: 'bodyweight',
     instructions: 'Jump your feet out while raising your arms overhead, then back in.',
     baseSets: 3,
@@ -2610,7 +2592,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Inchworm',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=ZY2ji_Ho0dA',
     hardware: 'bodyweight',
     instructions: 'From standing, walk your hands out to a plank, then walk them back.',
     baseSets: 3,
@@ -2628,7 +2610,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: "World's Greatest Stretch",
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=d_vLXGPcYo0',
     hardware: 'bodyweight',
     instructions: 'A dynamic stretch combining a lunge, hamstring stretch, and torso rotation.',
     baseSets: 3,
@@ -2646,7 +2628,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Squat to Stand',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=TlI8pR3Hc-E',
     hardware: 'bodyweight',
     instructions: 'From standing, bend over and grab your toes, then squat down and stand up.',
     baseSets: 3,
@@ -2664,7 +2646,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Deep Squat Hold',
     targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    videoUrl: 'https://www.youtube.com/watch?v=poKi7JPfuxE',
     hardware: 'bodyweight',
     instructions: 'Hold a deep squat position with your heels down and chest up.',
     baseSets: 3,
@@ -2681,8 +2663,8 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Cossack Squat',
-    targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    targetMuscle: 'quadriceps',
+    videoUrl: 'https://www.youtube.com/watch?v=tpczTeSkHz0',
     hardware: 'bodyweight',
     instructions: 'Shift your weight to one side and squat down, keeping the other leg straight.',
     baseSets: 3,
@@ -2699,8 +2681,8 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Pistol Squat',
-    targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    targetMuscle: 'quadriceps',
+    videoUrl: 'https://www.youtube.com/watch?v=vq5-vdgJc0I',
     hardware: 'bodyweight',
     instructions: 'Squat down on one leg while keeping the other leg extended forward.',
     baseSets: 3,
@@ -2717,8 +2699,8 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Shrimp Squat',
-    targetMuscle: 'full-body',
-    videoUrl: 'https://www.youtube.com/watch?v=1V3v6z4Z4E',
+    targetMuscle: 'quadriceps',
+    videoUrl: 'https://www.youtube.com/watch?v=P-h6BuU3q78',
     hardware: 'bodyweight',
     instructions: 'Squat down on one leg while holding the other leg behind you.',
     baseSets: 3,
@@ -2736,7 +2718,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Plate Neck Flexion',
     targetMuscle: 'neck',
-    videoUrl: 'https://www.youtube.com/watch?v=nDT3iYbAX4E',
+    videoUrl: 'https://www.youtube.com/watch?v=YIDkL1BlYI0',
     hardware: 'full',
     instructions: 'Lie back on a bench with a light plate held on your forehead and curl your chin toward your chest.',
     baseSets: 3,
@@ -2754,7 +2736,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Plate Neck Extension',
     targetMuscle: 'neck',
-    videoUrl: 'https://www.youtube.com/watch?v=Bb1QBqQbJ7c',
+    videoUrl: 'https://www.youtube.com/watch?v=3-yAPkua_cA',
     hardware: 'full',
     instructions: 'Lie face down with a light plate held on the back of your head and extend your neck against the load.',
     baseSets: 3,
@@ -2772,7 +2754,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Lateral Neck Flexion',
     targetMuscle: 'neck',
-    videoUrl: 'https://www.youtube.com/watch?v=0gGBzYAEYUo',
+    videoUrl: 'https://www.youtube.com/watch?v=YgG2DTr5Qhc',
     hardware: 'bodyweight',
     instructions: 'Tilt your ear toward your shoulder against light hand resistance, then return to neutral.',
     baseSets: 3,
@@ -2790,7 +2772,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Chin Tuck',
     targetMuscle: 'neck',
-    videoUrl: 'https://www.youtube.com/watch?v=0B6dAcx-XC4',
+    videoUrl: 'https://www.youtube.com/watch?v=gIBoxQ6AlS0',
     hardware: 'bodyweight',
     instructions: 'Draw your chin straight back to lengthen the back of your neck, hold, then release.',
     baseSets: 3,
@@ -2808,7 +2790,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Hanging Knee Raise',
     targetMuscle: 'hip-flexors',
-    videoUrl: 'https://www.youtube.com/watch?v=HgnQRbVdBmA',
+    videoUrl: 'https://www.youtube.com/watch?v=X-ACS9vpRyU',
     hardware: 'bodyweight',
     instructions: 'Hang from a bar and drive your knees up toward your chest without swinging.',
     baseSets: 3,
@@ -2844,7 +2826,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Cable Hip Flexion',
     targetMuscle: 'hip-flexors',
-    videoUrl: 'https://www.youtube.com/watch?v=PLsKfTVIAHc',
+    videoUrl: 'https://www.youtube.com/watch?v=mxfIfJ1YHus',
     hardware: 'full',
     instructions: 'With an ankle strap on a low pulley, drive your knee forward and up against the cable.',
     baseSets: 3,
@@ -2862,7 +2844,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Psoas March',
     targetMuscle: 'hip-flexors',
-    videoUrl: 'https://www.youtube.com/watch?v=Mn0Qa6mZ0Kg',
+    videoUrl: 'https://www.youtube.com/watch?v=GvGx7yNtIoU',
     hardware: 'bodyweight',
     instructions: 'Lying on your back with hips flexed, alternate driving one knee up while the other resists.',
     baseSets: 3,
@@ -2880,7 +2862,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Terminal Knee Extension',
     targetMuscle: 'knees',
-    videoUrl: 'https://www.youtube.com/watch?v=OWPeMhqKfEc',
+    videoUrl: 'https://www.youtube.com/watch?v=CU7Fn11YMTw',
     hardware: 'full',
     instructions: 'With resistance behind the knee, straighten the joint the last few degrees to full lockout.',
     baseSets: 3,
@@ -2916,7 +2898,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Step-Down',
     targetMuscle: 'knees',
-    videoUrl: 'https://www.youtube.com/watch?v=Lm4iLdDCp_M',
+    videoUrl: 'https://www.youtube.com/watch?v=d93bbZvxe_w',
     hardware: 'bodyweight',
     instructions: 'Standing on a box on one leg, lower the other heel slowly to the floor and drive back up.',
     baseSets: 3,
@@ -2934,7 +2916,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Nordic Curl',
     targetMuscle: 'knees',
-    videoUrl: 'https://www.youtube.com/watch?v=bq1AOFQXPUc',
+    videoUrl: 'https://www.youtube.com/watch?v=PvJDjcfZe1c',
     hardware: 'bodyweight',
     instructions: 'Kneeling upright, lean your torso back by bending only at the knees, then pull yourself upright.',
     baseSets: 3,
@@ -2970,7 +2952,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Reverse Hyperextension',
     targetMuscle: 'lower-back',
-    videoUrl: 'https://www.youtube.com/watch?v=ZkcLLIvHqpI',
+    videoUrl: 'https://www.youtube.com/watch?v=cZSxxPkCDy0',
     hardware: 'full',
     instructions: 'With your torso fixed, raise your legs behind you until your hips reach full extension.',
     baseSets: 3,
