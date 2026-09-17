@@ -189,29 +189,46 @@ export function ExerciseLibrary() {
             </Card>
           ) : (
             results.map((exercise) => (
-              <Card key={exercise.name} className="flex gap-sm">
-                <VideoThumbnail name={exercise.name} videoUrl={exercise.videoUrl} className="shrink-0" />
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-sm">
-                    <h3 className="font-display text-base font-bold text-white">{exercise.name}</h3>
+              <Card key={exercise.name} className="flex flex-col gap-0 overflow-hidden p-0 md:flex-row">
+                {/* Thumbnail — full width on mobile, fixed sidebar on desktop */}
+                <div className="aspect-video w-full shrink-0 md:aspect-auto md:h-auto md:w-[280px]">
+                  <VideoThumbnail
+                    name={exercise.name}
+                    videoUrl={exercise.videoUrl}
+                    onPlay={() => setModalExercise(exercise)}
+                    className="h-full w-full rounded-none"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-1 flex-col gap-sm p-md">
+                  {/* Badges row */}
+                  <div className="flex flex-wrap items-center gap-xs">
                     <Badge>{exercise.targetMuscle}</Badge>
                     <Badge>{DIFFICULTY_LABELS[exercise.difficulty]}</Badge>
                     <Badge>{EQUIPMENT_LABELS[exercise.equipment]}</Badge>
                     <Badge>{MECHANICS_LABELS[exercise.mechanics]}</Badge>
                   </div>
-                  <div className="mt-sm">
+
+                  {/* Title */}
+                  <h3 className="font-display text-headline-sm text-white">{exercise.name}</h3>
+
+                  {/* Cues */}
+                  <div>
                     <span className="font-display text-label-caps uppercase text-on-surface-variant">
                       Cues &amp; Kinematic Path
                     </span>
-                    <ol className="mt-1 list-decimal space-y-0.5 pl-md text-body-sm text-on-surface-variant">
+                    <ol className="mt-1 space-y-1 pl-md text-body-sm text-on-surface-variant" style={{ listStyleType: 'decimal' }}>
                       {exercise.cues.map((cue) => (
                         <li key={cue}>{cue}</li>
                       ))}
                     </ol>
                   </div>
-                  <div className="mt-sm flex gap-sm">
+
+                  {/* Actions — pinned to bottom */}
+                  <div className="mt-auto flex flex-wrap gap-sm pt-sm">
                     <Button variant="secondary" onClick={() => setModalExercise(exercise)}>
-                      Watch Demo
+                      Open in YouTube / Demo
                     </Button>
                     <Button variant={added.has(exercise.name) ? 'primary' : 'ghost'} onClick={() => toggleAdded(exercise.name)}>
                       {added.has(exercise.name) ? 'Added ✓' : '+ Add to Routine'}
