@@ -1,22 +1,21 @@
 ---
-approved_by: ""
-approved_at: ""
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "6776384efda75d43ec3eb41582c8a82c99fe9fd5bb922082f9cb3ac49b53126d"
 ---
-# TSD 0002 — <feature title>
+# TSD 0002 — Per-muscle anatomy selector for the Exercise Library
 > Behavior + contracts ONLY. Never name the library/method/pattern (over-spec = defeats spec-first).
 > One section per PRD story. Critic anchors to this as the external executable spec.
 > Story IDs are S-0002.nn — the 0002 prefix is what resolves this folder (docs/features/0002-*/),
 > so the `## TSD S-0002.nn` header below must match the story ID exactly.
 
-<!-- Domain-neutral default rows — tailor `.lane/templates/TSD.md` to your stack
-     (web: DB / API / Frontend · pipeline: sources / transforms / sinks ·
-      CLI: commands / flags / output · library: public API / invariants). -->
-## TSD S-0002.01 — <title>  (PRD §S-0002.01)
+## TSD S-0002.01 — Filter exercises by clicking a specific muscle  (PRD §S-0002.01)
+
 | Aspect | Spec |
 |--------|------|
-| Interfaces | contracts this exposes/consumes — endpoints, CLI flags, function/SDK signatures, events, queues |
-| Data / State | persistent or in-memory state it touches — schemas, files, formats (empty if none) |
-| Behavior | the observable behavior delivered |
-| Access | who/what may invoke it (empty if N/A) |
-| Boundaries | external deps we DON'T own — network/external services, clock, randomness, filesystem. A *what* ("external mail provider"), not a library. Injected as ports; faked in unit/integration. (empty if none) |
-| Tests | unit (what logic) / integration (which flows) / smoke (critical path — **required when Boundaries non-empty**: exercises the real boundary in a realistic environment) |
+| Interfaces | **Muscle vocabulary** — the single enumerated set of selectable muscles, shared by the exercise data, the filter, the routine generator and the inspector. Exactly these 17 anatomical regions, matching the supplied diagram's clickable regions one-for-one: `neck`, `trapezius`, `shoulders`, `chest`, `lats`, `lower-back`, `biceps`, `triceps`, `forearms`, `core`, `obliques`, `hip-flexors`, `glutes`, `quadriceps`, `hamstrings`, `knees`, `calves` — plus `full-body`, which is NOT a diagram region and exists only for whole-body/conditioning work. No other value is a valid target muscle.<br>**Exercise filter** — accepts an optional muscle selector that is either one vocabulary member or "all", plus the existing free-text / difficulty / equipment / mechanics selectors; returns the matching exercises. Unchanged in shape; only the muscle value space widens.<br>**Inspector** — accepts the currently-selected muscle (a vocabulary member or "all") and emits a vocabulary member when the user picks a region. It holds no filter state of its own and performs no filtering. |
+| Data / State | **Exercise records** — each carries exactly one target muscle drawn from the vocabulary above; the existing per-exercise fields (name, demo video reference, hardware tier, instructions, base sets/reps/rest, difficulty, equipment, mechanics, cues) are unchanged in meaning. Every previously-tagged exercise is re-tagged from its coarse body area to the specific muscle it trains, and additional exercises are authored for regions that would otherwise have none. **In-memory only** — selection lives in view state for the session; nothing is persisted, and no stored data is migrated. |
+| Behavior | Selecting a region narrows the exercise list to exactly the exercises tagged to that region, and the reported result count equals the number listed. The selected region is named back to the user in the inspector's legend and is rendered visually distinct from unselected regions; with nothing selected the legend says so and no region is distinguished. Both a front and a back view are presented together, so regions visible only from behind are reachable without a view toggle. Regions the diagram draws as silhouette rather than muscle (head, feet) are inert: not selectable and never highlighted. Every selectable region resolves to a non-empty exercise list. Routine generation continues to fill every training day for all goal / experience / cadence / hardware combinations. The diagram's region geometry and labelling reproduce the supplied asset exactly; its colour and type values resolve through the existing design-system tokens rather than asset-local literals, and no second styling mechanism is introduced. |
+| Access | N/A — a public, no-auth static client; every view is reachable by any visitor. |
+| Boundaries | None new. The only external dependency in this area remains the passive per-exercise demo-video reference (view-only link/embed, already owned by 0001); this story neither adds nor calls any service, and introduces no clock, randomness or filesystem dependency. |
+| Tests | **unit** — the muscle vocabulary covers every clickable region of the supplied diagram and nothing else; filtering by each vocabulary member returns only exercises tagged to it, and returns a non-empty list for every selectable region; routine generation yields a non-empty exercise set for every training day across all goal / experience / cadence / hardware combinations. **integration** — selecting a region in the inspector narrows the rendered list and updates the reported count, and the legend names the selection; inert regions do not respond to selection. **smoke** — not required: Boundaries is empty. |
