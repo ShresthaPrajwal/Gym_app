@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "1f210637dbdc18d8151715e4bd31af2675312cd7416b4b8300d4a5ec879ae987"
+---
 ## Task T-design-renovate-oqlkk9 — Mobile responsiveness pass
 **Parent:** story S-0004.04 · feature 0004-enhancement-design-renovate
 **Slice:** Global mobile UX pass across ExerciseLibrary, RoutineBuilder, and PageLayout
