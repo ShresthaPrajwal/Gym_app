@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "515b247a717c4cc973bb31c93a13e32f125909e60bcc5438ddbaa37685fa2991"
+---
 ## Task T-design-renovate-9293y6 — Video player modal with YouTube Shorts support
 **Parent:** story S-0004.02 · feature 0004-enhancement-design-renovate
 **Slice:** Replace in-card video playback with a centred modal player; handle both watch and Shorts URLs
