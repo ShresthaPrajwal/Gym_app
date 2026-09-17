@@ -12,7 +12,10 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   const equipmentGroup = screen.getByRole('group', { name: /equipment/i })
 
   // search narrows to a single exercise
-  fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: 'bench' } })
+  // 0002: 'bench' alone now matches three exercises (Bench Press, Close-Grip Bench Press,
+  // Bench Dip) in the grown catalogue; this term still resolves to exactly Bench Press,
+  // which the single-result assertions below depend on.
+  fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: 'bench press chest' } })
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Back Squat', level: 3 })).not.toBeInTheDocument()
 
@@ -30,7 +33,9 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
 
   // clear search, narrow by anatomy + difficulty instead
   fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: '' } })
-  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /legs/i }))
+  // 0002: the coarse 'Legs' control was replaced by per-muscle regions; Back Squat and Lunge
+  // are both quadriceps, so the same narrowing intent now runs through the Quadriceps control.
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /quadriceps/i }))
   fireEvent.click(within(difficultyGroup).getByRole('button', { name: 'Advanced' }))
   expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Lunge', level: 3 })).not.toBeInTheDocument()
@@ -40,20 +45,70 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.getByRole('heading', { name: 'Lunge', level: 3 })).toBeInTheDocument()
 
   // a combination with no matches shows the no-results state
+  // 0002: Core+Barbell became a real match (Weighted Plank); Core+Dumbbell is the pairing
+  // that is still legitimately empty.
   fireEvent.click(within(anatomyGroup).getByRole('button', { name: /core/i }))
-  fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Barbell' }))
+  fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Dumbbell' }))
   expect(screen.getByText(/no matching exercises/i)).toBeInTheDocument()
   expect(screen.queryByRole('heading', { level: 3 })).not.toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: /reset filter matrix/i }))
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
 
-  // anatomy inspector stays in sync with the selected anatomy group
-  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /legs/i }))
-  expect(screen.getByRole('button', { name: /legs region/i, pressed: true })).toBeInTheDocument()
+  // anatomy inspector stays in sync with the selected anatomy group.
+  // The ANT/POST view toggle this section used to drive is gone by design: the anatomy diagram
+  // now presents front and back together (card AC-4), so a back-only region needs no toggle to
+  // reach. Region coverage here is broadened as the diagram's regions land.
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /^calves$/i }))
+  expect(screen.getAllByRole('button', { name: /calves.*region/i }).some((el) => el.getAttribute('aria-pressed') === 'true')).toBe(true)
+})
 
-  // toggling anterior/posterior changes the view without changing the selection
-  expect(screen.queryByRole('button', { name: /back region/i })).not.toBeInTheDocument()
-  fireEvent.click(screen.getByRole('button', { name: 'POST' }))
-  expect(screen.getByRole('button', { name: /back region/i })).toBeInTheDocument()
-  expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
+// ── 0002 S-0002.01 ────────────────────────────────────────────────────────────
+// B-4: AC-4 [e2e]: a user selects one specific muscle region in the Exercise Library and the
+// listing narrows to exactly that region, with the reported count matching what is shown.
+// Driven through 'Calves' — a region this feature introduces — because selecting one of the
+// surviving coarse areas would have passed before the change and proved nothing.
+test('selecting a specific muscle region narrows the listing and the reported count matches', () => {
+  render(<ExerciseLibrary />)
+
+  const anatomyGroup = screen.getByRole('group', { name: /anatomy group/i })
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /^calves$/i }))
+
+  const listed = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+
+  // every calves exercise and nothing else
+  expect(listed).toContain('Standing Calf Raise')
+  expect(listed).not.toContain('Bench Press')
+  expect(listed).not.toContain('Back Squat')
+
+  // the count the page reports is the count it actually rendered
+  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+
+  // and the active-sector readout names the chosen region back to the user (scoped, since
+  // the region's name also appears on its filter control)
+  const sector = screen.getByText('Active Sector').parentElement as HTMLElement
+  expect(within(sector).getByText('Calves')).toBeInTheDocument()
+})
+
+// B-4: AC-5 [e2e]: clicking a muscle on the anatomy diagram itself (not the filter chips)
+// narrows the listing and the diagram's legend names the selection. Driven through `glutes`,
+// which the asset only draws on the back panel, so the click cannot have come from anywhere else.
+test('clicking a region on the anatomy diagram narrows the listing and the legend names it', () => {
+  render(<ExerciseLibrary />)
+
+  fireEvent.click(screen.getByRole('button', { name: /glutes region/i }))
+
+  const listed = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+  expect(listed.length).toBeGreaterThan(0)
+  expect(listed).toContain('Barbell Hip Thrust')
+  expect(listed).not.toContain('Bench Press')
+
+  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+  expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/glutes/i)
+
+  // The diagram is a two-panel landscape figure, so the owner's decision was to present it as a
+  // full-width band ABOVE the results rather than in the old narrow sidebar. Asserted as document
+  // order — an observable structural fact — rather than by inspecting CSS classes.
+  const inspector = screen.getByTestId('anatomy-inspector')
+  const firstResult = screen.getAllByRole('heading', { level: 3 })[0]
+  expect(inspector.compareDocumentPosition(firstResult) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
 })

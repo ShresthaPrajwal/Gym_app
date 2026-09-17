@@ -1,6 +1,29 @@
 import { EXERCISES } from '../data/exercises'
 
-export const MUSCLE_GROUPS = ['chest', 'back', 'legs', 'shoulders', 'arms', 'core', 'full-body'] as const
+// One entry per clickable region of the Bio-Anatomy Inspector diagram, ordered head-to-toe,
+// plus 'full-body' for conditioning work that no single region owns. The diagram also draws
+// a head and feet, but as silhouette rather than muscle — those are inert, so they have no
+// entry here and no exercises are tagged to them.
+export const MUSCLE_GROUPS = [
+  'neck',
+  'trapezius',
+  'shoulders',
+  'chest',
+  'lats',
+  'lower-back',
+  'biceps',
+  'triceps',
+  'forearms',
+  'core',
+  'obliques',
+  'hip-flexors',
+  'glutes',
+  'quadriceps',
+  'hamstrings',
+  'knees',
+  'calves',
+  'full-body',
+] as const
 export type MuscleGroup = (typeof MUSCLE_GROUPS)[number]
 
 // bodyweight ⊂ dumbbell ⊂ full — an exercise tagged 'bodyweight' is includable under any
@@ -12,7 +35,7 @@ export type HardwareTier = (typeof HARDWARE_TIERS)[number]
 export const DIFFICULTIES = ['beginner', 'intermediate', 'advanced'] as const
 export type Difficulty = (typeof DIFFICULTIES)[number]
 
-export const EQUIPMENT_TYPES = ['barbell', 'dumbbell', 'cable', 'bodyweight'] as const
+export const EQUIPMENT_TYPES = ['barbell', 'dumbbell', 'cable', 'bodyweight', 'machine'] as const
 export type EquipmentType = (typeof EQUIPMENT_TYPES)[number]
 
 export const MECHANICS = ['compound', 'isolation'] as const
