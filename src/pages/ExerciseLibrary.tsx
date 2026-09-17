@@ -16,13 +16,24 @@ import { AnatomyInspector } from './AnatomyInspector'
 import { ExerciseTechniqueModal } from './ExerciseTechniqueModal'
 
 const ANATOMY_LABELS: Record<MuscleGroup, string> = {
+  neck: 'Neck',
+  trapezius: 'Trapezius',
+  shoulders: 'Shoulders',
   chest: 'Chest',
-  back: 'Back & Lats',
-  legs: 'Legs & Quads',
-  shoulders: 'Shoulders & Delts',
-  arms: 'Arms',
-  core: 'Core & Abs',
-  'full-body': 'Full Body & Compound',
+  lats: 'Lats',
+  'lower-back': 'Lower Back',
+  biceps: 'Biceps',
+  triceps: 'Triceps',
+  forearms: 'Forearms',
+  core: 'Core',
+  obliques: 'Obliques',
+  'hip-flexors': 'Hip Flexors',
+  glutes: 'Glutes',
+  quadriceps: 'Quadriceps',
+  hamstrings: 'Hamstrings',
+  knees: 'Knees',
+  calves: 'Calves',
+  'full-body': 'Full Body',
 }
 
 const DIFFICULTY_LABELS: Record<Difficulty, string> = {

@@ -22,32 +22,40 @@ const HARDWARE_RANK: Record<Hardware, number> = { bodyweight: 0, dumbbell: 1, fu
 
 type Archetype = { focus: string; muscles: readonly MuscleGroup[] }
 
+// A training day now draws from a UNION of specific regions rather than one coarse area.
+// Every day deliberately includes at least one region that has a bodyweight-tier exercise,
+// otherwise that day comes back empty for a user on the bodyweight hardware tier.
+const PUSH: readonly MuscleGroup[] = ['chest', 'shoulders', 'triceps']
+const PULL: readonly MuscleGroup[] = ['lats', 'trapezius', 'biceps', 'forearms']
+const LEGS: readonly MuscleGroup[] = ['quadriceps', 'hamstrings', 'glutes', 'calves']
+const TRUNK: readonly MuscleGroup[] = ['core', 'obliques', 'lower-back']
+
 const GOAL_ARCHETYPES: Record<Goal, Archetype[]> = {
-  abs: [{ focus: 'Core', muscles: ['core'] }],
+  abs: [{ focus: 'Core', muscles: TRUNK }],
   bulk: [
-    { focus: 'Push', muscles: ['chest', 'shoulders'] },
-    { focus: 'Pull', muscles: ['back', 'arms'] },
-    { focus: 'Legs', muscles: ['legs'] },
+    { focus: 'Push', muscles: PUSH },
+    { focus: 'Pull', muscles: PULL },
+    { focus: 'Legs', muscles: LEGS },
   ],
   'cut-lean': [
     { focus: 'Full Body Conditioning', muscles: ['full-body'] },
-    { focus: 'Core', muscles: ['core'] },
-    { focus: 'Legs', muscles: ['legs'] },
+    { focus: 'Core', muscles: TRUNK },
+    { focus: 'Legs', muscles: LEGS },
   ],
   'general-fitness': [
-    { focus: 'Upper Body', muscles: ['chest', 'back', 'shoulders', 'arms'] },
-    { focus: 'Lower Body', muscles: ['legs'] },
-    { focus: 'Full Body', muscles: ['full-body', 'core'] },
+    { focus: 'Upper Body', muscles: [...PUSH, ...PULL] },
+    { focus: 'Lower Body', muscles: LEGS },
+    { focus: 'Full Body', muscles: ['full-body', ...TRUNK] },
   ],
   strength: [
-    { focus: 'Push', muscles: ['chest', 'shoulders'] },
-    { focus: 'Pull', muscles: ['back', 'arms'] },
-    { focus: 'Legs', muscles: ['legs'] },
+    { focus: 'Push', muscles: PUSH },
+    { focus: 'Pull', muscles: PULL },
+    { focus: 'Legs', muscles: LEGS },
   ],
   endurance: [
     { focus: 'Full Body Conditioning', muscles: ['full-body'] },
-    { focus: 'Legs', muscles: ['legs'] },
-    { focus: 'Core', muscles: ['core'] },
+    { focus: 'Legs', muscles: LEGS },
+    { focus: 'Core', muscles: TRUNK },
   ],
 }
 

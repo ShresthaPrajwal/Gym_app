@@ -7,20 +7,25 @@ type Region = { muscle: MuscleGroup; label: string; top: string; left: string; w
 
 // Only regions actually visible from each view are clickable there (e.g. you can't see
 // someone's back from the front). Both views share the same selected-muscle highlight.
+//
+// PLACEHOLDER block-figure geometry, re-pointed at the per-muscle vocabulary only so this
+// page keeps working. It is replaced wholesale by the supplied anatomy diagram in
+// T-anatomy-svg-muscle-selector-d5dm8h, so it is deliberately not built out to one region
+// per muscle here — each box maps to the most representative region it overlaps.
 const ANTERIOR_REGIONS: Region[] = [
   { muscle: 'shoulders', label: 'Shoulders', top: '12%', left: '20%', width: '60%', height: '8%' },
   { muscle: 'chest', label: 'Chest', top: '20%', left: '30%', width: '40%', height: '12%' },
-  { muscle: 'arms', label: 'Arms', top: '20%', left: '5%', width: '15%', height: '30%' },
+  { muscle: 'biceps', label: 'Biceps', top: '20%', left: '5%', width: '15%', height: '30%' },
   { muscle: 'core', label: 'Core', top: '32%', left: '32%', width: '36%', height: '15%' },
-  { muscle: 'legs', label: 'Legs', top: '47%', left: '30%', width: '40%', height: '40%' },
+  { muscle: 'quadriceps', label: 'Quadriceps', top: '47%', left: '30%', width: '40%', height: '40%' },
   { muscle: 'full-body', label: 'Full body', top: '88%', left: '30%', width: '40%', height: '8%' },
 ]
 
 const POSTERIOR_REGIONS: Region[] = [
-  { muscle: 'shoulders', label: 'Shoulders', top: '12%', left: '20%', width: '60%', height: '8%' },
-  { muscle: 'back', label: 'Back', top: '20%', left: '30%', width: '40%', height: '25%' },
-  { muscle: 'arms', label: 'Arms', top: '20%', left: '5%', width: '15%', height: '30%' },
-  { muscle: 'legs', label: 'Legs', top: '47%', left: '30%', width: '40%', height: '40%' },
+  { muscle: 'trapezius', label: 'Trapezius', top: '12%', left: '20%', width: '60%', height: '8%' },
+  { muscle: 'lats', label: 'Lats', top: '20%', left: '30%', width: '40%', height: '25%' },
+  { muscle: 'triceps', label: 'Triceps', top: '20%', left: '5%', width: '15%', height: '30%' },
+  { muscle: 'hamstrings', label: 'Hamstrings', top: '47%', left: '30%', width: '40%', height: '40%' },
   { muscle: 'full-body', label: 'Full body', top: '88%', left: '30%', width: '40%', height: '8%' },
 ]
 

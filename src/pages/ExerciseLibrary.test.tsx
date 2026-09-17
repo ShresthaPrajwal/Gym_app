@@ -30,7 +30,9 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
 
   // clear search, narrow by anatomy + difficulty instead
   fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: '' } })
-  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /legs/i }))
+  // 0002: the coarse 'Legs' control was replaced by per-muscle regions; Back Squat and Lunge
+  // are both quadriceps, so the same narrowing intent now runs through the Quadriceps control.
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /quadriceps/i }))
   fireEvent.click(within(difficultyGroup).getByRole('button', { name: 'Advanced' }))
   expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Lunge', level: 3 })).not.toBeInTheDocument()
@@ -48,12 +50,13 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
 
   // anatomy inspector stays in sync with the selected anatomy group
-  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /legs/i }))
-  expect(screen.getByRole('button', { name: /legs region/i, pressed: true })).toBeInTheDocument()
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /quadriceps/i }))
+  expect(screen.getByRole('button', { name: /quadriceps region/i, pressed: true })).toBeInTheDocument()
 
-  // toggling anterior/posterior changes the view without changing the selection
-  expect(screen.queryByRole('button', { name: /back region/i })).not.toBeInTheDocument()
+  // toggling anterior/posterior changes the view without changing the selection — 'Lats' is
+  // only reachable from the posterior view, as 'Back' was before the per-muscle split
+  expect(screen.queryByRole('button', { name: /lats region/i })).not.toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'POST' }))
-  expect(screen.getByRole('button', { name: /back region/i })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /lats region/i })).toBeInTheDocument()
   expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
 })

@@ -60,7 +60,7 @@ export const EXERCISES: Exercise[] = [
   // back
   {
     name: 'Deadlift',
-    targetMuscle: 'back',
+    targetMuscle: 'lats',
     videoUrl: 'https://www.youtube.com/watch?v=op9kVnSso6Q',
     hardware: 'full',
     instructions: 'Keep the bar close to your shins, brace your core, and drive through your heels to stand tall.',
@@ -78,7 +78,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Barbell Row',
-    targetMuscle: 'back',
+    targetMuscle: 'lats',
     videoUrl: 'https://www.youtube.com/watch?v=9efgcAjQe7E',
     hardware: 'full',
     instructions: 'Hinge at the hips, pull the bar to your lower ribcage, and squeeze your shoulder blades together.',
@@ -96,7 +96,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Pull-up',
-    targetMuscle: 'back',
+    targetMuscle: 'lats',
     videoUrl: 'https://www.youtube.com/watch?v=eGo4IYlbE5g',
     hardware: 'bodyweight',
     instructions: 'Hang with an overhand grip and pull your chin over the bar, leading with your elbows.',
@@ -116,7 +116,7 @@ export const EXERCISES: Exercise[] = [
   // legs
   {
     name: 'Back Squat',
-    targetMuscle: 'legs',
+    targetMuscle: 'quadriceps',
     videoUrl: 'https://www.youtube.com/watch?v=ultWZbUMPL8',
     hardware: 'full',
     instructions: 'Brace your core, sit back and down until your hips are below your knees, then drive up.',
@@ -134,7 +134,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Lunge',
-    targetMuscle: 'legs',
+    targetMuscle: 'quadriceps',
     videoUrl: 'https://www.youtube.com/watch?v=QOVaHwm-Q6U',
     hardware: 'bodyweight',
     instructions: 'Step forward and lower until both knees are at 90 degrees, then push back to standing.',
@@ -152,7 +152,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Leg Press',
-    targetMuscle: 'legs',
+    targetMuscle: 'quadriceps',
     videoUrl: 'https://www.youtube.com/watch?v=IZxyjW7MPJQ',
     hardware: 'full',
     instructions: 'Lower the sled until your knees reach about 90 degrees, then press through your heels.',
@@ -228,7 +228,7 @@ export const EXERCISES: Exercise[] = [
   // arms
   {
     name: 'Barbell Curl',
-    targetMuscle: 'arms',
+    targetMuscle: 'biceps',
     videoUrl: 'https://www.youtube.com/watch?v=kwG2ipFRgfo',
     hardware: 'full',
     instructions: 'Curl the bar up while keeping your elbows pinned to your sides, then lower with control.',
@@ -246,7 +246,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Tricep Pushdown',
-    targetMuscle: 'arms',
+    targetMuscle: 'triceps',
     videoUrl: 'https://www.youtube.com/watch?v=2-LAMcpzODU',
     hardware: 'full',
     instructions: 'Keep elbows at your sides and extend your arms fully, squeezing your triceps at the bottom.',
@@ -264,7 +264,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Hammer Curl',
-    targetMuscle: 'arms',
+    targetMuscle: 'biceps',
     videoUrl: 'https://www.youtube.com/watch?v=zC3nLlEvin4',
     hardware: 'dumbbell',
     instructions: 'Curl the dumbbells with a neutral grip, keeping your upper arms stationary.',
@@ -302,7 +302,7 @@ export const EXERCISES: Exercise[] = [
   },
   {
     name: 'Bicycle Crunch',
-    targetMuscle: 'core',
+    targetMuscle: 'obliques',
     videoUrl: 'https://www.youtube.com/watch?v=9FGilxCbdz8',
     hardware: 'bodyweight',
     instructions: 'Rotate to bring opposite elbow to knee, extending the other leg, in a controlled pedaling motion.',
@@ -390,6 +390,61 @@ export const EXERCISES: Exercise[] = [
       'Set up over the bar as in a deadlift, shins close.',
       'Pull the bar explosively and receive it at your shoulders.',
       'Drive the bar overhead in one fluid motion to lockout.',
+    ],
+  },
+  // calves
+  {
+    name: 'Standing Calf Raise',
+    targetMuscle: 'calves',
+    videoUrl: 'https://www.youtube.com/watch?v=gwLzBJYoWlI',
+    hardware: 'bodyweight',
+    instructions: 'Rise onto the balls of your feet, pause at the top, then lower your heels below the step for a full stretch.',
+    baseSets: 3,
+    baseReps: '15-20',
+    baseRest: '45s',
+    difficulty: 'beginner',
+    equipment: 'bodyweight',
+    mechanics: 'isolation',
+    cues: [
+      'Stand tall with the balls of your feet on a step, heels hanging free.',
+      'Rise as high as you can onto your toes and pause at the top.',
+      'Lower your heels below the step until you feel the stretch, then repeat.',
+    ],
+  },
+  {
+    name: 'Dumbbell Calf Raise',
+    targetMuscle: 'calves',
+    videoUrl: 'https://www.youtube.com/watch?v=JbyjNymZOt0',
+    hardware: 'dumbbell',
+    instructions: 'Hold dumbbells at your sides and rise onto the balls of your feet, controlling the descent.',
+    baseSets: 3,
+    baseReps: '12-15',
+    baseRest: '60s',
+    difficulty: 'beginner',
+    equipment: 'dumbbell',
+    mechanics: 'isolation',
+    cues: [
+      'Hold a dumbbell in each hand, arms relaxed at your sides.',
+      'Rise onto the balls of your feet, keeping your knees straight.',
+      'Lower your heels slowly under control — no bouncing.',
+    ],
+  },
+  {
+    name: 'Barbell Calf Raise',
+    targetMuscle: 'calves',
+    videoUrl: 'https://www.youtube.com/watch?v=k0j3iGyFvPE',
+    hardware: 'full',
+    instructions: 'With a loaded bar on your upper back, rise onto the balls of your feet and lower under control.',
+    baseSets: 4,
+    baseReps: '10-12',
+    baseRest: '75s',
+    difficulty: 'intermediate',
+    equipment: 'barbell',
+    mechanics: 'isolation',
+    cues: [
+      'Rack a bar across your upper back as for a squat, feet hip-width.',
+      'Drive up onto the balls of your feet, keeping your knees soft but straight.',
+      'Lower your heels under control to a full stretch before the next rep.',
     ],
   },
 ]

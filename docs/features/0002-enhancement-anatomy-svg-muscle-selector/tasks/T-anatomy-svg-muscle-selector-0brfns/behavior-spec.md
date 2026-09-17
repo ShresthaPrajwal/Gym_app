@@ -9,19 +9,37 @@
 > non-functional ACs are not RED→GREEN cycles — any are listed in their own section.
 
 ## B-1 (tracer bullet): AC-1 [behavior]: filtering the exercise set by a single muscle returns only exercises whose target muscle is that muscle, and returns nothing tagged to any other muscle.
-- Given:
-- When:
-- Then:
+- Given: the bundled exercise set, and `calves` as a member of the muscle vocabulary
+- When: the exercise set is filtered by the single muscle `calves`
+- Then: the result is non-empty, and every exercise in it has `calves` as its target muscle — no
+  exercise tagged to any other region appears
 
-## B-2: AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
-- Given:
-- When:
-- Then:
+## B-2: AC-2 [invariant, driven as behavior]: every muscle in the vocabulary that is selectable returns at least one exercise — no selectable muscle yields an empty list.
+- Given: the bundled exercise set, and the diagram's regions enumerated explicitly in the test
+  (NOT read back out of the vocabulary — that loop passes vacuously at base, where all 7 coarse
+  areas are populated)
+- When: the exercise set is filtered by each enumerated region in turn
+- Then: every one of those filters returns at least one exercise, so no selectable region is a dead
+  end; and the vocabulary contains exactly those regions and nothing else
+
+## B-3 — WITHDRAWN as a RED→GREEN cycle; recorded off-ledger instead (see Invariants below)
+
+## B-4: AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
+- Given: the Exercise Library rendered with no filters applied
+- When: the user selects one of the regions introduced by this task in the anatomy filter controls
+  (a surviving coarse area would pass at base and prove nothing)
+- Then: only that region's exercises are listed, and the count reported on the page equals the
+  number of exercises shown
 
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
 > behavior above (state which) or is locked by a guard test recorded off-ledger with
 > `lane red --regression`. Non-functional ACs are validated out-of-band (load test, etc.).
-- AC-2 [invariant]: every muscle in the vocabulary that is selectable returns at least one exercise — no selectable muscle yields an empty list. — coverage:
-- AC-3 [invariant]: generating a weekly routine returns at least one exercise for every training day, for every goal / experience / cadence / hardware combination. — coverage:
-
+- **AC-3** [invariant]: generating a weekly routine returns at least one exercise for every training
+  day, for every goal / experience / cadence / hardware combination. — coverage: **off-ledger guard
+  via `lane red --regression`.** Verified empirically at the task base BEFORE any implementation:
+  this assertion already PASSES there, so it guards existing behavior against this task's change
+  rather than specifying new behavior, and a plain `lane red` would be a false proof. See
+  AMENDMENT 1 in the exec plan.
+- AC-2 remains driven as a real cycle (B-2) — unlike AC-3 it genuinely fails at base once phrased
+  against the enumerated regions, because the empty regions have no exercises there.
