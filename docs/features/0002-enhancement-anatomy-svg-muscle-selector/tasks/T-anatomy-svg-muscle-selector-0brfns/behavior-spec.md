@@ -24,7 +24,8 @@
 
 ## B-3 — WITHDRAWN as a RED→GREEN cycle; recorded off-ledger instead (see Invariants below)
 
-## B-4: AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
+## B-4 — RECORDED AS A BACK-FILL, not a test-first cycle (see note at the bottom of this file)
+## AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
 - Given: the Exercise Library rendered with no filters applied
 - When: the user selects one of the regions introduced by this task in the anatomy filter controls
   (a surviving coarse area would pass at base and prove nothing)
@@ -43,3 +44,12 @@
   AMENDMENT 1 in the exec plan.
 - AC-2 remains driven as a real cycle (B-2) — unlike AC-3 it genuinely fails at base once phrased
   against the enumerated regions, because the empty regions have no exercises there.
+- **AC-4 (B-4) was recorded with `lane red --backfill`, NOT test-first — a process shortfall worth
+  naming.** The intent (exec plan) was a real RED→GREEN cycle, and at the task base the test does
+  fail. But by the time it was written the behavior was already implemented: the page builds its
+  filter controls *from* the muscle vocabulary, and the label map is a total map over that
+  vocabulary, so the app could not compile until the labels existed — which forced them into B-1's
+  GREEN, pre-satisfying AC-4. Correct sequencing would have driven B-4 before wiring the labels.
+  Rather than contrive a failure or revert proven cycles to manufacture a red, it is recorded as a
+  back-fill: honest, off-ledger, and counted apart from the test-first proof. Net ledger for this
+  task: **2 proven RED→GREEN cycles (B-1, B-2), 1 regression guard (AC-3), 1 back-fill (AC-4).**
