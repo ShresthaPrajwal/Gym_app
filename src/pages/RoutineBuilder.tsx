@@ -59,19 +59,19 @@ export function RoutineBuilder() {
 
       <div className="grid grid-cols-1 gap-md rounded bg-surface-container-low p-md lg:grid-cols-3">
         <PillGroup
-          label="01. Adaptation Threshold"
+          label="Adaptation Threshold"
           options={EXPERIENCE_LEVELS.map((level) => ({ value: level, label: EXPERIENCE_LABELS[level] }))}
           value={experience}
           onChange={setExperience}
         />
         <PillGroup
-          label="02. Microcycle Cadence"
+          label="Microcycle Cadence"
           options={CADENCES.map((c) => ({ value: c, label: `${c} Days` }))}
           value={cadence}
           onChange={setCadence}
         />
         <PillGroup
-          label="03. Available Hardware"
+          label="Available Hardware"
           options={HARDWARE_OPTIONS.map((h) => ({ value: h.value, label: h.label }))}
           value={hardware}
           onChange={setHardware}
@@ -206,17 +206,17 @@ function PillGroup<T extends string | number>({
   return (
     <div className="flex flex-col gap-xs">
       <span className="font-display text-label-caps uppercase tracking-wider text-on-surface-variant">{label}</span>
-      <div className="grid gap-1 rounded bg-surface-container-lowest p-1" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
+      <div className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
         {options.map((opt) => (
           <Button
             key={String(opt.value)}
             variant="pill"
             onClick={() => onChange(opt.value)}
-            className={
+            className={`min-h-[44px] px-3 ${
               value === opt.value
                 ? 'bg-surface-container-high text-primary-container shadow-sm'
                 : 'text-on-surface-variant hover:text-on-surface'
-            }
+            }`}
           >
             {opt.label}
           </Button>
