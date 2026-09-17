@@ -1,4 +1,4 @@
-import { filterExercises } from './exerciseFilter'
+import { MUSCLE_GROUPS, filterExercises, type MuscleGroup } from './exerciseFilter'
 
 const YOUTUBE_URL_RE = /^https:\/\/(www\.)?youtube\.com\/watch\?v=[\w-]+$/
 
@@ -61,4 +61,39 @@ test("filtering by a specific muscle region returns only that region's exercises
   for (const exercise of results) {
     expect(exercise.targetMuscle).toBe('calves')
   }
+})
+
+// B-2: AC-2: no selectable region is a dead end. The regions are spelled out here rather
+// than read back out of MUSCLE_GROUPS on purpose — looping the vocabulary would assert
+// "whatever we shipped is non-empty", which passes vacuously and proves nothing. This list
+// is the contract: the clickable regions of the Bio-Anatomy Inspector diagram, plus
+// 'full-body' for conditioning work that belongs to no single region.
+const DIAGRAM_REGIONS: MuscleGroup[] = [
+  'neck',
+  'trapezius',
+  'shoulders',
+  'chest',
+  'lats',
+  'lower-back',
+  'biceps',
+  'triceps',
+  'forearms',
+  'core',
+  'obliques',
+  'hip-flexors',
+  'glutes',
+  'quadriceps',
+  'hamstrings',
+  'knees',
+  'calves',
+  'full-body',
+]
+
+test('the muscle vocabulary is exactly the diagram regions, and nothing else', () => {
+  expect([...MUSCLE_GROUPS].sort()).toEqual([...DIAGRAM_REGIONS].sort())
+})
+
+test('every selectable muscle region returns at least one exercise', () => {
+  const dead = DIAGRAM_REGIONS.filter((muscle) => filterExercises({ muscle }).length === 0)
+  expect(dead).toEqual([])
 })
