@@ -123,47 +123,73 @@ export function ExerciseLibrary() {
           onChange={(e) => update('search', e.target.value)}
         />
 
-        <div role="group" aria-label="Anatomy Group" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-          <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>
-            All
-          </PillButton>
-          {MUSCLE_GROUPS.map((m) => (
-            <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
-              {ANATOMY_LABELS[m]}
-            </PillButton>
-          ))}
+        <div className="flex flex-col gap-xs">
+          <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+              <circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/>
+            </svg>
+            Muscle Group
+          </span>
+          <div role="group" aria-label="Anatomy Group" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+            <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>All</PillButton>
+            {MUSCLE_GROUPS.map((m) => (
+              <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
+                {ANATOMY_LABELS[m]}
+              </PillButton>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-sm sm:grid-cols-3">
-          <div role="group" aria-label="Difficulty" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-            <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>
-              All
-            </PillButton>
-            {DIFFICULTIES.map((d) => (
-              <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
-                {DIFFICULTY_LABELS[d]}
-              </PillButton>
-            ))}
+          <div className="flex flex-col gap-xs">
+            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              Difficulty
+            </span>
+            <div role="group" aria-label="Difficulty" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+              <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>All</PillButton>
+              {DIFFICULTIES.map((d) => (
+                <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
+                  {DIFFICULTY_LABELS[d]}
+                </PillButton>
+              ))}
+            </div>
           </div>
-          <div role="group" aria-label="Equipment" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-            <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>
-              All
-            </PillButton>
-            {EQUIPMENT_TYPES.map((e) => (
-              <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
-                {EQUIPMENT_LABELS[e]}
-              </PillButton>
-            ))}
+
+          <div className="flex flex-col gap-xs">
+            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+              Equipment
+            </span>
+            <div role="group" aria-label="Equipment" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+              <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>All</PillButton>
+              {EQUIPMENT_TYPES.map((e) => (
+                <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
+                  {EQUIPMENT_LABELS[e]}
+                </PillButton>
+              ))}
+            </div>
           </div>
-          <div role="group" aria-label="Mechanics" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-            <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>
-              Any
-            </PillButton>
-            {MECHANICS.map((m) => (
-              <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
-                {MECHANICS_LABELS[m]}
-              </PillButton>
-            ))}
+
+          <div className="flex flex-col gap-xs">
+            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+                <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12"/>
+              </svg>
+              Mechanics
+            </span>
+            <div role="group" aria-label="Mechanics" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
+              <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>Any</PillButton>
+              {MECHANICS.map((m) => (
+                <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
+                  {MECHANICS_LABELS[m]}
+                </PillButton>
+              ))}
+            </div>
           </div>
         </div>
 

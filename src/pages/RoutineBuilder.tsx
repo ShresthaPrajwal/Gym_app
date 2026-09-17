@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type JSX } from 'react'
 import { Badge, Button, Card, PageLayout, VideoThumbnail } from '../components'
 import {
   CADENCES,
@@ -13,13 +13,37 @@ import {
 } from '../domain/routineGenerator'
 import { VideoPlayerModal } from './VideoPlayerModal'
 
-const GOAL_META: Record<Goal, { label: string; description: string }> = {
-  abs: { label: 'Core Shred', description: 'Visceral density & rotational stability' },
-  bulk: { label: 'Mass Hypertrophy', description: 'Cross-sectional myofibrillar enlargement' },
-  'cut-lean': { label: 'Lean Definition', description: 'Fat loss with lean mass retention' },
-  'general-fitness': { label: 'Total Health', description: 'Cardiometabolic longevity and resilience' },
-  strength: { label: 'Peak Strength', description: 'Neural recruitment & 1RM capacity' },
-  endurance: { label: 'Endurance', description: 'Aerobic capacity & work tolerance' },
+const GOAL_META: Record<Goal, { label: string; description: string; icon: JSX.Element }> = {
+  abs: {
+    label: 'Core Shred',
+    description: 'Visceral density & rotational stability',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>,
+  },
+  bulk: {
+    label: 'Mass Hypertrophy',
+    description: 'Cross-sectional myofibrillar enlargement',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M6.5 6.5h11M6.5 17.5h11M4 12h16M9 4l-2 2M15 4l2 2M9 20l-2-2M15 20l2-2"/></svg>,
+  },
+  'cut-lean': {
+    label: 'Lean Definition',
+    description: 'Fat loss with lean mass retention',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M12 2C9 2 6 5 6 9c0 3.5 2.5 6.5 6 8.5 3.5-2 6-5 6-8.5C18 5 15 2 12 2z"/><path d="M12 2v18"/></svg>,
+  },
+  'general-fitness': {
+    label: 'Total Health',
+    description: 'Cardiometabolic longevity and resilience',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+  },
+  strength: {
+    label: 'Peak Strength',
+    description: 'Neural recruitment & 1RM capacity',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  },
+  endurance: {
+    label: 'Endurance',
+    description: 'Aerobic capacity & work tolerance',
+    icon: <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+  },
 }
 
 const EXPERIENCE_LABELS: Record<ExperienceLevel, string> = {
@@ -102,6 +126,7 @@ export function RoutineBuilder() {
                 }`}
               >
                 {active && <div className="absolute inset-x-0 top-0 h-0.5 rounded-t bg-primary-container" />}
+                <span className={active ? 'text-primary-container' : 'text-on-surface-variant'}>{meta.icon}</span>
                 <span className="font-display text-headline-sm text-white">{meta.label}</span>
                 <span className="font-body text-body-sm text-on-surface-variant">{meta.description}</span>
               </Button>
