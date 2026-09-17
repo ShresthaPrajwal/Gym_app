@@ -37,8 +37,10 @@ test('equipment + mechanics narrows to matching exercises only', () => {
 })
 
 // B-2: AC-2: a filter combination with no matching exercises returns an empty list.
+// 0002: was core+barbell, which became a real match once the catalogue grew (Weighted Plank).
+// core+dumbbell carries the same "valid pair, nothing tagged to it" intent.
 test('a filter combination with no matches returns an empty list', () => {
-  const results = filterExercises({ muscle: 'core', equipment: 'barbell' })
+  const results = filterExercises({ muscle: 'core', equipment: 'dumbbell' })
   expect(results).toEqual([])
 })
 

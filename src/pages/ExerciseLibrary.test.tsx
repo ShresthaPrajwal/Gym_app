@@ -12,7 +12,10 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   const equipmentGroup = screen.getByRole('group', { name: /equipment/i })
 
   // search narrows to a single exercise
-  fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: 'bench' } })
+  // 0002: 'bench' alone now matches three exercises (Bench Press, Close-Grip Bench Press,
+  // Bench Dip) in the grown catalogue; this term still resolves to exactly Bench Press,
+  // which the single-result assertions below depend on.
+  fireEvent.change(screen.getByLabelText(/search exercises/i), { target: { value: 'bench press chest' } })
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Back Squat', level: 3 })).not.toBeInTheDocument()
 
@@ -42,8 +45,10 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.getByRole('heading', { name: 'Lunge', level: 3 })).toBeInTheDocument()
 
   // a combination with no matches shows the no-results state
+  // 0002: Core+Barbell became a real match (Weighted Plank); Core+Dumbbell is the pairing
+  // that is still legitimately empty.
   fireEvent.click(within(anatomyGroup).getByRole('button', { name: /core/i }))
-  fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Barbell' }))
+  fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Dumbbell' }))
   expect(screen.getByText(/no matching exercises/i)).toBeInTheDocument()
   expect(screen.queryByRole('heading', { level: 3 })).not.toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: /reset filter matrix/i }))
