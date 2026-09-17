@@ -54,16 +54,12 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   fireEvent.click(screen.getByRole('button', { name: /reset filter matrix/i }))
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
 
-  // anatomy inspector stays in sync with the selected anatomy group
-  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /quadriceps/i }))
-  expect(screen.getByRole('button', { name: /quadriceps region/i, pressed: true })).toBeInTheDocument()
-
-  // toggling anterior/posterior changes the view without changing the selection — 'Lats' is
-  // only reachable from the posterior view, as 'Back' was before the per-muscle split
-  expect(screen.queryByRole('button', { name: /lats region/i })).not.toBeInTheDocument()
-  fireEvent.click(screen.getByRole('button', { name: 'POST' }))
-  expect(screen.getByRole('button', { name: /lats region/i })).toBeInTheDocument()
-  expect(screen.getByRole('heading', { name: 'Back Squat', level: 3 })).toBeInTheDocument()
+  // anatomy inspector stays in sync with the selected anatomy group.
+  // The ANT/POST view toggle this section used to drive is gone by design: the anatomy diagram
+  // now presents front and back together (card AC-4), so a back-only region needs no toggle to
+  // reach. Region coverage here is broadened as the diagram's regions land.
+  fireEvent.click(within(anatomyGroup).getByRole('button', { name: /^calves$/i }))
+  expect(screen.getAllByRole('button', { name: /calves.*region/i }).some((el) => el.getAttribute('aria-pressed') === 'true')).toBe(true)
 })
 
 // ── 0002 S-0002.01 ────────────────────────────────────────────────────────────
