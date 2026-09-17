@@ -23,9 +23,13 @@
   is driven (the inspector itself holds no filter state, per the TSD)
 
 ## B-2: AC-3 [invariant, driven as a cycle — see note above]: every region the diagram depicts is selectable, and the silhouette-only regions are inert.
-- Given:
-- When:
-- Then:
+- Given: the inspector rendered, and the diagram's trainable regions enumerated explicitly in the
+  test (NOT read back out of `MUSCLE_GROUPS` — that would assert "whatever we shipped is what we
+  shipped" and pass vacuously, the trap that had to be corrected mid-flight in the sibling task)
+- When: the diagram's region controls are collected, and each enumerated region is activated in turn
+- Then: every one of the 17 depicted regions has a control that reports exactly that region to the
+  host page; `full-body` has none, because the TSD makes it unreachable from the body; and the
+  asset's head and feet expose no control at all
 
 ## B-3: AC-2 + AC-4 [behavior]: the legend names the current selection (and says so when there is none), and back-only regions are selectable with no view toggle.
 - Given:

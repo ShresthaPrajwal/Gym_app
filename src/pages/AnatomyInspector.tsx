@@ -14,10 +14,88 @@ type RegionDef = {
   label: string
   /** `d` attributes exactly as authored, in the asset's own group order. */
   paths: string[]
+  /** Secondary shape the asset paints over the region (the abdominal segmentation). */
+  detail?: string
+  /** Regions the asset draws as ellipses rather than paths (the knees). */
+  ellipses?: { cx: number; cy: number; rx: number; ry: number }[]
 }
 
 // Coordinates are body-local: the asset nests each figure in a translate(), reproduced below.
+// Order within each list follows the asset's own group order, so paint order is preserved.
 const FRONT_REGIONS: RegionDef[] = [
+  {
+    muscle: 'neck',
+    label: 'Neck',
+    paths: ['M-22 61 L-28 88 L-52 104 L-31 119 L0 103 L31 119 L52 104 L28 88 L22 61Z'],
+  },
+  {
+    muscle: 'shoulders',
+    label: 'Shoulders',
+    paths: [
+      'M-32 93 Q-75 92 -103 123 Q-76 141 -48 132 L-24 108Z',
+      'M32 93 Q75 92 103 123 Q76 141 48 132 L24 108Z',
+    ],
+  },
+  {
+    muscle: 'chest',
+    label: 'Chest',
+    paths: [
+      'M-25 105 Q-70 106 -68 143 Q-45 158 0 148 L0 110Z',
+      'M25 105 Q70 106 68 143 Q45 158 0 148 L0 110Z',
+    ],
+  },
+  {
+    muscle: 'biceps',
+    label: 'Biceps',
+    paths: [
+      'M-70 132 Q-94 144 -92 190 Q-83 212 -65 194 L-50 150Z',
+      'M70 132 Q94 144 92 190 Q83 212 65 194 L50 150Z',
+    ],
+  },
+  {
+    muscle: 'forearms',
+    label: 'Forearms',
+    paths: [
+      'M-87 190 Q-105 205 -103 263 L-87 290 Q-72 272 -70 218Z',
+      'M87 190 Q105 205 103 263 L87 290 Q72 272 70 218Z',
+    ],
+  },
+  {
+    muscle: 'core',
+    label: 'Core',
+    paths: ['M-40 149 Q-25 158 0 156 Q25 158 40 149 L45 242 Q23 256 0 251 Q-23 256 -45 242Z'],
+    detail:
+      'M-31 164 L-3 163 L-3 187 L-30 188Z M3 163 L31 164 L30 188 L3 187Z ' +
+      'M-30 193 L-3 192 L-3 218 L-28 217Z M3 192 L30 193 L28 217 L3 218Z ' +
+      'M-26 222 L-3 221 L-3 244 L-23 241Z M3 221 L26 222 L23 241 L3 244Z',
+  },
+  {
+    muscle: 'obliques',
+    label: 'Obliques',
+    paths: ['M-43 161 L-62 169 L-52 232 L-43 242 L-34 210Z', 'M43 161 L62 169 L52 232 L43 242 L34 210Z'],
+  },
+  {
+    muscle: 'hip-flexors',
+    label: 'Hip Flexors',
+    paths: ['M-44 241 Q-23 250 0 249 Q23 250 44 241 L35 276 Q0 291 -35 276Z'],
+  },
+  {
+    muscle: 'quadriceps',
+    label: 'Quadriceps',
+    paths: [
+      'M-35 270 Q-62 284 -61 344 L-50 415 Q-30 425 -8 406 L-3 294Z',
+      'M35 270 Q62 284 61 344 L50 415 Q30 425 8 406 L3 294Z',
+    ],
+  },
+  {
+    muscle: 'knees',
+    label: 'Knees',
+    ellipses: [
+      { cx: -30, cy: 426, rx: 22, ry: 25 },
+      { cx: 30, cy: 426, rx: 22, ry: 25 },
+    ],
+    paths: [],
+  },
   {
     muscle: 'calves',
     label: 'Calves / Lower Legs',
@@ -29,6 +107,69 @@ const FRONT_REGIONS: RegionDef[] = [
 ]
 
 const BACK_REGIONS: RegionDef[] = [
+  {
+    muscle: 'neck',
+    label: 'Neck',
+    paths: ['M-22 61 L-28 95 L-55 112 L-30 126 L0 105 L30 126 L55 112 L28 95 L22 61Z'],
+  },
+  {
+    muscle: 'trapezius',
+    label: 'Trapezius',
+    paths: ['M-24 91 L0 106 L24 91 L61 120 L43 176 L0 159 L-43 176 L-61 120Z'],
+  },
+  {
+    muscle: 'shoulders',
+    label: 'Shoulders',
+    paths: [
+      'M-61 111 Q-94 112 -103 143 Q-82 158 -58 151 L-42 128Z',
+      'M61 111 Q94 112 103 143 Q82 158 58 151 L42 128Z',
+    ],
+  },
+  {
+    muscle: 'lats',
+    label: 'Lats',
+    paths: [
+      'M-42 145 L-61 151 Q-70 191 -48 245 L-12 265 L-7 164Z',
+      'M42 145 L61 151 Q70 191 48 245 L12 265 L7 164Z',
+    ],
+  },
+  {
+    muscle: 'triceps',
+    label: 'Triceps',
+    paths: [
+      'M-61 151 Q-83 166 -85 213 L-70 254 Q-56 235 -54 190Z',
+      'M61 151 Q83 166 85 213 L70 254 Q56 235 54 190Z',
+    ],
+  },
+  {
+    muscle: 'forearms',
+    label: 'Forearms',
+    paths: [
+      'M-84 210 Q-104 229 -101 278 L-86 302 Q-70 278 -69 238Z',
+      'M84 210 Q104 229 101 278 L86 302 Q70 278 69 238Z',
+    ],
+  },
+  {
+    muscle: 'lower-back',
+    label: 'Lower Back',
+    paths: ['M-34 221 Q-20 234 0 232 Q20 234 34 221 L43 283 L0 302 L-43 283Z'],
+  },
+  {
+    muscle: 'glutes',
+    label: 'Glutes',
+    paths: [
+      'M-43 283 Q-20 270 0 286 L0 346 Q-30 357 -51 332Z',
+      'M43 283 Q20 270 0 286 L0 346 Q30 357 51 332Z',
+    ],
+  },
+  {
+    muscle: 'hamstrings',
+    label: 'Hamstrings',
+    paths: [
+      'M-49 340 Q-61 355 -57 416 L-46 454 Q-24 458 -7 440 L-5 355Z',
+      'M49 340 Q61 355 57 416 L46 454 Q24 458 7 440 L5 355Z',
+    ],
+  },
   {
     muscle: 'calves',
     label: 'Calves',
@@ -90,6 +231,12 @@ function Region({
       {region.paths.map((d) => (
         <path key={d} d={d} />
       ))}
+      {region.ellipses?.map((e) => (
+        <ellipse key={`${e.cx},${e.cy}`} cx={e.cx} cy={e.cy} rx={e.rx} ry={e.ry} />
+      ))}
+      {region.detail && (
+        <path className="fill-surface-container-highest stroke-surface-container-lowest" strokeWidth={1} d={region.detail} />
+      )}
     </g>
   )
 }
