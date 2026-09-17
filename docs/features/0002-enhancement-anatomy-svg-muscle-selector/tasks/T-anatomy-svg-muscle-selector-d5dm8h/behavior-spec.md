@@ -32,9 +32,19 @@
   asset's head and feet expose no control at all
 
 ## B-3: AC-2 + AC-4 [behavior]: the legend names the current selection (and says so when there is none), and back-only regions are selectable with no view toggle.
-- Given:
-- When:
-- Then:
+- Given: the inspector rendered twice — once with nothing selected, once with a back-only region
+  selected
+- When: the legend is read in each case, and the controls for regions the asset only draws from
+  behind (trapezius, lats, triceps, lower back, glutes, hamstrings) are looked for in the single
+  rendered view
+- Then: the legend names the selected region when there is one and says plainly that none is
+  selected otherwise; and every back-only region is present without any view having been switched,
+  because front and back are drawn together — there is no view-toggle control to find
+- Honesty note on what this cycle actually drives: only the **legend** assertion fails at the
+  moment of RED. The AC-4 assertion (back-only regions reachable, no toggle) fails at the task
+  BASE — the placeholder had an ANT/POST switch and exposed neither glutes nor lower back — but it
+  was already satisfied by the dual-panel diagram landed in B-1/B-2, so within this cycle it
+  guards that design rather than driving it. Recorded rather than presented as test-first.
 
 ## B-4: AC-5 [e2e]: in the running app a user opens the Exercise Library, clicks a muscle on the anatomy diagram, and sees the list narrow to that muscle's exercises with the legend naming the selection.
 - Given:

@@ -180,6 +180,56 @@ const BACK_REGIONS: RegionDef[] = [
   },
 ]
 
+// Display names for the legend readout. `full-body` has no region on the body (it is reachable
+// only from the page's filter controls), but it can still be the page's current selection, so the
+// legend must be able to name it.
+const REGION_LABELS: Record<MuscleGroup, string> = {
+  neck: 'Neck',
+  trapezius: 'Trapezius',
+  shoulders: 'Shoulders',
+  chest: 'Chest',
+  lats: 'Lats',
+  'lower-back': 'Lower Back',
+  biceps: 'Biceps',
+  triceps: 'Triceps',
+  forearms: 'Forearms',
+  core: 'Core',
+  obliques: 'Obliques',
+  'hip-flexors': 'Hip Flexors',
+  glutes: 'Glutes',
+  quadriceps: 'Quadriceps',
+  hamstrings: 'Hamstrings',
+  knees: 'Knees',
+  calves: 'Calves',
+  'full-body': 'Full Body',
+}
+
+// Leader-line callouts, transcribed from the asset. Decorative: the region itself is the control,
+// so these are hidden from assistive tech rather than duplicated as a second set of targets.
+type Callout = { line: string; dot: { cx: number; cy: number }; text: string; x: number; y: number }
+
+const FRONT_CALLOUTS: Callout[] = [
+  { line: 'M-34 111 H-150 L-220 91', dot: { cx: -34, cy: 111 }, text: 'Shoulders', x: -226, y: 88 },
+  { line: 'M-44 130 H-150 L-220 130', dot: { cx: -44, cy: 130 }, text: 'Chest', x: -226, y: 134 },
+  { line: 'M-71 169 H-150 L-220 169', dot: { cx: -71, cy: 169 }, text: 'Biceps', x: -226, y: 173 },
+  { line: 'M-88 224 H-150 L-220 208', dot: { cx: -88, cy: 224 }, text: 'Forearms', x: -226, y: 212 },
+  { line: 'M-44 199 H-145 L-220 246', dot: { cx: -44, cy: 199 }, text: 'Core', x: -226, y: 250 },
+  { line: 'M-52 205 H-130 L-220 286', dot: { cx: -52, cy: 205 }, text: 'Obliques', x: -226, y: 290 },
+  { line: 'M-49 340 H-145 L-220 337', dot: { cx: -49, cy: 340 }, text: 'Quadriceps', x: -226, y: 341 },
+  { line: 'M-49 520 H-145 L-220 520', dot: { cx: -49, cy: 520 }, text: 'Lower legs', x: -226, y: 524 },
+]
+
+const BACK_CALLOUTS: Callout[] = [
+  { line: 'M30 105 H145 L220 88', dot: { cx: 30, cy: 105 }, text: 'Trapezius', x: 226, y: 91 },
+  { line: 'M61 132 H150 L220 130', dot: { cx: 61, cy: 132 }, text: 'Shoulders', x: 226, y: 134 },
+  { line: 'M45 190 H150 L220 177', dot: { cx: 45, cy: 190 }, text: 'Lats', x: 226, y: 181 },
+  { line: 'M70 215 H150 L220 215', dot: { cx: 70, cy: 215 }, text: 'Triceps', x: 226, y: 219 },
+  { line: 'M35 255 H150 L220 255', dot: { cx: 35, cy: 255 }, text: 'Lower back', x: 226, y: 259 },
+  { line: 'M43 312 H150 L220 303', dot: { cx: 43, cy: 312 }, text: 'Glutes', x: 226, y: 307 },
+  { line: 'M50 396 H150 L220 396', dot: { cx: 50, cy: 396 }, text: 'Hamstrings', x: 226, y: 400 },
+  { line: 'M47 515 H150 L220 515', dot: { cx: 47, cy: 515 }, text: 'Calves', x: 226, y: 519 },
+]
+
 const FRONT_SILHOUETTE =
   'M-103 123 Q-112 150 -105 205 L-103 264 L-87 290 L-70 263 L-65 194 L-48 154 L-35 276 L-45 300 ' +
   'L-48 415 L-52 430 L-48 448 L-38 584 L-13 584 L-7 448 L0 420 L7 448 L13 584 L38 584 L48 448 ' +
@@ -245,12 +295,14 @@ function BodyPanel({
   view,
   regions,
   silhouette,
+  callouts,
   selected,
   onSelect,
 }: {
   view: 'front' | 'back'
   regions: RegionDef[]
   silhouette: string
+  callouts: Callout[]
   selected: MuscleGroup | 'all'
   onSelect: (muscle: MuscleGroup) => void
 }) {
@@ -268,6 +320,22 @@ function BodyPanel({
           onSelect={onSelect}
         />
       ))}
+      <g aria-hidden="true">
+        {callouts.map((c) => (
+          <g key={c.text}>
+            <path className="fill-none stroke-primary-container/70" strokeWidth={1.2} d={c.line} />
+            <circle className="fill-primary-container/70" cx={c.dot.cx} cy={c.dot.cy} r={3} />
+            <text
+              className="fill-on-surface-variant font-body text-[13px]"
+              x={c.x}
+              y={c.y}
+              textAnchor={view === 'front' ? 'end' : 'start'}
+            >
+              {c.text}
+            </text>
+          </g>
+        ))}
+      </g>
     </g>
   )
 }
@@ -322,6 +390,7 @@ export function AnatomyInspector({
           view="front"
           regions={FRONT_REGIONS}
           silhouette={FRONT_SILHOUETTE}
+          callouts={FRONT_CALLOUTS}
           selected={selected}
           onSelect={onSelect}
         />
@@ -329,6 +398,7 @@ export function AnatomyInspector({
           view="back"
           regions={BACK_REGIONS}
           silhouette={BACK_SILHOUETTE}
+          callouts={BACK_CALLOUTS}
           selected={selected}
           onSelect={onSelect}
         />
@@ -362,6 +432,16 @@ export function AnatomyInspector({
         <rect className="fill-primary-container/40" x={898} y={47} width={18} height={18} rx={3} />
         <text className="fill-on-surface-variant font-body text-[12px]" x={928} y={61}>
           Click a muscle group to select
+        </text>
+
+        <text
+          data-testid="anatomy-legend"
+          className="fill-on-surface-variant font-body text-[12px]"
+          x={600}
+          y={735}
+          textAnchor="middle"
+        >
+          {selected === 'all' ? 'Selected: none' : `Selected: ${REGION_LABELS[selected] ?? selected}`}
         </text>
       </svg>
     </div>
