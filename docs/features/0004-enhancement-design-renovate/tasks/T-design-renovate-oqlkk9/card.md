@@ -1,11 +1,12 @@
-## Task T-design-renovate-oqlkk9 — <title>
-**Parent:** story S-0004-enhancement-design-renovate.nn · feature 0004-enhancement-design-renovate (docs/features/0004-enhancement-design-renovate-*/ — its PRD + TSD)
-**Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
-**Acceptance criteria:** (tag each `behavior`/`invariant`/`non-functional`/`e2e`; behavior ACs = observable outcome through an interface — NO "calls X / saves to table Y / uses lib Z")
-- [ ] AC-1 [behavior]: <observable outcome through interface>
-**End-to-end AC:** AC-<n> [e2e] — reachable through the running app (required: green component/unit ≠ reachable)
-**Tests:** AC-1  ← ordered; first = tracer bullet
-<!-- exception: Tests: N/A — reason: config | scaffolding | spike | refactor | tooling | integration -->
-**Test scope:** tests/T-design-renovate-oqlkk9/   ← documentation: where this task's OWN tests live. Scope is NOT configured — red/green scope to the changed test files and `verify` derives it from the RED commits (ADR-0002); `review` runs the FULL suite. This line is a human pointer only.
-<!-- approval: written by `lane approve` as frontmatter (approved_by/at/sha256) after a human confirms — never hand-edit -->
-**Done =** reviewable PR, all tests pass, links to chain. One PR per task (default).
+## Task T-design-renovate-oqlkk9 — Mobile responsiveness pass
+**Parent:** story S-0004.04 · feature 0004-enhancement-design-renovate
+**Slice:** Global mobile UX pass across ExerciseLibrary, RoutineBuilder, and PageLayout
+**Acceptance criteria:**
+- [ ] AC-1 [behavior]: Exercise library single-column on mobile; thumbnails proportional, no overflow-x
+- [ ] AC-2 [behavior]: Nav tabs min 44px height, thumb-friendly
+- [ ] AC-3 [behavior]: PageLayout padding scales correctly from px-4 on mobile to px-gutter on lg
+- [ ] AC-4 [e2e]: Full exercise library and routine builder usable at 375px with no horizontal scroll and all tap targets ≥44px
+**End-to-end AC:** AC-4 [e2e]
+**Tests:** N/A — layout/UX change verified by manual review
+**Test scope:** tests/T-design-renovate-oqlkk9/
+**Done =** reviewable PR, no horizontal scroll at 375px, all tap targets reachable.

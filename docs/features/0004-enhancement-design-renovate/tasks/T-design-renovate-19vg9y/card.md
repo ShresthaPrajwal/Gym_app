@@ -1,11 +1,11 @@
-## Task T-design-renovate-19vg9y — <title>
-**Parent:** story S-0004-enhancement-design-renovate.nn · feature 0004-enhancement-design-renovate (docs/features/0004-enhancement-design-renovate-*/ — its PRD + TSD)
-**Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
-**Acceptance criteria:** (tag each `behavior`/`invariant`/`non-functional`/`e2e`; behavior ACs = observable outcome through an interface — NO "calls X / saves to table Y / uses lib Z")
-- [ ] AC-1 [behavior]: <observable outcome through interface>
-**End-to-end AC:** AC-<n> [e2e] — reachable through the running app (required: green component/unit ≠ reachable)
-**Tests:** AC-1  ← ordered; first = tracer bullet
-<!-- exception: Tests: N/A — reason: config | scaffolding | spike | refactor | tooling | integration -->
-**Test scope:** tests/T-design-renovate-19vg9y/   ← documentation: where this task's OWN tests live. Scope is NOT configured — red/green scope to the changed test files and `verify` derives it from the RED commits (ADR-0002); `review` runs the FULL suite. This line is a human pointer only.
-<!-- approval: written by `lane approve` as frontmatter (approved_by/at/sha256) after a human confirms — never hand-edit -->
-**Done =** reviewable PR, all tests pass, links to chain. One PR per task (default).
+## Task T-design-renovate-19vg9y — Filter pill group overflow fix (RoutineBuilder)
+**Parent:** story S-0004.03 · feature 0004-enhancement-design-renovate
+**Slice:** Fix Adaptation Threshold / Microcycle Cadence / Hardware selector overflow in RoutineBuilder
+**Acceptance criteria:**
+- [ ] AC-1 [behavior]: All filter options visible on viewports from 375px to 1280px with no clipping or horizontal scroll
+- [ ] AC-2 [behavior]: Pills wrap naturally on narrow viewports and remain tappable (min 44px tap target height)
+- [ ] AC-3 [e2e]: On 375px, user can select any option in all three filter groups without zooming or scrolling horizontally
+**End-to-end AC:** AC-3 [e2e]
+**Tests:** N/A — layout/UX change verified by manual review
+**Test scope:** tests/T-design-renovate-19vg9y/
+**Done =** reviewable PR, no overflow on 375px–1280px.

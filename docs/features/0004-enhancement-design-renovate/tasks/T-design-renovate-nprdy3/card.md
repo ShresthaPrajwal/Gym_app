@@ -1,11 +1,11 @@
-## Task T-design-renovate-nprdy3 — <title>
-**Parent:** story S-0004-enhancement-design-renovate.nn · feature 0004-enhancement-design-renovate (docs/features/0004-enhancement-design-renovate-*/ — its PRD + TSD)
-**Slice:** a complete observable behavior end-to-end + tests (full vertical — a disconnected layer = smell)
-**Acceptance criteria:** (tag each `behavior`/`invariant`/`non-functional`/`e2e`; behavior ACs = observable outcome through an interface — NO "calls X / saves to table Y / uses lib Z")
-- [ ] AC-1 [behavior]: <observable outcome through interface>
-**End-to-end AC:** AC-<n> [e2e] — reachable through the running app (required: green component/unit ≠ reachable)
-**Tests:** AC-1  ← ordered; first = tracer bullet
-<!-- exception: Tests: N/A — reason: config | scaffolding | spike | refactor | tooling | integration -->
-**Test scope:** tests/T-design-renovate-nprdy3/   ← documentation: where this task's OWN tests live. Scope is NOT configured — red/green scope to the changed test files and `verify` derives it from the RED commits (ADR-0002); `review` runs the FULL suite. This line is a human pointer only.
-<!-- approval: written by `lane approve` as frontmatter (approved_by/at/sha256) after a human confirms — never hand-edit -->
-**Done =** reviewable PR, all tests pass, links to chain. One PR per task (default).
+## Task T-design-renovate-nprdy3 — Large cinematic exercise video cards
+**Parent:** story S-0004.01 · feature 0004-enhancement-design-renovate
+**Slice:** Restyle exercise result cards in ExerciseLibrary to a large two-column layout (thumbnail left, metadata right) matching the reference design
+**Acceptance criteria:**
+- [ ] AC-1 [behavior]: Each card shows a 16:9 thumbnail ≥260px wide on desktop, with name, badges, cues, and action buttons in the right column
+- [ ] AC-2 [behavior]: On mobile (≤768px) cards switch to stacked layout (thumbnail on top, content below)
+- [ ] AC-3 [e2e]: Opening the exercise library at 1280px shows cards with large thumbnails; opening at 375px shows stacked cards with no horizontal scroll
+**End-to-end AC:** AC-3 [e2e]
+**Tests:** N/A — visual layout change verified by prototype and manual review
+**Test scope:** tests/T-design-renovate-nprdy3/
+**Done =** reviewable PR, layout matches reference, no regressions.
