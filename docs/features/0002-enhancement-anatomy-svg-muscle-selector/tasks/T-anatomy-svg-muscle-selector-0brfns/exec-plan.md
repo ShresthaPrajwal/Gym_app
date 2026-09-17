@@ -4,8 +4,8 @@ approved_at: "2026-09-17"
 # planned_behaviors — machine-read count of RED→GREEN cycles (B-N). Leave empty to let
 # lane infer from B-N labels below; SET it when an AC becomes a regression guard so
 # `lane next` knows the remaining count (frontmatter edits need no re-approval).
-planned_behaviors: "4"
-approved_sha256: "56f60e4085f726300772d1785c536f94f108137c97077125010a1b8cb30eeb69"
+planned_behaviors: "3"
+approved_sha256: "c9a1103096967462a3b708f602d1b53171fd309b5f9bf8909ed849fd216d00c5"
 ---
 ## Exec Plan — Task T-anatomy-svg-muscle-selector-0brfns
 > Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
@@ -47,18 +47,33 @@ generator or component logic is restructured beyond what the widened value space
   which every exercise is tagged to that region. Phrased against a region that does not exist at the
   task base (`calves`), so it genuinely fails first: thinnest possible cut proving vocabulary + data
   + filter line up end to end.
-- **B-2 (AC-2)** — Every selectable region in the vocabulary returns at least one exercise. Fails at
-  base for the five thin/empty regions; this is the behavior that forces the new exercises to exist.
-- **B-3 (AC-3)** — Routine generation returns at least one exercise for every training day across
-  every goal / experience / cadence / hardware combination. Fails at base once the coarse areas the
-  archetypes name are gone.
-- **B-4 (AC-4, `e2e`)** — Through the rendered Exercise Library, choosing a specific muscle in the
-  filter controls narrows the listed exercises to that muscle and the reported count matches the
-  number shown.
-- **Why AC-2 and AC-3 are full RED→GREEN cycles, not off-ledger guards:** a `--regression` guard
-  must pass at the task *base*. Both assertions FAIL at base (the regions and the archetype
-  vocabulary do not exist yet), which by definition makes them new behavior, so they are driven
-  test-first like any other behavior rather than recorded as guards.
+- **B-2 (AC-2)** — Every region of the vocabulary returns at least one exercise, asserted against the
+  **explicitly enumerated** region list rather than by looping whatever the vocabulary happens to
+  contain. Enumerating is both the honest RED (a loop over the vocabulary passes *vacuously* at base,
+  where all 7 coarse areas are populated) and the stronger test, since the TSD requires the
+  vocabulary to cover the diagram's regions "and nothing else". This is the behavior that forces the
+  new exercises to exist.
+- **B-3 (AC-3) — OFF-LEDGER REGRESSION GUARD, not a RED→GREEN cycle.** Routine generation returns at
+  least one exercise for every training day across every goal / experience / cadence / hardware
+  combination. Recorded with `lane red --regression`.
+- **B-4 (AC-4, `e2e`)** — Through the rendered Exercise Library, choosing a **specific new region**
+  in the filter controls narrows the listed exercises to that region and the reported count matches
+  the number shown. Phrased against a region introduced by this task so it fails at base; choosing a
+  surviving coarse area would pass at base and prove nothing.
+
+**AMENDMENT 1 (2026-09-17, pre-B-2, corrects this plan as first approved):** AC-3 was planned as a
+full RED→GREEN cycle on the stated grounds that it "fails at base once the coarse areas the
+archetypes name are gone". That reasoning was wrong, and I verified it empirically before writing any
+implementation: with the task base checked out, a test asserting every training day is non-empty
+across all goal × experience × cadence × hardware combinations **PASSES**. Routine generation already
+fills every day today; my change threatens that behavior rather than introducing it. A test that
+passes at base is by definition a guard on EXISTING behavior, so AC-3 is now recorded off-ledger via
+`lane red --regression` — the tool LANE provides for exactly this case. Driving it as a plain
+`lane red` would have required either a contrived failure or leaving the generator knowingly broken
+for a cycle, and would have put a non-proof on the TDD ledger. AC-3's coverage is unchanged and its
+test is identical; only its ledger classification is corrected. Consequently `planned_behaviors`
+drops from 4 to 3 (B-1, B-2, B-4). The same base-passes trap applied to AC-2 as originally phrased
+and is addressed above by enumerating the regions explicitly instead of looping the vocabulary.
 
 **PR will contain:**
 - The widened muscle vocabulary in the shared domain module.
