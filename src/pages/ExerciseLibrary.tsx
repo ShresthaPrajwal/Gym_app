@@ -110,7 +110,7 @@ export function ExerciseLibrary() {
           </div>
           <div className="rounded bg-surface-container-low p-sm">
             <div className="font-display text-label-caps uppercase text-on-surface-variant">Indexed Drills</div>
-            <div className="font-display text-base font-bold text-primary-container">Indexed Drills: {results.length}</div>
+            <div className="font-display text-base font-bold text-primary-container">{results.length}</div>
           </div>
         </div>
       </div>
