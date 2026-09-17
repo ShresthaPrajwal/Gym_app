@@ -62,6 +62,30 @@ test('every region the diagram depicts is selectable and reports itself', () => 
   expect(unreachable).toEqual([])
 })
 
+// B-3: AC-2: the legend reports the current selection back to the user.
+test('the legend names the selected region, and says so when nothing is selected', () => {
+  const { unmount } = render(<AnatomyInspector selected="all" onSelect={() => {}} />)
+  expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/no.*select|none/i)
+  unmount()
+
+  render(<AnatomyInspector selected="hamstrings" onSelect={() => {}} />)
+  expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/hamstrings/i)
+})
+
+// B-3: AC-4: front and back are drawn together, so a back-only region needs no view toggle.
+test('regions only visible from behind are selectable with no view toggle', () => {
+  render(<AnatomyInspector selected="all" onSelect={() => {}} />)
+
+  const backOnly = ['trapezius', 'lats', 'triceps', 'lower back', 'glutes', 'hamstrings']
+  const labels = screen.queryAllByRole('button').map((el) => (el.getAttribute('aria-label') ?? '').toLowerCase())
+
+  const missing = backOnly.filter((region) => !labels.some((l) => l.includes(region)))
+  expect(missing).toEqual([])
+
+  // there is no anterior/posterior switch to operate — the toggle is gone by design
+  expect(screen.queryByRole('button', { name: /^(ant|post|anterior|posterior)$/i })).not.toBeInTheDocument()
+})
+
 test('full-body is not reachable from the diagram, and head and feet are inert', () => {
   const onSelect = vi.fn()
   render(<AnatomyInspector selected="all" onSelect={onSelect} />)
