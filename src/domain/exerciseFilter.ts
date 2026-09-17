@@ -35,7 +35,7 @@ export type HardwareTier = (typeof HARDWARE_TIERS)[number]
 export const DIFFICULTIES = ['beginner', 'intermediate', 'advanced'] as const
 export type Difficulty = (typeof DIFFICULTIES)[number]
 
-export const EQUIPMENT_TYPES = ['barbell', 'dumbbell', 'cable', 'bodyweight'] as const
+export const EQUIPMENT_TYPES = ['barbell', 'dumbbell', 'cable', 'bodyweight', 'machine'] as const
 export type EquipmentType = (typeof EQUIPMENT_TYPES)[number]
 
 export const MECHANICS = ['compound', 'isolation'] as const

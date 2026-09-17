@@ -47,6 +47,7 @@ const EQUIPMENT_LABELS: Record<EquipmentType, string> = {
   dumbbell: 'Dumbbell',
   cable: 'Cable',
   bodyweight: 'Bodyweight',
+  machine: 'Machine',
 }
 
 const MECHANICS_LABELS: Record<Mechanics, string> = {
