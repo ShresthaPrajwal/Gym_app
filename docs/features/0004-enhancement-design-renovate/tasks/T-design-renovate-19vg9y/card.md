@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "9e0fab68b9ebb74e2cf3b31aaac9c03ebcb873641487d4b23c10ad47913dd2bc"
+---
 ## Task T-design-renovate-19vg9y — Filter pill group overflow fix (RoutineBuilder)
 **Parent:** story S-0004.03 · feature 0004-enhancement-design-renovate
 **Slice:** Fix Adaptation Threshold / Microcycle Cadence / Hardware selector overflow in RoutineBuilder
