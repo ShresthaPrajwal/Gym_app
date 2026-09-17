@@ -1,49 +1,45 @@
 ---
-approved_by: ""
-approved_at: ""
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "dcc01b7547b65db76b99c0b868a65fbdabfa7d038fdf765fc8b6caa57e142e6d"
 ---
-# Patch 0005 — <short title>
-> A `patch` iteration — the TWO-STAMP ceremony for small, known-scope work (a bug fix, a
-> tweak, one behavior, one PR). This ONE document is the ticket + TSD + task card + exec
-> plan: your single `lane approve` stamp covers all of it (stamp 1 of 2; stamp 2 is the
-> verification report at the end). The TDD ledger, Critic snapshot, and verify replay are
-> unchanged — a patch removes redundant signatures, never proof.
-> Too big for a patch? More than one story, more than ~3 behaviors, or more than one task
-> → use `lane new fix` / `lane new enhancement` instead (agents: CALL THIS OUT when
-> drafting; the human decides at the stamp).
+# Patch 0005 — Icons on nav tabs and selection cards
 
-**Severity:** <blocker | major | minor>
-**Source:** <where this came from — bug report, monitoring, review feedback>   ← audit chain
+**Severity:** minor
+**Source:** UX feedback — selection tabs feel plain; icons would aid scannability and make the UI more distinctive
 
-**Current behavior:** <what happens now — the scenario that triggers it, not just the error message>
-**Expected behavior:** <what should happen instead>
-**Must NOT change:** <behavior/contracts that stay intact — guards against regression>
+**Current behavior:** Nav tabs (Routine Builder / Exercise Library / Nutrition Plan) and the RoutineBuilder goal cards show text only — no visual icons to differentiate them at a glance.
+**Expected behavior:** Each nav tab has a relevant inline SVG icon above or beside the label. Each goal card in RoutineBuilder has a thematic icon. Filter group labels in ExerciseLibrary get a small icon prefix. No new npm dependency — inline SVGs only.
+**Must NOT change:** Tab switching logic, filter behaviour, active/inactive state styling, existing Tailwind classes on Button variants.
 
-## TSD S-0005.01 — <title>
-> Behavior + contracts ONLY — never the library/method/pattern. The Critic anchors to THIS
-> section (snapshot frozen at `lane start`), exactly as it would to a TSD.md section.
-
+## TSD S-0005.01 — Icons on nav tabs and selection cards
 | Aspect | Spec |
 |--------|------|
-| Interfaces | <contracts touched — endpoint, CLI flag, function/SDK signature> |
-| Data / State | <state it touches — empty if none> |
-| Behavior | <the observable behavior after the patch> |
-| Boundaries | <external deps we DON'T own, faked in tests — empty if none> |
-| Tests | <unit/integration — what proves the fix> |
+| Interfaces | `App.tsx` nav buttons; `RoutineBuilder` goal cards; `ExerciseLibrary` filter group labels |
+| Data / State | None |
+| Behavior | Nav tabs: icon (16×16 SVG) + label stacked vertically, centred. Goal cards: thematic 20×20 icon above the label. Filter labels (Difficulty / Equipment / Mechanics / Anatomy): small 14×14 icon inline before the text. All icons use `currentColor` so they inherit the button's active/inactive colour automatically. |
+| Boundaries | None |
+| Tests | N/A — visual/presentational change |
 
-## Task T-icon-nav-tabs-blwuzy — <short title>
-**Slice:** a complete observable behavior end-to-end + tests (full vertical)
-**Acceptance criteria:** (tag each: `behavior` | `invariant` | `non-functional` | `e2e`)
-- [ ] AC-1 [behavior]: <observable outcome through an interface that proves the fix>
-**Tests:** AC-1  ← ordered; first = tracer bullet
-<!-- exception: Tests: N/A — reason: config | scaffolding | spike | refactor | tooling — the opt-out is part of what you stamp -->
+## Task T-icon-nav-tabs-blwuzy — Icons on nav tabs and selection cards
+**Slice:** Add inline SVG icons to nav tabs, goal cards, and filter group labels
+**Acceptance criteria:**
+- [ ] AC-1 [behavior]: Nav tabs show a relevant icon + label, icon inherits active/inactive color
+- [ ] AC-2 [behavior]: RoutineBuilder goal cards show a thematic icon above the label
+- [ ] AC-3 [behavior]: ExerciseLibrary filter group labels (Anatomy / Difficulty / Equipment / Mechanics) show a small icon
+- [ ] AC-4 [e2e]: All tabs and cards remain fully functional — clicking still switches sections/goals/filters
+**Tests:** N/A — visual/presentational change, no logic altered
 
 ## Execution Plan
-> Approved BY the spec stamp: `lane start` copies this section verbatim into the worktree's
-> exec-plan.md and carries your stamp onto it — no separate plan gate. Keep it last in this file.
+**Approach:**
+- `App.tsx`: wrap each Button content in `flex flex-col items-center gap-1`; add a 16×16 inline SVG per tab (dumbbell for Routine Builder, magnifier for Exercise Library, leaf/apple for Nutrition Plan)
+- `RoutineBuilder.tsx`: add a 20×20 SVG to each goal card above `meta.label` — one distinct icon per goal (target, muscle, flame, heart, bolt, timer)
+- `ExerciseLibrary.tsx`: prepend a 14×14 icon to each filter group label span (person for Anatomy, bar-chart for Difficulty, wrench for Equipment, link for Mechanics)
+- All SVGs inline, `currentColor`, `aria-hidden="true"`, `focusable="false"`
 
-**Approach:** <high-level how — NOT implementation prescription>
-**Boundaries & mocks:** <what's FAKED vs REAL — empty if none>
+**Boundaries & mocks:** None
+
 **Behaviors (TDD order):**
-- B-1: <the failing test that proves the bug/behavior, then the change that fixes it>
-**Open questions:** <MUST be resolved (or say "none") before the stamp>
+- B-1 [e2e]: Nav tabs render with icon + label and remain clickable
+
+**Open questions:** none
