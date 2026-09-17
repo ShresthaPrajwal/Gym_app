@@ -1,26 +1,32 @@
 ---
-approved_by: ""
-approved_at: ""
-# planned_behaviors — machine-read count of RED→GREEN cycles (B-N). Leave empty to let
-# lane infer from B-N labels below; SET it when an AC becomes a regression guard so
-# `lane next` knows the remaining count (frontmatter edits need no re-approval).
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
 planned_behaviors: ""
+approved_sha256: "5a43f1387b912a5eace7b38a106a3067503fb94f9c3663a9f31afe4798c90b03"
 ---
 ## Exec Plan — Task T-design-renovate-19vg9y
-> Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
+> Tests: N/A — layout/UX change. No TDD ledger.
 
-**Will build:** (mapped to each AC)
--
-**Approach:** high-level only — NOT implementation prescription
-**Boundaries & mocks:** (from TSD Boundaries) what's FAKED (network/external services, clock, randomness, filesystem) vs REAL. Each fake = an injected port. Boundaries non-empty ⇒ name the smoke AC that hits the real one in a realistic environment.
--
-**Behaviors (TDD order):** B-1 first (tracer bullet), then B-2, B-3 … ; include the `e2e` behavior
--
+**Will build:**
+- Fix PillGroup in RoutineBuilder: replace fixed-column grid with flex-wrap so pills wrap naturally on narrow viewports
+- Ensure pills meet 44px min tap target height
+
+**Approach:**
+- `PillGroup` in `RoutineBuilder.tsx`: replace `style={{ gridTemplateColumns: ... }}` grid with `flex flex-wrap gap-1`; add `min-h-[44px]` to each pill Button
+- Outer container stays `grid grid-cols-1 gap-md lg:grid-cols-3` — already correct
+- Labels: remove "01." / "02." / "03." numeric prefixes (they imply a sequence, but these are independent selectors — frontend-design principle: numbered markers only for actual sequences)
+
+**Boundaries & mocks:** None
+
+**Behaviors:**
+- B-1: Pills wrap naturally at any viewport width, no overflow-x
+- B-2: Each pill is min 44px tall — thumb-friendly on mobile
+- B-3 [e2e]: All three filter groups fully usable at 375px with no horizontal scroll
+
 **PR will contain:**
--
-**Open questions / ambiguities:** (MUST be resolved before execution)
--
-**Path:** L (lean, default) | R (rich)
-**Escalation signals hit (≥2 → R):** ambiguities≥3 · blast-radius≥3 · security · amendments≥2 · prior-fail · self-flag
-**If overriding R→L:** risk acknowledged here + SA co-signs Verification.
-- [ ] Refactor pass done (on green; tests unchanged) — before PR
+- `src/pages/RoutineBuilder.tsx` — PillGroup layout fix + label cleanup
+
+**Open questions / ambiguities:** None
+
+**Path:** L (lean)
+- [ ] Refactor pass done — before PR
