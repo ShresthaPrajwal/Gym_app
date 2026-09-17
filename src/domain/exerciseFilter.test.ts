@@ -48,3 +48,17 @@ test('no filters returns the full exercise set', () => {
   expect(withAll).toEqual(all)
   expect(all.length).toBeGreaterThan(0)
 })
+
+// ── 0002 S-0002.01 ────────────────────────────────────────────────────────────
+// B-1 (tracer bullet): AC-1: filtering by a single muscle returns only exercises
+// tagged to that muscle. Driven against `calves` — one of the specific anatomical
+// regions this task introduces — so it proves the widened vocabulary, the re-tagged
+// data and the filter line up, not merely that filtering works at all.
+test("filtering by a specific muscle region returns only that region's exercises", () => {
+  const results = filterExercises({ muscle: 'calves' })
+
+  expect(results.length).toBeGreaterThan(0)
+  for (const exercise of results) {
+    expect(exercise.targetMuscle).toBe('calves')
+  }
+})
