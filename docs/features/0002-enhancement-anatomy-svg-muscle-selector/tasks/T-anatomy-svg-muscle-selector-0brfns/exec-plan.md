@@ -5,7 +5,7 @@ approved_at: "2026-09-17"
 # lane infer from B-N labels below; SET it when an AC becomes a regression guard so
 # `lane next` knows the remaining count (frontmatter edits need no re-approval).
 planned_behaviors: "3"
-approved_sha256: "c9a1103096967462a3b708f602d1b53171fd309b5f9bf8909ed849fd216d00c5"
+approved_sha256: "78c0b24f320b00a1973fdd70d0051ca50553e050fcfbc3c7ceee32f2ed74692b"
 ---
 ## Exec Plan — Task T-anatomy-svg-muscle-selector-0brfns
 > Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
@@ -75,10 +75,46 @@ test is identical; only its ledger classification is corrected. Consequently `pl
 drops from 4 to 3 (B-1, B-2, B-4). The same base-passes trap applied to AC-2 as originally phrased
 and is addressed above by enumerating the regions explicitly instead of looping the vocabulary.
 
+**AMENDMENT 2 (2026-09-17, pre-B-1-GREEN, corrects the base-state analysis):** the "Empty today"
+figures under AC-2 above (*neck, hip-flexors, knees, calves at 0; lower-back at 1*) are WRONG for this
+task's base. They were computed against a 148-exercise catalogue that exists only in an unmerged
+local stash from before this feature was specced — it was never committed to the integration branch,
+so the task base carries the **original 21 exercises** (3 per coarse area). Verified by inspection of
+the base worktree.
+
+Re-tagging just those 21 onto the new vocabulary leaves **9 regions empty**, not 4: `neck`,
+`trapezius`, `lower-back`, `forearms`, `hip-flexors`, `glutes`, `hamstrings`, `knees`, `calves`.
+Populated after re-tag: chest 3 · lats 3 · quadriceps 3 · shoulders 3 · biceps 2 · triceps 1 ·
+core 2 · obliques 1 · full-body 3.
+
+Two consequences, both inside this task's existing ACs but materially larger than first described:
+1. **Catalogue expansion is part of this task's data work.** AC-2 (no selectable region is a dead
+   end) cannot be met from 21 exercises across 18 regions. The product owner has supplied an exercise
+   reference list (~127 entries, already reviewed and accepted by them) which is the source for the
+   expansion, exactly as the SVG is the source for the diagram in the sibling task. Regions still
+   empty after importing it are authored fresh — those are the four originally named plus `lower-back`.
+2. **`machine` joins the equipment vocabulary.** Many supplied exercises are machine-based (leg
+   press/extension, pec deck, cable crossover rigs) and the base equipment set has no term for them;
+   without it those entries would have to be mis-tagged. This is a second, smaller vocabulary
+   widening that the plan as approved did not mention.
+
+**Routing consequence, stated rather than buried:** this is the second amendment, so the objective
+signal `amendments≥2` now FIRES. With the previously-confirmed `blast-radius≥3` that is **2 signals →
+Path R** by the stated rule, where the plan currently records Path L. I am NOT self-certifying the
+override: the Path line below is left at L pending the approver's decision, and if L is retained it is
+an explicit R→L override that pulls SA co-sign onto Verification. My recommendation is **retain L** —
+both amendments were spec/ledger corrections found by checking my own claims against the code rather
+than defects discovered during execution, no code had been written when either was raised, and the
+added volume is data entry guarded by a mechanical whole-vocabulary invariant (B-2) rather than new
+logic or new architecture. I note the counter-argument honestly: the task now rewrites ~150 data rows
+and widens two vocabularies, which is a larger blast radius than the plan was approved against.
+
 **PR will contain:**
 - The widened muscle vocabulary in the shared domain module.
-- The exercise data set: all existing entries re-tagged, plus new entries for neck, hip-flexors,
-  knees, calves and lower-back.
+- The exercise data set: all existing entries re-tagged, the product-owner-supplied reference list
+  imported (see AMENDMENT 2), plus fresh entries for any region still empty after that import —
+  neck, hip-flexors, knees, calves and lower-back.
+- `machine` added to the equipment vocabulary (see AMENDMENT 2).
 - Routine-generator goal archetypes recomposed over the new vocabulary.
 - Exercise Library muscle labels completed; placeholder inspector re-pointed to keep the page whole.
 - Tests for B-1 … B-4.
