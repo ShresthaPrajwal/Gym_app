@@ -9,7 +9,9 @@ import {
   type ExperienceLevel,
   type Goal,
   type Hardware,
+  type PlanExercise,
 } from '../domain/routineGenerator'
+import { VideoPlayerModal } from './VideoPlayerModal'
 
 const GOAL_META: Record<Goal, { label: string; description: string }> = {
   abs: { label: 'Core Shred', description: 'Visceral density & rotational stability' },
@@ -38,6 +40,7 @@ export function RoutineBuilder() {
   const [hardware, setHardware] = useState<Hardware>('full')
   const [goal, setGoal] = useState<Goal | ''>('')
   const [dayIndex, setDayIndex] = useState(0)
+  const [playerExercise, setPlayerExercise] = useState<PlanExercise | null>(null)
 
   const plan = goal ? generateWeeklyPlan(goal, experience, cadence, hardware) : null
   const day = plan?.[dayIndex]
@@ -166,27 +169,72 @@ export function RoutineBuilder() {
                 </Card>
 
                 {day.exercises.map((exercise, i) => (
-                  <Card key={exercise.name} className="flex items-center gap-sm">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-surface-container-highest font-display text-label-caps text-primary-container">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-sm">
-                        <span className="font-display text-base font-bold text-white">{exercise.name}</span>
-                        <Badge>{exercise.targetMuscle}</Badge>
-                      </div>
-                      <span className="text-sm text-on-surface-variant">
-                        {exercise.sets} × {exercise.reps} · rest {exercise.rest}
-                      </span>
-                      <p className="mt-1 text-body-sm text-on-surface-variant">{exercise.instructions}</p>
+                  <Card key={exercise.name} className="flex flex-col gap-0 overflow-hidden p-0 md:flex-row">
+                    {/* Thumbnail */}
+                    <div className="aspect-video w-full shrink-0 md:aspect-auto md:h-auto md:w-[280px]">
+                      <VideoThumbnail
+                        name={exercise.name}
+                        videoUrl={exercise.videoUrl}
+                        onPlay={() => setPlayerExercise(exercise)}
+                        className="h-full w-full rounded-none"
+                      />
                     </div>
-                    <VideoThumbnail name={exercise.name} videoUrl={exercise.videoUrl} />
+
+                    {/* Content */}
+                    <div className="flex flex-1 flex-col gap-sm p-md">
+                      {/* Number + badges */}
+                      <div className="flex flex-wrap items-center gap-xs">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-surface-container-highest font-display text-label-caps text-primary-container">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <Badge>{exercise.targetMuscle}</Badge>
+                        <Badge>{exercise.difficulty}</Badge>
+                        <Badge>{exercise.equipment}</Badge>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-display text-headline-sm text-white">{exercise.name}</h3>
+
+                      {/* Sets / reps / rest */}
+                      <p className="font-display text-label-md text-primary-container">
+                        {exercise.sets} sets × {exercise.reps} &nbsp;·&nbsp; rest {exercise.rest}
+                      </p>
+
+                      {/* Cues */}
+                      {exercise.cues?.length > 0 && (
+                        <div>
+                          <span className="font-display text-label-caps uppercase text-on-surface-variant">
+                            Cues &amp; Kinematic Path
+                          </span>
+                          <ol className="mt-1 space-y-1 pl-md text-body-sm text-on-surface-variant" style={{ listStyleType: 'decimal' }}>
+                            {exercise.cues.map((cue) => (
+                              <li key={cue}>{cue}</li>
+                            ))}
+                          </ol>
+                        </div>
+                      )}
+
+                      {/* Actions */}
+                      <div className="mt-auto pt-sm">
+                        <Button variant="secondary" onClick={() => setPlayerExercise(exercise)}>
+                          Open in YouTube / Demo
+                        </Button>
+                      </div>
+                    </div>
                   </Card>
                 ))}
               </>
             )}
           </div>
         </div>
+      )}
+
+      {playerExercise && (
+        <VideoPlayerModal
+          name={playerExercise.name}
+          videoUrl={playerExercise.videoUrl}
+          onClose={() => setPlayerExercise(null)}
+        />
       )}
     </PageLayout>
   )
