@@ -612,7 +612,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Chest-Supported Row',
     targetMuscle: 'lats',
-    videoUrl: 'https://www.youtube.com/watch?v=FTwvmczf7bE',
+    videoUrl: 'https://www.youtube.com/watch?v=ro2vfHfD0DQ',
     hardware: 'dumbbell',
     instructions: 'Lie face down on an incline bench and row the dumbbells to your sides, squeezing your back.',
     baseSets: 3,
@@ -1584,7 +1584,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Kickback',
     targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=l4zReIOfPCQ',
+    videoUrl: 'https://www.youtube.com/watch?v=6SS6K3lAwZ8',
     hardware: 'dumbbell',
     instructions: 'Hinge at the hips and extend your arm back, squeezing your triceps at the top.',
     baseSets: 3,
@@ -1633,24 +1633,6 @@ export const EXERCISES: Exercise[] = [
       'Lie on a bench with dumbbells above your chest, palms facing each other.',
       'Lower the dumbbells toward your chest, elbows flared out.',
       'Press back up, squeezing your triceps.',
-    ],
-  },
-  {
-    name: 'Rope Overhead Extension',
-    targetMuscle: 'triceps',
-    videoUrl: 'https://www.youtube.com/watch?v=NTk0Igxqcsk',
-    hardware: 'full',
-    instructions: 'With a rope attachment, extend your arms overhead, squeezing your triceps.',
-    baseSets: 3,
-    baseReps: '12-15',
-    baseRest: '60s',
-    difficulty: 'beginner',
-    equipment: 'cable',
-    mechanics: 'isolation',
-    cues: [
-      'Set the cable at a low position with a rope attachment.',
-      'Face away from the machine, arms overhead.',
-      'Extend your arms fully, squeezing your triceps.',
     ],
   },
   {
@@ -2862,7 +2844,7 @@ export const EXERCISES: Exercise[] = [
   {
     name: 'Terminal Knee Extension',
     targetMuscle: 'knees',
-    videoUrl: 'https://www.youtube.com/watch?v=CU7Fn11YMTw',
+    videoUrl: 'https://www.youtube.com/watch?v=VtQ4qTMLhTw',
     hardware: 'full',
     instructions: 'With resistance behind the knee, straighten the joint the last few degrees to full lockout.',
     baseSets: 3,

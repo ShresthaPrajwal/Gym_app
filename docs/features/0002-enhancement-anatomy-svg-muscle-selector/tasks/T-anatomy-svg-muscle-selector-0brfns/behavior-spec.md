@@ -42,8 +42,19 @@
 
 ## B-3 (original slot) — the AC-3 routine invariant that once sat here is WITHDRAWN as a cycle and recorded off-ledger (see Invariants below)
 
-## B-4 — RECORDED AS A BACK-FILL, not a test-first cycle (see note at the bottom of this file)
-## AC-4 [e2e]: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
+## B-4 (surfaced by the Critic's SECOND pass, verifying the B-3 fix): no two exercises share a demo video.
+> The B-3 guard checked URL *shape* only, so it accepted the fix's own new defects: a triceps
+> `Kickback` pointing at a glute-kickback video, and two records (`Cable Overhead Tricep Extension`,
+> `Rope Overhead Extension`) sharing one video while being byte-identical in every field but the
+> name. A shared video is the cheap structural signal for both a copy-paste slip and a duplicated
+> record. The same pass also found the B-3 guard was vacuously passable on an empty catalogue.
+- Given: the full bundled exercise set
+- When: demo-video references are grouped by URL, and the catalogue is asserted to be non-empty
+- Then: no URL is claimed by more than one exercise, and the non-empty assertion makes the shape
+  guard meaningful rather than vacuous
+
+## AC-4 [e2e] — RECORDED AS A BACK-FILL, not a test-first cycle; off-ledger, so it holds no B-number (see the note at the bottom of this file)
+## AC-4: in the running app a user picks a specific muscle in the Exercise Library filter controls and sees the list narrow to that muscle's exercises with the reported count matching the number shown.
 - Given: the Exercise Library rendered with no filters applied
 - When: the user selects one of the regions introduced by this task in the anatomy filter controls
   (a surviving coarse area would pass at base and prove nothing)
