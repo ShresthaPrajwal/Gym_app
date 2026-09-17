@@ -1,26 +1,34 @@
 ---
-approved_by: ""
-approved_at: ""
-# planned_behaviors — machine-read count of RED→GREEN cycles (B-N). Leave empty to let
-# lane infer from B-N labels below; SET it when an AC becomes a regression guard so
-# `lane next` knows the remaining count (frontmatter edits need no re-approval).
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
 planned_behaviors: ""
+approved_sha256: "10f563cc59d651c68d4bf7b9edeb5a866874712816b448400fcb92ff6b3dd5ca"
 ---
 ## Exec Plan — Task T-design-renovate-9293y6
-> Authored during planning, before any code. ★GATE: DEV/SA approve via `lane approve` BEFORE any code (lane writes the stamp). Resolve all ambiguities first.
+> Tests: N/A — interaction/UI change. No TDD ledger. Gated by exec-plan approval + verification report.
 
-**Will build:** (mapped to each AC)
--
-**Approach:** high-level only — NOT implementation prescription
-**Boundaries & mocks:** (from TSD Boundaries) what's FAKED (network/external services, clock, randomness, filesystem) vs REAL. Each fake = an injected port. Boundaries non-empty ⇒ name the smoke AC that hits the real one in a realistic environment.
--
-**Behaviors (TDD order):** B-1 first (tracer bullet), then B-2, B-3 … ; include the `e2e` behavior
--
+**Will build:**
+- `VideoPlayerModal` component: centred overlay, 16:9 iframe embed, Escape/click-outside to close, "Watch on YouTube" link
+- Wire into `ExerciseLibrary` — thumbnail click and "Open in YouTube / Demo" button both open it
+
+**Approach:**
+- New `src/pages/VideoPlayerModal.tsx`: fixed overlay, max-w-3xl centred panel, aspect-video iframe with autoplay, Escape key via useEffect, click-outside via overlay onClick
+- Reuse `extractVideoId` already exported from `VideoThumbnail` (handles both ?v= and /shorts/)
+- `ExerciseLibrary`: add `playerExercise: Exercise | null` state; pass `onPlay={() => setPlayerExercise(exercise)}` to VideoThumbnail; "Open in YouTube / Demo" button also sets playerExercise
+
+**Boundaries & mocks:** YouTube embed (youtube.com/embed) — real in all environments. No fakes.
+
+**Behaviors:**
+- B-1: Clicking thumbnail opens centred modal with autoplay embed; clicking outside closes it
+- B-2: Escape key closes modal
+- B-3: "Watch on YouTube" link in modal footer opens original URL in new tab
+- B-4 [e2e]: Full flow — open modal, see video, close — works in running app; Shorts URL embeds correctly
+
 **PR will contain:**
--
-**Open questions / ambiguities:** (MUST be resolved before execution)
--
-**Path:** L (lean, default) | R (rich)
-**Escalation signals hit (≥2 → R):** ambiguities≥3 · blast-radius≥3 · security · amendments≥2 · prior-fail · self-flag
-**If overriding R→L:** risk acknowledged here + SA co-signs Verification.
-- [ ] Refactor pass done (on green; tests unchanged) — before PR
+- `src/pages/VideoPlayerModal.tsx` — new focused video modal
+- `src/pages/ExerciseLibrary.tsx` — playerExercise state, VideoPlayerModal wired in
+
+**Open questions / ambiguities:** None
+
+**Path:** L (lean)
+- [ ] Refactor pass done — before PR
