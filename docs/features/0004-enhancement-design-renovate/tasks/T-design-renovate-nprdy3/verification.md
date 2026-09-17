@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "953f04c5f95186b3605006eb97367c5ef340541a5b8deae7927b846c8c4e73e4"
+---
 ## Verification — Task T-design-renovate-nprdy3 — 2026-09-17
 > Critic anchored to TSD S-0004.01 (external spec), NOT to the code.
 
