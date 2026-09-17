@@ -88,3 +88,27 @@ test('selecting a specific muscle region narrows the listing and the reported co
   const sector = screen.getByText('Active Sector').parentElement as HTMLElement
   expect(within(sector).getByText('Calves')).toBeInTheDocument()
 })
+
+// B-4: AC-5 [e2e]: clicking a muscle on the anatomy diagram itself (not the filter chips)
+// narrows the listing and the diagram's legend names the selection. Driven through `glutes`,
+// which the asset only draws on the back panel, so the click cannot have come from anywhere else.
+test('clicking a region on the anatomy diagram narrows the listing and the legend names it', () => {
+  render(<ExerciseLibrary />)
+
+  fireEvent.click(screen.getByRole('button', { name: /glutes region/i }))
+
+  const listed = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)
+  expect(listed.length).toBeGreaterThan(0)
+  expect(listed).toContain('Barbell Hip Thrust')
+  expect(listed).not.toContain('Bench Press')
+
+  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+  expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/glutes/i)
+
+  // The diagram is a two-panel landscape figure, so the owner's decision was to present it as a
+  // full-width band ABOVE the results rather than in the old narrow sidebar. Asserted as document
+  // order — an observable structural fact — rather than by inspecting CSS classes.
+  const inspector = screen.getByTestId('anatomy-inspector')
+  const firstResult = screen.getAllByRole('heading', { level: 3 })[0]
+  expect(inspector.compareDocumentPosition(firstResult) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+})
