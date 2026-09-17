@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-17"
+approved_sha256: "af78375696d908d5c8a2d63247e9e79b50619f2db82001f71078c6cc750a061a"
+---
 ## Verification — Task T-icon-nav-tabs-blwuzy — 2026-09-17
 > Critic anchored to TSD (external spec), NOT to the code. GATE: owner confirms/dismisses every flag.
 
