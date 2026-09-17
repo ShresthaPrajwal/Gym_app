@@ -204,6 +204,19 @@ const REGION_LABELS: Record<MuscleGroup, string> = {
   'full-body': 'Full Body',
 }
 
+// The asset's inert anatomy: drawn with its silhouette style rather than its muscle style, so it
+// is presented but exposes no control and never highlights. Omitting it would leave the figure
+// ending at the ankles — "inert" is not "absent".
+const FRONT_FEET = [
+  'M-38 584 L-13 584 L-7 608 Q-16 619 -48 615 Q-54 604 -38 584Z',
+  'M38 584 L13 584 L7 608 Q16 619 48 615 Q54 604 38 584Z',
+]
+
+const BACK_FEET = [
+  'M-37 584 L-12 584 L-6 608 Q-16 619 -48 615 Q-53 604 -37 584Z',
+  'M37 584 L12 584 L6 608 Q16 619 48 615 Q53 604 37 584Z',
+]
+
 // Leader-line callouts, transcribed from the asset. Decorative: the region itself is the control,
 // so these are hidden from assistive tech rather than duplicated as a second set of targets.
 type Callout = { line: string; dot: { cx: number; cy: number }; text: string; x: number; y: number }
@@ -295,6 +308,7 @@ function BodyPanel({
   view,
   regions,
   silhouette,
+  feet,
   callouts,
   selected,
   onSelect,
@@ -302,6 +316,7 @@ function BodyPanel({
   view: 'front' | 'back'
   regions: RegionDef[]
   silhouette: string
+  feet: string[]
   callouts: Callout[]
   selected: MuscleGroup | 'all'
   onSelect: (muscle: MuscleGroup) => void
@@ -312,6 +327,9 @@ function BodyPanel({
     <g transform={view === 'front' ? 'translate(302,125)' : 'translate(898,125)'}>
       <path className="fill-surface-container-highest" d={silhouette} opacity={0.12} />
       <ellipse className="fill-surface-container-highest" cx={0} cy={34} rx={34} ry={42} />
+      {feet.map((d) => (
+        <path key={d} className="fill-surface-container-highest" d={d} />
+      ))}
       {regions.map((region) => (
         <Region
           key={`${view}-${region.muscle}`}
@@ -391,6 +409,7 @@ export function AnatomyInspector({
           view="front"
           regions={FRONT_REGIONS}
           silhouette={FRONT_SILHOUETTE}
+          feet={FRONT_FEET}
           callouts={FRONT_CALLOUTS}
           selected={selected}
           onSelect={onSelect}
@@ -399,6 +418,7 @@ export function AnatomyInspector({
           view="back"
           regions={BACK_REGIONS}
           silhouette={BACK_SILHOUETTE}
+          feet={BACK_FEET}
           callouts={BACK_CALLOUTS}
           selected={selected}
           onSelect={onSelect}

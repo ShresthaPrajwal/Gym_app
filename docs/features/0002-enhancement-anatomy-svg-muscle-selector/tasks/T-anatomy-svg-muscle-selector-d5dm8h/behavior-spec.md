@@ -53,6 +53,20 @@
 - Then: the listing narrows to exactly that region's exercises, the count the page reports equals
   the number of exercises rendered, and the diagram's legend names the selection back to the user
 
+## B-5 (surfaced by a mechanical geometry audit before review): the asset's inert anatomy is PRESENTED, not omitted.
+> AC-3 says head and feet are "inert — not selectable and never highlighted", which means drawn but
+> non-interactive. A script-driven comparison of every shape in the source asset against the
+> transcription found 53 of 57 path `d` attributes reproduced exactly and **4 missing: both feet,
+> front and back**. The head was carried over, the feet were dropped, so the rendered figure ends
+> at the ankles. "Inert" was mis-implemented as "absent", which is both a geometry-fidelity gap and
+> an AC-3 deviation. No existing test caught it because every AC-3 assertion checks that head/feet
+> are NOT selectable — none checks they are still drawn.
+- Given: the inspector rendered
+- When: the shapes the asset draws for the inert head and feet are looked for, and the region
+  controls are enumerated
+- Then: those shapes are present in the rendered diagram, and none of them exposes a control —
+  presented and inert, rather than simply missing
+
 ## Invariants & non-functional ACs (NOT RED→GREEN cycles)
 > Not standalone behaviors to drive. An invariant usually holds as a property of a
 > behavior above (state which) or is locked by a guard test recorded off-ledger with
