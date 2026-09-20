@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4cd7f6"/>
+      <stop offset="100%" stop-color="#acf847"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="96" fill="#1a1f2e"/>
+  <!-- Accent bar top-left -->
+  <rect x="48" y="48" width="6" height="120" rx="3" fill="url(#bg)"/>
+  <!-- A shape -->
+  <path d="M80 320 L152 120 L224 320" stroke="#f0f4ff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="100" y1="248" x2="204" y2="248" stroke="#f0f4ff" stroke-width="22" stroke-linecap="round"/>
+  <!-- F shape -->
+  <line x1="256" y1="120" x2="256" y2="320" stroke="#f0f4ff" stroke-width="28" stroke-linecap="round"/>
+  <line x1="256" y1="120" x2="360" y2="120" stroke="url(#bg)" stroke-width="28" stroke-linecap="round"/>
+  <line x1="256" y1="218" x2="340" y2="218" stroke="url(#bg)" stroke-width="22" stroke-linecap="round"/>
+  <!-- Tagline dot -->
+  <circle cx="432" cy="320" r="16" fill="url(#bg)"/>
+</svg>

@@ -11,7 +11,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-surface">
-      <nav className="flex flex-wrap justify-center gap-sm bg-surface-container-lowest p-md">
+      <header className="flex items-center gap-xs px-md pt-md pb-sm bg-surface-container-lowest">
+        <img src="/logo.svg" alt="" aria-hidden="true" className="h-8 w-8 rounded-lg" />
+        <span className="text-headline-sm text-on-surface font-semibold tracking-tight">Apex Fitness</span>
+      </header>
+      <nav className="flex flex-wrap justify-center gap-sm bg-surface-container-lowest px-md pb-md">
         <Button
           variant={section === 'routine-builder' ? 'primary' : 'secondary'}
           onClick={() => setSection('routine-builder')}
