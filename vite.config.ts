@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon-32.png', 'apple-touch-icon.png', 'logo.svg'],
+      includeAssets: ['favicon-32.png', 'apple-touch-icon.png', 'logo.png'],
       manifest: {
         name: 'Apex Fitness',
         short_name: 'Apex Fitness',
