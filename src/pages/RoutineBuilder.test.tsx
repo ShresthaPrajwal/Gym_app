@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { RoutineBuilder } from './RoutineBuilder'
 
 // B-3 (e2e): a user picks threshold/cadence/hardware, then a target, sees the full
@@ -23,4 +23,18 @@ test('selecting threshold/cadence/hardware then a target renders the full week a
   const thumbnail = screen.getByRole('button', { name: /play plank demo/i })
   fireEvent.click(thumbnail)
   expect(screen.getByTitle(/plank demo video/i)).toBeInTheDocument()
+})
+
+// 0008 B-1: AC-1: the selectors are named chip groups that report which option is chosen.
+test('level, days and equipment are named selector groups that report the chosen option', () => {
+  render(<RoutineBuilder />)
+
+  const level = screen.getByRole('group', { name: 'Level' })
+  expect(screen.getByRole('group', { name: 'Days per week' })).toBeInTheDocument()
+  expect(screen.getByRole('group', { name: 'Equipment' })).toBeInTheDocument()
+
+  expect(within(level).getByRole('button', { name: 'Intermediate' })).toHaveAttribute('aria-pressed', 'true')
+  fireEvent.click(within(level).getByRole('button', { name: 'Beginner' }))
+  expect(within(level).getByRole('button', { name: 'Beginner' })).toHaveAttribute('aria-pressed', 'true')
+  expect(within(level).getByRole('button', { name: 'Intermediate' })).toHaveAttribute('aria-pressed', 'false')
 })
