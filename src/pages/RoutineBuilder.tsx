@@ -1,5 +1,5 @@
 import { useState, type JSX } from 'react'
-import { Badge, Button, Card, PageLayout, VideoThumbnail } from '../components'
+import { Badge, Button, Card, ChipGroup, PageLayout, VideoThumbnail } from '../components'
 import {
   CADENCES,
   EXPERIENCE_LEVELS,
@@ -81,19 +81,19 @@ export function RoutineBuilder() {
       </div>
 
       <div className="grid grid-cols-1 gap-md rounded bg-surface-container-low p-md lg:grid-cols-3">
-        <PillGroup
+        <ChipGroup
           label="Level"
           options={EXPERIENCE_LEVELS.map((level) => ({ value: level, label: EXPERIENCE_LABELS[level] }))}
           value={experience}
           onChange={setExperience}
         />
-        <PillGroup
+        <ChipGroup
           label="Days per week"
           options={CADENCES.map((c) => ({ value: c, label: `${c} Days` }))}
           value={cadence}
           onChange={setCadence}
         />
-        <PillGroup
+        <ChipGroup
           label="Equipment"
           options={HARDWARE_OPTIONS.map((h) => ({ value: h.value, label: h.label }))}
           value={hardware}
@@ -252,40 +252,6 @@ export function RoutineBuilder() {
         />
       )}
     </PageLayout>
-  )
-}
-
-function PillGroup<T extends string | number>({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string
-  options: { value: T; label: string }[]
-  value: T
-  onChange: (v: T) => void
-}) {
-  return (
-    <div className="flex flex-col gap-xs">
-      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
-      <div className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-        {options.map((opt) => (
-          <Button
-            key={String(opt.value)}
-            variant="pill"
-            onClick={() => onChange(opt.value)}
-            className={`min-h-[44px] px-3 ${
-              value === opt.value
-                ? 'bg-surface-container-high text-primary-container shadow-sm'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {opt.label}
-          </Button>
-        ))}
-      </div>
-    </div>
   )
 }
 
