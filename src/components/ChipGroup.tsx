@@ -28,7 +28,7 @@ export function ChipGroup<T extends string | number>({ label, name = label, opti
               variant="pill"
               aria-pressed={active}
               onClick={() => onChange(opt.value)}
-              className={`h-10 shrink-0 whitespace-nowrap border px-md ${
+              className={`min-h-[44px] shrink-0 whitespace-nowrap border px-md ${
                 active
                   ? 'border-primary-container bg-primary-container/15 text-primary-container'
                   : 'border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface'
