@@ -91,28 +91,14 @@ export function ExerciseLibrary() {
 
   return (
     <PageLayout>
-      <div className="flex flex-col justify-between gap-md lg:flex-row lg:items-end">
-        <div className="flex flex-col gap-xs">
-          <h1 className="font-display text-headline-xl text-white">Exercise Library</h1>
-          <p className="max-w-2xl text-body-md text-on-surface-variant">
-            Movement guides, execution cues, and demo videos for every exercise in the library.
-          </p>
-        </div>
-        <div className="flex gap-md">
-          <div className="rounded bg-surface-container-low p-sm">
-            <div className="text-body-sm text-on-surface-variant">Muscle group</div>
-            <div className="font-display text-base font-bold text-white">
-              {filters.muscle === 'all' ? 'All' : ANATOMY_LABELS[filters.muscle]}
-            </div>
-          </div>
-          <div className="rounded bg-surface-container-low p-sm">
-            <div className="text-body-sm text-on-surface-variant">Exercises</div>
-            <div className="font-display text-base font-bold text-primary-container">{results.length}</div>
-          </div>
-        </div>
+      <div className="flex flex-col gap-xs">
+        <h1 className="font-display text-headline-lg text-white md:text-headline-xl">Exercise Library</h1>
+        <p className="max-w-2xl text-body-md text-on-surface-variant">
+          Movement guides, execution cues, and demo videos for every exercise in the library.
+        </p>
       </div>
 
-      <Card className="flex flex-col gap-sm">
+      <Card className="flex flex-col gap-md">
         <Input
           aria-label="Search exercises"
           placeholder="Search by name, muscle, or equipment…"
@@ -120,74 +106,40 @@ export function ExerciseLibrary() {
           onChange={(e) => update('search', e.target.value)}
         />
 
-        <div className="flex flex-col gap-xs">
-          <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
-              <circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/>
-            </svg>
-            Muscle group
-          </span>
-          <div role="group" aria-label="Anatomy Group" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-            <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>All</PillButton>
-            {MUSCLE_GROUPS.map((m) => (
-              <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
-                {ANATOMY_LABELS[m]}
+        <FilterRow label="Muscle group" groupLabel="Anatomy Group">
+          <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>All</PillButton>
+          {MUSCLE_GROUPS.map((m) => (
+            <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
+              {ANATOMY_LABELS[m]}
+            </PillButton>
+          ))}
+        </FilterRow>
+
+        <div className="grid grid-cols-1 gap-md lg:grid-cols-3">
+          <FilterRow label="Difficulty">
+            <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>All</PillButton>
+            {DIFFICULTIES.map((d) => (
+              <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
+                {DIFFICULTY_LABELS[d]}
               </PillButton>
             ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-sm sm:grid-cols-3">
-          <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-              Difficulty
-            </span>
-            <div role="group" aria-label="Difficulty" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-              <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>All</PillButton>
-              {DIFFICULTIES.map((d) => (
-                <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
-                  {DIFFICULTY_LABELS[d]}
-                </PillButton>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-              </svg>
-              Equipment
-            </span>
-            <div role="group" aria-label="Equipment" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-              <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>All</PillButton>
-              {EQUIPMENT_TYPES.map((e) => (
-                <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
-                  {EQUIPMENT_LABELS[e]}
-                </PillButton>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
-                <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12"/>
-              </svg>
-              Mechanics
-            </span>
-            <div role="group" aria-label="Mechanics" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-              <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>Any</PillButton>
-              {MECHANICS.map((m) => (
-                <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
-                  {MECHANICS_LABELS[m]}
-                </PillButton>
-              ))}
-            </div>
-          </div>
+          </FilterRow>
+          <FilterRow label="Equipment">
+            <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>All</PillButton>
+            {EQUIPMENT_TYPES.map((e) => (
+              <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
+                {EQUIPMENT_LABELS[e]}
+              </PillButton>
+            ))}
+          </FilterRow>
+          <FilterRow label="Mechanics">
+            <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>Any</PillButton>
+            {MECHANICS.map((m) => (
+              <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
+                {MECHANICS_LABELS[m]}
+              </PillButton>
+            ))}
+          </FilterRow>
         </div>
 
         <Button variant="secondary" onClick={reset} className="self-start">
@@ -201,6 +153,11 @@ export function ExerciseLibrary() {
 
       <div className="grid grid-cols-1 items-start gap-md">
         <div className="flex flex-col gap-sm">
+          <p role="status" className="text-body-sm text-on-surface-variant">
+            Showing <strong className="font-semibold text-white">{results.length}</strong>{' '}
+            {results.length === 1 ? 'exercise' : 'exercises'}:{' '}
+            {filters.muscle === 'all' ? 'all muscle groups' : ANATOMY_LABELS[filters.muscle]}
+          </p>
           {results.length === 0 ? (
             <Card className="flex flex-col items-center gap-sm py-xl text-center">
               <span className="text-2xl">🔍</span>
@@ -209,7 +166,7 @@ export function ExerciseLibrary() {
                 No exercise matches the current search and filters. Try loosening a filter or resetting the matrix.
               </p>
               <Button variant="secondary" onClick={reset}>
-                Reset filters
+                Clear all filters
               </Button>
             </Card>
           ) : (
@@ -275,12 +232,33 @@ export function ExerciseLibrary() {
   )
 }
 
+function FilterRow({ label, groupLabel = label, children }: { label: string; groupLabel?: string; children: ReactNode }) {
+  return (
+    <div className="flex min-w-0 flex-col gap-xs">
+      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
+      {/* one swipeable row on phones (bleeds to the card edge to show it scrolls); wraps from md up */}
+      <div
+        role="group"
+        aria-label={groupLabel}
+        className="-mx-md flex gap-xs overflow-x-auto px-md pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
+      >
+        {children}
+      </div>
+    </div>
+  )
+}
+
 function PillButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
   return (
     <Button
       variant="pill"
+      aria-pressed={active}
       onClick={onClick}
-      className={active ? 'bg-surface-container-high text-primary-container shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}
+      className={`h-10 shrink-0 whitespace-nowrap border px-md ${
+        active
+          ? 'border-primary-container bg-primary-container/15 text-primary-container'
+          : 'border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface'
+      }`}
     >
       {children}
     </Button>
