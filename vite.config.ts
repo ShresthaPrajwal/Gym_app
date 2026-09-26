@@ -8,13 +8,13 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon-32.png', 'apple-touch-icon.png', 'logo.png'],
+      includeAssets: ['favicon-32.png', 'apple-touch-icon.png', 'logo.svg'],
       manifest: {
         name: 'Apex Fitness',
         short_name: 'Apex Fitness',
         description: 'Your personal gym companion — routines, nutrition, and exercise library.',
-        theme_color: '#1a1f2e',
-        background_color: '#1a1f2e',
+        theme_color: '#0a0e16',
+        background_color: '#0f131c',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
@@ -22,7 +22,7 @@ export default defineConfig({
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'pwa-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
     }),

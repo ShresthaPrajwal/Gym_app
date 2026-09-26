@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Apex Fitness">
+  <rect width="64" height="64" rx="16" fill="#c3f400"/>
+  <path d="M16 50 L32 14 L48 50" fill="none" stroke="#0f131c" stroke-width="7" stroke-linecap="round" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  <path d="M13 38 H51" fill="none" stroke="#0f131c" stroke-width="3.5" stroke-linecap="round"/>
+  <rect x="7.5" y="31" width="5" height="14" rx="2" fill="#0f131c"/>
+  <rect x="51.5" y="31" width="5" height="14" rx="2" fill="#0f131c"/>
+</svg>

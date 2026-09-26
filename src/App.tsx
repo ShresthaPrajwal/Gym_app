@@ -47,9 +47,12 @@ function App() {
   return (
     // bottom padding keeps content clear of the fixed phone tab bar
     <div className="min-h-screen bg-surface pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
-      <header className="sticky top-0 z-20 flex items-center gap-sm border-b border-white/[0.06] bg-surface-container-lowest/95 px-md py-sm backdrop-blur-sm">
-        <img src="/logo.png" alt="" aria-hidden="true" className="h-7 w-7 rounded-lg object-contain" />
-        <span className="font-display text-headline-sm font-semibold tracking-tight text-on-surface">Apex Fitness</span>
+      {/* safe-area padding keeps the bar clear of the notch when installed as a PWA */}
+      <header className="sticky top-0 z-20 border-b border-white/[0.06] bg-surface-container-lowest/95 pt-[env(safe-area-inset-top)] backdrop-blur-sm">
+        <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-sm px-md sm:px-lg lg:px-xl">
+          <img src="/logo.svg" alt="" aria-hidden="true" className="h-9 w-9 shrink-0" />
+          <span className="font-display text-headline-sm font-bold leading-none tracking-tight text-white">Apex Fitness</span>
+        </div>
       </header>
       <nav
         aria-label="Main navigation"
