@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { NutritionPlan } from './NutritionPlan'
 
 beforeEach(() => {
@@ -36,4 +36,19 @@ test('fills the form, updates results live, saves and restores locally, and expo
   const payload = JSON.parse(decodeURIComponent(encoded))
   expect(payload.biometrics.age).toBe(28)
   expect(payload.micronutrients).toHaveLength(7)
+})
+
+// 0008 B-2: AC-2: the selectors are named chip groups that report which option is chosen.
+test('sex, units, activity and macro preset are named selector groups that report the chosen option', () => {
+  render(<NutritionPlan />)
+
+  const sex = screen.getByRole('group', { name: 'Sex' })
+  for (const name of ['Units', 'Activity level', 'Macro preset']) {
+    expect(screen.getByRole('group', { name })).toBeInTheDocument()
+  }
+
+  expect(within(sex).getByRole('button', { name: 'Male' })).toHaveAttribute('aria-pressed', 'true')
+  fireEvent.click(within(sex).getByRole('button', { name: 'Female' }))
+  expect(within(sex).getByRole('button', { name: 'Female' })).toHaveAttribute('aria-pressed', 'true')
+  expect(within(sex).getByRole('button', { name: 'Male' })).toHaveAttribute('aria-pressed', 'false')
 })
