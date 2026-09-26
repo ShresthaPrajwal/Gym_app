@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-26"
+approved_sha256: "28fd0528bbe769b0f448b47e2b68bbea45a9f7e395a58bf4f62f232edc60ee0c"
+---
 ## Verification — Task T-consistent-chips-swdfhe — 2026-09-26
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
 > Critic: a fresh-context subagent given only snapshot-TSD.md, the task card, and `git diff main...` (src/).
