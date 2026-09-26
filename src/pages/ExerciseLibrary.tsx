@@ -93,23 +93,20 @@ export function ExerciseLibrary() {
     <PageLayout>
       <div className="flex flex-col justify-between gap-md lg:flex-row lg:items-end">
         <div className="flex flex-col gap-xs">
-          <span className="w-fit rounded bg-surface-container-high px-sm py-0.5 font-display text-label-caps uppercase tracking-wider text-primary-container">
-            Static Biomechanic Kinematics
-          </span>
-          <h1 className="font-display text-headline-xl text-white">Exercise &amp; Anatomy Library</h1>
+          <h1 className="font-display text-headline-xl text-white">Exercise Library</h1>
           <p className="max-w-2xl text-body-md text-on-surface-variant">
-            Movement information, execution guidance, and safety cues for every exercise in the library.
+            Movement guides, execution cues, and demo videos for every exercise in the library.
           </p>
         </div>
         <div className="flex gap-md">
           <div className="rounded bg-surface-container-low p-sm">
-            <div className="font-display text-label-caps uppercase text-on-surface-variant">Active Sector</div>
+            <div className="text-body-sm text-on-surface-variant">Muscle group</div>
             <div className="font-display text-base font-bold text-white">
               {filters.muscle === 'all' ? 'All' : ANATOMY_LABELS[filters.muscle]}
             </div>
           </div>
           <div className="rounded bg-surface-container-low p-sm">
-            <div className="font-display text-label-caps uppercase text-on-surface-variant">Indexed Drills</div>
+            <div className="text-body-sm text-on-surface-variant">Exercises</div>
             <div className="font-display text-base font-bold text-primary-container">{results.length}</div>
           </div>
         </div>
@@ -124,11 +121,11 @@ export function ExerciseLibrary() {
         />
 
         <div className="flex flex-col gap-xs">
-          <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+          <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
               <circle cx="12" cy="8" r="5"/><path d="M3 21a9 9 0 0 1 18 0"/>
             </svg>
-            Muscle Group
+            Muscle group
           </span>
           <div role="group" aria-label="Anatomy Group" className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
             <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>All</PillButton>
@@ -142,7 +139,7 @@ export function ExerciseLibrary() {
 
         <div className="grid grid-cols-1 gap-sm sm:grid-cols-3">
           <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
               <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
               </svg>
@@ -159,7 +156,7 @@ export function ExerciseLibrary() {
           </div>
 
           <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
               <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
               </svg>
@@ -176,7 +173,7 @@ export function ExerciseLibrary() {
           </div>
 
           <div className="flex flex-col gap-xs">
-            <span className="flex items-center gap-xs font-display text-label-caps uppercase text-on-surface-variant">
+            <span className="flex items-center gap-xs text-body-sm font-semibold text-on-surface-variant">
               <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
                 <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12"/>
               </svg>
@@ -194,7 +191,7 @@ export function ExerciseLibrary() {
         </div>
 
         <Button variant="secondary" onClick={reset} className="self-start">
-          Reset Matrix
+          Reset filters
         </Button>
       </Card>
 
@@ -212,7 +209,7 @@ export function ExerciseLibrary() {
                 No exercise matches the current search and filters. Try loosening a filter or resetting the matrix.
               </p>
               <Button variant="secondary" onClick={reset}>
-                Reset Filter Matrix
+                Reset filters
               </Button>
             </Card>
           ) : (
@@ -243,9 +240,7 @@ export function ExerciseLibrary() {
 
                   {/* Cues */}
                   <div>
-                    <span className="font-display text-label-caps uppercase text-on-surface-variant">
-                      Cues &amp; Kinematic Path
-                    </span>
+                    <p className="text-body-sm font-semibold text-on-surface-variant">Cues</p>
                     <ol className="mt-1 space-y-1 pl-md text-body-sm text-on-surface-variant" style={{ listStyleType: 'decimal' }}>
                       {exercise.cues.map((cue) => (
                         <li key={cue}>{cue}</li>
@@ -253,10 +248,9 @@ export function ExerciseLibrary() {
                     </ol>
                   </div>
 
-                  {/* Actions — pinned to bottom */}
                   <div className="mt-auto flex flex-wrap gap-sm pt-sm">
                     <Button variant="secondary" onClick={() => setPlayerExercise(exercise)}>
-                      Open in YouTube / Demo
+                      Watch demo
                     </Button>
                     <Button variant={added.has(exercise.name) ? 'primary' : 'ghost'} onClick={() => toggleAdded(exercise.name)}>
                       {added.has(exercise.name) ? 'Added ✓' : '+ Add to Routine'}

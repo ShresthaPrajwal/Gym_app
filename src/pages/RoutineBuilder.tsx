@@ -72,33 +72,29 @@ export function RoutineBuilder() {
   return (
     <PageLayout>
       <div className="flex flex-col gap-xs">
-        <span className="w-fit rounded bg-surface-container-high px-sm py-0.5 font-display text-label-caps uppercase tracking-wider text-primary-container">
-          Algorithmic Program Engine
-        </span>
-        <h1 className="font-display text-headline-xl uppercase leading-none tracking-tight text-white">
-          Goal-Based Routine Generator
+        <h1 className="font-display text-headline-xl leading-none tracking-tight text-white">
+          Routine Generator
         </h1>
         <p className="max-w-2xl text-body-md text-on-surface-variant">
-          Set your adaptation threshold, cadence, and hardware, pick a primary target, and get a full deterministic
-          7-day plan — generated entirely in your browser.
+          Pick your level, schedule, and equipment, then choose a goal to get a full 7-day plan generated in your browser.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-md rounded bg-surface-container-low p-md lg:grid-cols-3">
         <PillGroup
-          label="Adaptation Threshold"
+          label="Level"
           options={EXPERIENCE_LEVELS.map((level) => ({ value: level, label: EXPERIENCE_LABELS[level] }))}
           value={experience}
           onChange={setExperience}
         />
         <PillGroup
-          label="Microcycle Cadence"
-          options={CADENCES.map((c) => ({ value: c, label: `${c} Days` }))}
+          label="Days per week"
+          options={CADENCES.map((c) => ({ value: c, label: String(c) }))}
           value={cadence}
           onChange={setCadence}
         />
         <PillGroup
-          label="Available Hardware"
+          label="Equipment"
           options={HARDWARE_OPTIONS.map((h) => ({ value: h.value, label: h.label }))}
           value={hardware}
           onChange={setHardware}
@@ -106,9 +102,9 @@ export function RoutineBuilder() {
       </div>
 
       <div>
-        <span className="font-display text-label-caps uppercase text-on-surface-variant">
-          Primary Adaptational Target <span className="text-slate-500">· Select 1 of {GOALS.length}</span>
-        </span>
+        <p className="text-body-sm text-on-surface-variant">
+          Training goal <span className="text-outline">— pick one</span>
+        </p>
         <div className="mt-sm grid grid-cols-2 gap-sm sm:grid-cols-3 lg:grid-cols-6">
           {GOALS.map((g) => {
             const active = g === goal
@@ -138,7 +134,7 @@ export function RoutineBuilder() {
       {plan && day && (
         <div className="grid grid-cols-1 items-start gap-md lg:grid-cols-[280px_1fr]">
           <div className="flex flex-col gap-xs">
-            <span className="font-display text-label-caps uppercase text-on-surface-variant">7-Day Plan</span>
+            <p className="text-body-sm text-on-surface-variant">7-day plan</p>
             {plan.map((d, i) => {
               const selected = i === dayIndex
               return (
@@ -158,14 +154,14 @@ export function RoutineBuilder() {
                     <span className="font-display text-label-md font-bold text-white">{d.day}</span>
                     {!d.isRest && (
                       <span className="font-body text-body-sm text-on-surface-variant">
-                        {d.exercises.length} exercises · {[...new Set(d.exercises.map((e) => e.targetMuscle))].join(' / ')}
+                        {d.exercises.length} exercises / {[...new Set(d.exercises.map((e) => e.targetMuscle))].join(', ')}
                       </span>
                     )}
                   </div>
                   {d.isRest ? (
                     <Badge>rest</Badge>
                   ) : (
-                    <span className="rounded bg-surface-container-lowest px-sm py-0.5 font-display text-label-caps uppercase text-on-surface-variant">
+                    <span className="rounded bg-surface-container-lowest px-sm py-0.5 font-display text-body-sm text-on-surface-variant">
                       {d.exercises.reduce((s, e) => s + e.sets, 0)} sets
                     </span>
                   )}
@@ -189,13 +185,12 @@ export function RoutineBuilder() {
                   <div className="mt-sm grid grid-cols-3 gap-sm">
                     <Stat label="Total sets" value={String(day.exercises.reduce((s, e) => s + e.sets, 0))} />
                     <Stat label="Exercises" value={String(day.exercises.length)} />
-                    <Stat label="Focal muscles" value={[...new Set(day.exercises.map((e) => e.targetMuscle))].join(' / ')} />
+                    <Stat label="Muscles" value={[...new Set(day.exercises.map((e) => e.targetMuscle))].join(', ')} />
                   </div>
                 </Card>
 
                 {day.exercises.map((exercise, i) => (
                   <Card key={exercise.name} className="flex flex-col gap-0 overflow-hidden p-0 md:flex-row">
-                    {/* Thumbnail */}
                     <div className="aspect-video w-full shrink-0 md:aspect-auto md:h-auto md:w-[280px]">
                       <VideoThumbnail
                         name={exercise.name}
@@ -205,9 +200,7 @@ export function RoutineBuilder() {
                       />
                     </div>
 
-                    {/* Content */}
                     <div className="flex flex-1 flex-col gap-sm p-md">
-                      {/* Number + badges */}
                       <div className="flex flex-wrap items-center gap-xs">
                         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-surface-container-highest font-display text-label-caps text-primary-container">
                           {String(i + 1).padStart(2, '0')}
@@ -217,20 +210,15 @@ export function RoutineBuilder() {
                         <Badge>{exercise.equipment}</Badge>
                       </div>
 
-                      {/* Title */}
                       <h3 className="font-display text-headline-sm text-white">{exercise.name}</h3>
 
-                      {/* Sets / reps / rest */}
                       <p className="font-display text-label-md text-primary-container">
                         {exercise.sets} sets × {exercise.reps} &nbsp;·&nbsp; rest {exercise.rest}
                       </p>
 
-                      {/* Cues */}
                       {exercise.cues?.length > 0 && (
                         <div>
-                          <span className="font-display text-label-caps uppercase text-on-surface-variant">
-                            Cues &amp; Kinematic Path
-                          </span>
+                          <p className="text-body-sm font-semibold text-on-surface-variant">Cues</p>
                           <ol className="mt-1 space-y-1 pl-md text-body-sm text-on-surface-variant" style={{ listStyleType: 'decimal' }}>
                             {exercise.cues.map((cue) => (
                               <li key={cue}>{cue}</li>
@@ -239,10 +227,9 @@ export function RoutineBuilder() {
                         </div>
                       )}
 
-                      {/* Actions */}
                       <div className="mt-auto pt-sm">
                         <Button variant="secondary" onClick={() => setPlayerExercise(exercise)}>
-                          Open in YouTube / Demo
+                          Watch demo
                         </Button>
                       </div>
                     </div>
@@ -278,7 +265,7 @@ function PillGroup<T extends string | number>({
 }) {
   return (
     <div className="flex flex-col gap-xs">
-      <span className="font-display text-label-caps uppercase tracking-wider text-on-surface-variant">{label}</span>
+      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
       <div className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
         {options.map((opt) => (
           <Button
@@ -302,7 +289,7 @@ function PillGroup<T extends string | number>({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded bg-surface-container-lowest p-sm">
-      <div className="font-display text-label-caps uppercase text-on-surface-variant">{label}</div>
+      <div className="text-body-sm text-on-surface-variant">{label}</div>
       <div className="mt-1 truncate font-display text-metric-md text-white">{value}</div>
     </div>
   )

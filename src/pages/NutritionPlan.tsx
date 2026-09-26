@@ -59,9 +59,9 @@ const ACTIVITY_LABELS: Record<ActivityLevel, string> = {
   'very-active': 'Very Active',
 }
 const GOAL_META: Record<Goal, { label: string; adjustment: string }> = {
-  cut: { label: 'Cut', adjustment: '-20% (deficit)' },
-  maintain: { label: 'Maintain', adjustment: '±0% (maintenance)' },
-  bulk: { label: 'Bulk', adjustment: '+15% (surplus)' },
+  cut: { label: 'Cut', adjustment: '−20% deficit' },
+  maintain: { label: 'Maintain', adjustment: '±0% maintenance' },
+  bulk: { label: 'Bulk', adjustment: '+15% surplus' },
 }
 const MACRO_PRESET_LABELS: Record<MacroPreset, string> = {
   'high-carb': 'High Carb',
@@ -84,22 +84,21 @@ export function NutritionPlan() {
   return (
     <PageLayout>
       <div className="flex flex-col gap-xs">
-        <h1 className="font-display text-headline-xl text-white">Nutrition &amp; Macro Calculator</h1>
+        <h1 className="font-display text-headline-xl tracking-tight text-white">Nutrition &amp; Macros</h1>
         <p className="max-w-2xl text-body-md text-on-surface-variant">
-          Enter your body information and fitness goal to calculate your daily calorie and macro targets, entirely in
-          your browser.
+          Enter your details and goal to get daily calorie and macro targets — calculated entirely in your browser.
         </p>
       </div>
 
       <Card className="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-3">
-        <PillGroup label="Biological Sex" options={SEXES.map((v) => ({ value: v, label: SEX_LABELS[v] }))} value={state.sex} onChange={(v) => update('sex', v)} />
-        <PillGroup label="Unit" options={UNITS.map((v) => ({ value: v, label: UNIT_LABELS[v] }))} value={state.unit} onChange={(v) => update('unit', v)} />
+        <PillGroup label="Sex" options={SEXES.map((v) => ({ value: v, label: SEX_LABELS[v] }))} value={state.sex} onChange={(v) => update('sex', v)} />
+        <PillGroup label="Units" options={UNITS.map((v) => ({ value: v, label: UNIT_LABELS[v] }))} value={state.unit} onChange={(v) => update('unit', v)} />
         <label className="flex flex-col gap-xs">
-          <span className="font-display text-label-caps uppercase text-on-surface-variant">Age</span>
+          <span className="text-body-sm font-semibold text-on-surface-variant">Age</span>
           <Input type="number" aria-label="Age" value={state.age} onChange={(e) => update('age', Number(e.target.value))} />
         </label>
         <label className="flex flex-col gap-xs">
-          <span className="font-display text-label-caps uppercase text-on-surface-variant">
+          <span className="text-body-sm font-semibold text-on-surface-variant">
             Height ({state.unit === 'metric' ? 'cm' : 'in'})
           </span>
           <Input
@@ -110,7 +109,7 @@ export function NutritionPlan() {
           />
         </label>
         <label className="flex flex-col gap-xs">
-          <span className="font-display text-label-caps uppercase text-on-surface-variant">
+          <span className="text-body-sm font-semibold text-on-surface-variant">
             Weight ({state.unit === 'metric' ? 'kg' : 'lbs'})
           </span>
           <Input
@@ -121,7 +120,7 @@ export function NutritionPlan() {
           />
         </label>
         <PillGroup
-          label="Activity Level"
+          label="Activity level"
           options={ACTIVITY_LEVELS.map((v) => ({ value: v, label: ACTIVITY_LABELS[v] }))}
           value={state.activityLevel}
           onChange={(v) => update('activityLevel', v)}
@@ -129,7 +128,7 @@ export function NutritionPlan() {
       </Card>
 
       <div>
-        <span className="font-display text-label-caps uppercase text-on-surface-variant">Fitness Goal</span>
+        <p className="text-body-sm text-on-surface-variant">Fitness goal</p>
         <div className="mt-sm grid grid-cols-1 gap-sm sm:grid-cols-3">
           {GOALS.map((g) => {
             const active = g === state.goal
@@ -141,6 +140,7 @@ export function NutritionPlan() {
                 onClick={() => update('goal', g)}
                 className={active ? 'bg-surface-container shadow-[0_0_24px_rgba(195,244,0,0.15)]' : 'bg-surface-container-low hover:bg-surface-container'}
               >
+                {active && <div className="absolute inset-x-0 top-0 h-0.5 rounded-t bg-primary-container" />}
                 <div className="flex flex-col items-start">
                   <span className="font-display text-headline-sm text-white">{meta.label}</span>
                   <span className="text-body-sm text-on-surface-variant">{meta.adjustment}</span>
@@ -152,26 +152,28 @@ export function NutritionPlan() {
       </div>
 
       <div className="grid grid-cols-1 gap-sm sm:grid-cols-3">
-        <Card>
-          <div className="font-display text-label-caps uppercase text-on-surface-variant">BMR</div>
-          <div className="mt-1 font-display text-metric-lg text-white">{plan.bmr}</div>
+        <Card className="flex flex-col gap-xs">
+          <div className="text-body-sm text-on-surface-variant">BMR</div>
+          <div className="font-display text-metric-lg text-white">{plan.bmr}</div>
+          <div className="text-body-sm text-on-surface-variant">kcal/day at rest</div>
         </Card>
-        <Card>
-          <div className="font-display text-label-caps uppercase text-on-surface-variant">TDEE</div>
-          <div className="mt-1 font-display text-metric-lg text-white">{plan.tdee}</div>
+        <Card className="flex flex-col gap-xs">
+          <div className="text-body-sm text-on-surface-variant">TDEE</div>
+          <div className="font-display text-metric-lg text-white">{plan.tdee}</div>
+          <div className="text-body-sm text-on-surface-variant">kcal/day with activity</div>
         </Card>
-        <Card>
-          <div className="font-display text-label-caps uppercase text-on-surface-variant">Target Calories</div>
-          <div className="mt-1 font-display text-metric-lg text-primary-container">{plan.targetCalories}</div>
+        <Card className="flex flex-col gap-xs border-primary-container/20 bg-surface-container">
+          <div className="text-body-sm text-on-surface-variant">Target calories</div>
+          <div className="font-display text-metric-lg text-primary-container">{plan.targetCalories}</div>
           <div className="text-body-sm capitalize text-on-surface-variant">{plan.goalLabel}</div>
         </Card>
       </div>
 
       <div>
-        <span className="font-display text-label-caps uppercase text-on-surface-variant">Macronutrient Breakdown</span>
+        <p className="text-body-sm text-on-surface-variant">Macronutrient breakdown</p>
         <div className="mt-sm mb-sm">
           <PillGroup
-            label="Macro Preset"
+            label="Macro preset"
             options={MACRO_PRESETS.map((v) => ({ value: v, label: MACRO_PRESET_LABELS[v] }))}
             value={state.macroPreset}
             onChange={(v) => update('macroPreset', v)}
@@ -185,7 +187,7 @@ export function NutritionPlan() {
                 <div className="flex items-center justify-between">
                   <span className="font-display text-base font-bold capitalize text-white">{macro}</span>
                   <span className="text-body-sm text-on-surface-variant">
-                    {m.grams}g · {m.calories} kcal · {m.percentage}% · {m.gramsPerKg}g/kg
+                    {m.grams}g / {m.calories} kcal / {m.percentage}% / {m.gramsPerKg}g·kg⁻¹
                   </span>
                 </div>
                 <div className="mt-sm h-1.5 w-full overflow-hidden rounded-full bg-surface-container-highest">
@@ -198,7 +200,7 @@ export function NutritionPlan() {
       </div>
 
       <div>
-        <span className="font-display text-label-caps uppercase text-on-surface-variant">Micronutrients &amp; Supplements</span>
+        <p className="text-body-sm text-on-surface-variant">Micronutrients &amp; supplements</p>
         <div className="mt-sm grid grid-cols-1 gap-sm sm:grid-cols-2">
           {plan.micronutrients.map((m) => (
             <Card key={m.name}>
@@ -212,7 +214,7 @@ export function NutritionPlan() {
 
       <div className="flex gap-sm">
         <Button variant="secondary" onClick={() => localStorage.setItem(STORAGE_KEY, JSON.stringify(state))}>
-          Save Plan
+          Save plan
         </Button>
         <a
           href={exportHref}
@@ -239,7 +241,7 @@ function PillGroup<T extends string>({
 }) {
   return (
     <div className="flex flex-col gap-xs">
-      <span className="font-display text-label-caps uppercase tracking-wider text-on-surface-variant">{label}</span>
+      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
       <div className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
         {options.map((opt) => (
           <Button
