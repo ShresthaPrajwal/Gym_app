@@ -1,6 +1,7 @@
 ---
 approved_by: "ShresthaPrajwal"
 approved_at: "2026-09-26"
+planned_behaviors: 2
 approved_sha256: "46702802c1a7cfd774430dba10276276a56ce23c43358fd6e960ee8610f5154a"
 ---
 ## Exec Plan — Task T-mobile-layout-20er3b
