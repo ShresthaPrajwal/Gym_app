@@ -52,7 +52,7 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Dumbbell' }))
   expect(screen.getByText(/no matching exercises/i)).toBeInTheDocument()
   expect(screen.queryByRole('heading', { level: 3 })).not.toBeInTheDocument()
-  fireEvent.click(screen.getAllByRole('button', { name: 'Reset filters' })[0])
+  fireEvent.click(screen.getByRole('button', { name: /clear all filters/i }))
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
 
   // anatomy inspector stays in sync with the selected anatomy group.
@@ -60,6 +60,9 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   // now presents front and back together (card AC-4), so a back-only region needs no toggle to
   // reach. Region coverage here is broadened as the diagram's regions land.
   fireEvent.click(within(anatomyGroup).getByRole('button', { name: /^calves$/i }))
+  // 0007: chips report which one is active
+  expect(within(anatomyGroup).getByRole('button', { name: /^calves$/i })).toHaveAttribute('aria-pressed', 'true')
+  expect(within(anatomyGroup).getByRole('button', { name: /^all$/i })).toHaveAttribute('aria-pressed', 'false')
   expect(screen.getAllByRole('button', { name: /calves.*region/i }).some((el) => el.getAttribute('aria-pressed') === 'true')).toBe(true)
 })
 
@@ -82,13 +85,11 @@ test('selecting a specific muscle region narrows the listing and the reported co
   expect(listed).not.toContain('Back Squat')
 
   // the count the page reports is the count it actually rendered
-  const count = screen.getByText('Exercises', { selector: 'div' }).parentElement as HTMLElement
-  expect(within(count).getByText(String(listed.length))).toBeInTheDocument()
+  expect(screen.getByRole('status')).toHaveTextContent(new RegExp(`Showing ${listed.length} exercises?`))
 
   // and the active-sector readout names the chosen region back to the user (scoped, since
   // the region's name also appears on its filter control)
-  const sector = screen.getByText('Muscle group', { selector: 'div' }).parentElement as HTMLElement
-  expect(within(sector).getByText('Calves')).toBeInTheDocument()
+  expect(screen.getByRole('status')).toHaveTextContent('Calves')
 })
 
 // B-4: AC-5 [e2e]: clicking a muscle on the anatomy diagram itself (not the filter chips)
@@ -104,8 +105,7 @@ test('clicking a region on the anatomy diagram narrows the listing and the legen
   expect(listed).toContain('Barbell Hip Thrust')
   expect(listed).not.toContain('Bench Press')
 
-  const count = screen.getByText('Exercises', { selector: 'div' }).parentElement as HTMLElement
-  expect(within(count).getByText(String(listed.length))).toBeInTheDocument()
+  expect(screen.getByRole('status')).toHaveTextContent(new RegExp(`Showing ${listed.length} exercises?`))
   expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/glutes/i)
 
   // The diagram is a two-panel landscape figure, so the owner's decision was to present it as a
