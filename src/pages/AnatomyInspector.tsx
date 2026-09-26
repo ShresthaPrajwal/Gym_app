@@ -1,4 +1,4 @@
-import { useEffect, useState, useSyncExternalStore, type KeyboardEvent } from 'react'
+import { useLayoutEffect, useState, useSyncExternalStore, type KeyboardEvent } from 'react'
 import { Button } from '../components'
 import type { MuscleGroup } from '../domain/exerciseFilter'
 
@@ -371,15 +371,16 @@ const hasRegion = (side: Side, muscle: MuscleGroup) => PANELS[side].regions.some
 // Matches the `md` breakpoint in tailwind.config. No matchMedia (e.g. jsdom) falls back to wide.
 const NARROW = '(max-width: 767px)'
 
+function subscribeToViewport(onChange: () => void) {
+  const query = window.matchMedia?.(NARROW)
+  query?.addEventListener('change', onChange)
+  return () => query?.removeEventListener('change', onChange)
+}
+
+const isNarrowViewport = () => window.matchMedia?.(NARROW).matches ?? false
+
 function useNarrowViewport() {
-  return useSyncExternalStore(
-    (onChange) => {
-      const query = window.matchMedia?.(NARROW)
-      query?.addEventListener('change', onChange)
-      return () => query?.removeEventListener('change', onChange)
-    },
-    () => window.matchMedia?.(NARROW).matches ?? false,
-  )
+  return useSyncExternalStore(subscribeToViewport, isNarrowViewport)
 }
 
 export function AnatomyInspector({
@@ -392,8 +393,9 @@ export function AnatomyInspector({
   const narrow = useNarrowViewport()
   const [side, setSide] = useState<Side>('front')
 
-  // A selection made elsewhere (the filter chips) that only exists on the hidden side brings it into view.
-  useEffect(() => {
+  // A selection made elsewhere (the filter chips) that only exists on the hidden side brings it into view —
+  // before paint, so the wrong side never flashes.
+  useLayoutEffect(() => {
     if (selected === 'all') return
     setSide((current) => {
       const other: Side = current === 'front' ? 'back' : 'front'

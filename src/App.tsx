@@ -20,7 +20,7 @@ const TABS: { id: Section; label: string; short: string; icon: ReactNode }[] = [
   {
     id: 'exercise-library',
     label: 'Exercise Library',
-    short: 'Exercises',
+    short: 'Library',
     icon: (
       <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0">
         <circle cx="11" cy="11" r="7" />
@@ -66,7 +66,6 @@ function App() {
                 window.scrollTo({ top: 0 })
               }}
               aria-current={active ? 'page' : undefined}
-              aria-label={tab.label}
               className={`relative flex min-h-[56px] flex-1 flex-col items-center justify-center gap-0.5 px-sm font-display font-bold transition-colors duration-150 md:min-h-[44px] md:flex-row md:gap-xs md:px-md ${
                 active
                   ? 'text-primary-container'
