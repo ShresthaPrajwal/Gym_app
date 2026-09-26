@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, Input, PageLayout } from '../components'
+import { Button, Card, ChipGroup, Input, PageLayout } from '../components'
 import {
   ACTIVITY_LEVELS,
   GOALS,
@@ -90,9 +90,9 @@ export function NutritionPlan() {
         </p>
       </div>
 
-      <Card className="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-3">
-        <PillGroup label="Sex" options={SEXES.map((v) => ({ value: v, label: SEX_LABELS[v] }))} value={state.sex} onChange={(v) => update('sex', v)} />
-        <PillGroup label="Units" options={UNITS.map((v) => ({ value: v, label: UNIT_LABELS[v] }))} value={state.unit} onChange={(v) => update('unit', v)} />
+      <Card className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-3">
+        <ChipGroup label="Sex" options={SEXES.map((v) => ({ value: v, label: SEX_LABELS[v] }))} value={state.sex} onChange={(v) => update('sex', v)} />
+        <ChipGroup label="Units" options={UNITS.map((v) => ({ value: v, label: UNIT_LABELS[v] }))} value={state.unit} onChange={(v) => update('unit', v)} />
         <label className="flex flex-col gap-xs">
           <span className="text-body-sm font-semibold text-on-surface-variant">Age</span>
           <Input type="number" aria-label="Age" value={state.age} onChange={(e) => update('age', Number(e.target.value))} />
@@ -119,7 +119,7 @@ export function NutritionPlan() {
             onChange={(e) => update('weight', Number(e.target.value))}
           />
         </label>
-        <PillGroup
+        <ChipGroup
           label="Activity level"
           options={ACTIVITY_LEVELS.map((v) => ({ value: v, label: ACTIVITY_LABELS[v] }))}
           value={state.activityLevel}
@@ -172,7 +172,7 @@ export function NutritionPlan() {
       <div>
         <p className="text-body-sm text-on-surface-variant">Macronutrient breakdown</p>
         <div className="mt-sm mb-sm">
-          <PillGroup
+          <ChipGroup
             label="Macro preset"
             options={MACRO_PRESETS.map((v) => ({ value: v, label: MACRO_PRESET_LABELS[v] }))}
             value={state.macroPreset}
@@ -225,39 +225,5 @@ export function NutritionPlan() {
         </a>
       </div>
     </PageLayout>
-  )
-}
-
-function PillGroup<T extends string>({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string
-  options: { value: T; label: string }[]
-  value: T
-  onChange: (v: T) => void
-}) {
-  return (
-    <div className="flex flex-col gap-xs">
-      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
-      <div className="flex flex-wrap gap-1 rounded bg-surface-container-lowest p-1">
-        {options.map((opt) => (
-          <Button
-            key={opt.value}
-            variant="pill"
-            onClick={() => onChange(opt.value)}
-            className={`flex-1 ${
-              value === opt.value
-                ? 'bg-surface-container-high text-primary-container shadow-sm'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {opt.label}
-          </Button>
-        ))}
-      </div>
-    </div>
   )
 }
