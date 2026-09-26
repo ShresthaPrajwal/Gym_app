@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { ExerciseLibrary } from './pages/ExerciseLibrary'
 import { NutritionPlan } from './pages/NutritionPlan'
 import { RoutineBuilder } from './pages/RoutineBuilder'
 
 type Section = 'routine-builder' | 'exercise-library' | 'nutrition-plan'
 
-const TABS: { id: Section; label: string; icon: React.ReactNode }[] = [
+const TABS: { id: Section; label: string; icon: ReactNode }[] = [
   {
     id: 'routine-builder',
     label: 'Routine Builder',
