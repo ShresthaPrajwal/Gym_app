@@ -89,7 +89,7 @@ export function RoutineBuilder() {
         />
         <PillGroup
           label="Days per week"
-          options={CADENCES.map((c) => ({ value: c, label: String(c) }))}
+          options={CADENCES.map((c) => ({ value: c, label: `${c} Days` }))}
           value={cadence}
           onChange={setCadence}
         />

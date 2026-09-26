@@ -1,4 +1,5 @@
-import type { KeyboardEvent } from 'react'
+import { useEffect, useState, useSyncExternalStore, type KeyboardEvent } from 'react'
+import { Button } from '../components'
 import type { MuscleGroup } from '../domain/exerciseFilter'
 
 // Geometry is transcribed verbatim from the supplied `human_muscle_system_clickable.svg`
@@ -285,7 +286,7 @@ function Region({
       onClick={activate}
       onKeyDown={onKeyDown}
       strokeWidth={active ? 2.5 : 1.5}
-      className={`cursor-pointer outline-none transition-colors ${
+      className={`cursor-pointer outline-none transition-colors focus-visible:stroke-secondary ${
         active
           ? 'fill-primary-container/40 stroke-primary-container'
           : 'fill-surface-bright stroke-surface-container-lowest hover:fill-outline'
@@ -317,7 +318,7 @@ function BodyPanel({
   regions: RegionDef[]
   silhouette: string
   feet: string[]
-  callouts: Callout[]
+  callouts: Callout[] | null
   selected: MuscleGroup | 'all'
   onSelect: (muscle: MuscleGroup) => void
 }) {
@@ -338,7 +339,7 @@ function BodyPanel({
           onSelect={onSelect}
         />
       ))}
-      <g aria-hidden="true">
+      {callouts && <g aria-hidden="true">
         {callouts.map((c) => (
           <g key={c.text}>
             <path className="fill-none stroke-primary-container/70" strokeWidth={1.2} d={c.line} />
@@ -353,8 +354,31 @@ function BodyPanel({
             </text>
           </g>
         ))}
-      </g>
+      </g>}
     </g>
+  )
+}
+
+type Side = 'front' | 'back'
+
+const PANELS: Record<Side, { regions: RegionDef[]; silhouette: string; feet: string[]; callouts: Callout[]; viewBox: string }> = {
+  front: { regions: FRONT_REGIONS, silhouette: FRONT_SILHOUETTE, feet: FRONT_FEET, callouts: FRONT_CALLOUTS, viewBox: '172 105 260 650' },
+  back: { regions: BACK_REGIONS, silhouette: BACK_SILHOUETTE, feet: BACK_FEET, callouts: BACK_CALLOUTS, viewBox: '768 105 260 650' },
+}
+
+const hasRegion = (side: Side, muscle: MuscleGroup) => PANELS[side].regions.some((r) => r.muscle === muscle)
+
+// Matches the `md` breakpoint in tailwind.config. No matchMedia (e.g. jsdom) falls back to wide.
+const NARROW = '(max-width: 767px)'
+
+function useNarrowViewport() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia?.(NARROW)
+      query?.addEventListener('change', onChange)
+      return () => query?.removeEventListener('change', onChange)
+    },
+    () => window.matchMedia?.(NARROW).matches ?? false,
   )
 }
 
@@ -365,106 +389,87 @@ export function AnatomyInspector({
   selected: MuscleGroup | 'all'
   onSelect: (muscle: MuscleGroup) => void
 }) {
+  const narrow = useNarrowViewport()
+  const [side, setSide] = useState<Side>('front')
+
+  // A selection made elsewhere (the filter chips) that only exists on the hidden side brings it into view.
+  useEffect(() => {
+    if (selected === 'all') return
+    setSide((current) => {
+      const other: Side = current === 'front' ? 'back' : 'front'
+      return !hasRegion(current, selected) && hasRegion(other, selected) ? other : current
+    })
+  }, [selected])
+
+  const sides: Side[] = narrow ? [side] : ['front', 'back']
+
   return (
     <div
       data-ds="anatomy-inspector"
       data-testid="anatomy-inspector"
-      className="rounded-md border border-white/10 bg-surface-container-lowest p-md"
+      className="flex flex-col gap-sm rounded-md border border-white/10 bg-surface-container-lowest p-md"
     >
+      <div className="flex flex-wrap items-end justify-between gap-sm">
+        <div>
+          <h2 className="font-display text-headline-sm text-white">Bio-Anatomy Inspector</h2>
+          <p className="text-body-sm text-on-surface-variant">Tap a muscle to filter the exercises below.</p>
+        </div>
+        {narrow && (
+          <div role="group" aria-label="Body side" className="flex gap-1 rounded bg-surface-container-low p-1">
+            {(['front', 'back'] as const).map((s) => (
+              <Button
+                key={s}
+                variant="pill"
+                aria-pressed={side === s}
+                onClick={() => setSide(s)}
+                className={`min-h-[40px] px-lg ${
+                  side === s ? 'bg-surface-container-high text-primary-container' : 'text-on-surface-variant hover:text-on-surface'
+                }`}
+              >
+                {s === 'front' ? 'Front' : 'Back'}
+              </Button>
+            ))}
+          </div>
+        )}
+      </div>
+
       <svg
-        viewBox="0 0 1200 760"
-        className="h-auto w-full"
+        viewBox={narrow ? PANELS[side].viewBox : '0 90 1200 670'}
+        className={narrow ? 'mx-auto h-[62vh] max-h-[560px] w-auto max-w-full' : 'h-auto w-full'}
         role="img"
-        aria-label="Human muscular system"
+        aria-label={narrow ? `Human muscular system, ${side} view` : 'Human muscular system'}
       >
-        <rect className="fill-surface-container-lowest" width={1200} height={760} />
+        {!narrow && (
+          <>
+            <rect className="fill-surface-container-low stroke-white/10" strokeWidth={1.5} x={25} y={100} width={555} height={610} rx={8} />
+            <rect className="fill-surface-container-low stroke-white/10" strokeWidth={1.5} x={620} y={100} width={555} height={610} rx={8} />
+            <text className="fill-on-surface-variant font-body text-[13px]" x={302} y={694} textAnchor="middle">
+              Front view
+            </text>
+            <text className="fill-on-surface-variant font-body text-[13px]" x={898} y={694} textAnchor="middle">
+              Back view
+            </text>
+          </>
+        )}
 
-        <text className="fill-white font-display text-[28px] font-bold" x={42} y={48}>
-          Bio-Anatomy Inspector
-        </text>
-        <text className="fill-on-surface-variant font-display text-[12px] tracking-[4px]" x={43} y={72}>
-          HUMAN MUSCULAR SYSTEM
-        </text>
-
-        <rect
-          className="fill-surface-container-low stroke-white/10"
-          strokeWidth={1.5}
-          x={25}
-          y={100}
-          width={555}
-          height={610}
-          rx={8}
-        />
-        <rect
-          className="fill-surface-container-low stroke-white/10"
-          strokeWidth={1.5}
-          x={620}
-          y={100}
-          width={555}
-          height={610}
-          rx={8}
-        />
-
-        <BodyPanel
-          view="front"
-          regions={FRONT_REGIONS}
-          silhouette={FRONT_SILHOUETTE}
-          feet={FRONT_FEET}
-          callouts={FRONT_CALLOUTS}
-          selected={selected}
-          onSelect={onSelect}
-        />
-        <BodyPanel
-          view="back"
-          regions={BACK_REGIONS}
-          silhouette={BACK_SILHOUETTE}
-          feet={BACK_FEET}
-          callouts={BACK_CALLOUTS}
-          selected={selected}
-          onSelect={onSelect}
-        />
-
-        <text
-          className="fill-on-surface-variant font-display text-[12px] tracking-[3px]"
-          x={302}
-          y={694}
-          textAnchor="middle"
-        >
-          FRONT VIEW
-        </text>
-        <text
-          className="fill-on-surface-variant font-display text-[12px] tracking-[3px]"
-          x={898}
-          y={694}
-          textAnchor="middle"
-        >
-          BACK VIEW
-        </text>
-
-        <rect
-          className="fill-surface-container stroke-white/10"
-          strokeWidth={1.2}
-          x={885}
-          y={35}
-          width={270}
-          height={43}
-          rx={7}
-        />
-        <rect className="fill-primary-container/40" x={898} y={47} width={18} height={18} rx={3} />
-        <text className="fill-on-surface-variant font-body text-[12px]" x={928} y={61}>
-          Click a muscle group to select
-        </text>
-
-        <text
-          data-testid="anatomy-legend"
-          className="fill-on-surface-variant font-body text-[12px]"
-          x={600}
-          y={735}
-          textAnchor="middle"
-        >
-          {selected === 'all' ? 'Selected: none' : `Selected: ${REGION_LABELS[selected] ?? selected}`}
-        </text>
+        {sides.map((s) => (
+          <BodyPanel
+            key={s}
+            view={s}
+            regions={PANELS[s].regions}
+            silhouette={PANELS[s].silhouette}
+            feet={PANELS[s].feet}
+            // at phone size the leader-line labels would render ~7px — the legend names the selection instead
+            callouts={narrow ? null : PANELS[s].callouts}
+            selected={selected}
+            onSelect={onSelect}
+          />
+        ))}
       </svg>
+
+      <p data-testid="anatomy-legend" aria-live="polite" className="text-center text-body-sm text-on-surface-variant">
+        {selected === 'all' ? 'Selected: none' : `Selected: ${REGION_LABELS[selected] ?? selected}`}
+      </p>
     </div>
   )
 }

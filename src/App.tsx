@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { Button } from './components'
 import { ExerciseLibrary } from './pages/ExerciseLibrary'
 import { NutritionPlan } from './pages/NutritionPlan'
 import { RoutineBuilder } from './pages/RoutineBuilder'
@@ -50,8 +51,9 @@ function App() {
         {TABS.map((tab) => {
           const active = section === tab.id
           return (
-            <button
+            <Button
               key={tab.id}
+              variant="pill"
               onClick={() => setSection(tab.id)}
               aria-current={active ? 'page' : undefined}
               className={`relative flex min-h-[44px] flex-1 items-center justify-center gap-xs px-md py-sm font-display text-label-md font-bold transition-colors duration-150 ${
@@ -65,7 +67,7 @@ function App() {
               {active && (
                 <span className="absolute inset-x-0 bottom-0 h-0.5 bg-primary-container" />
               )}
-            </button>
+            </Button>
           )
         })}
       </nav>
