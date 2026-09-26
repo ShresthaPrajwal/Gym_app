@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState, useSyncExternalStore, type KeyboardEvent } from 'react'
-import { Button } from '../components'
+import { ChipGroup } from '../components'
 import type { MuscleGroup } from '../domain/exerciseFilter'
 
 // Geometry is transcribed verbatim from the supplied `human_muscle_system_clickable.svg`
@@ -417,21 +417,15 @@ export function AnatomyInspector({
           <p className="text-body-sm text-on-surface-variant">Tap a muscle to filter the exercises below.</p>
         </div>
         {narrow && (
-          <div role="group" aria-label="Body side" className="flex gap-1 rounded bg-surface-container-low p-1">
-            {(['front', 'back'] as const).map((s) => (
-              <Button
-                key={s}
-                variant="pill"
-                aria-pressed={side === s}
-                onClick={() => setSide(s)}
-                className={`min-h-[40px] px-lg ${
-                  side === s ? 'bg-surface-container-high text-primary-container' : 'text-on-surface-variant hover:text-on-surface'
-                }`}
-              >
-                {s === 'front' ? 'Front' : 'Back'}
-              </Button>
-            ))}
-          </div>
+          <ChipGroup
+            name="Body side"
+            options={[
+              { value: 'front' as const, label: 'Front' },
+              { value: 'back' as const, label: 'Back' },
+            ]}
+            value={side}
+            onChange={setSide}
+          />
         )}
       </div>
 

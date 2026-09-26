@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from 'react'
-import { Badge, Button, Card, Input, PageLayout, VideoThumbnail } from '../components'
+import { useState } from 'react'
+import { Badge, Button, Card, ChipGroup, Input, PageLayout, VideoThumbnail } from '../components'
 import {
   DIFFICULTIES,
   EQUIPMENT_TYPES,
@@ -106,40 +106,33 @@ export function ExerciseLibrary() {
           onChange={(e) => update('search', e.target.value)}
         />
 
-        <FilterRow label="Muscle group" groupLabel="Anatomy Group">
-          <PillButton active={filters.muscle === 'all'} onClick={() => update('muscle', 'all')}>All</PillButton>
-          {MUSCLE_GROUPS.map((m) => (
-            <PillButton key={m} active={filters.muscle === m} onClick={() => update('muscle', m)}>
-              {ANATOMY_LABELS[m]}
-            </PillButton>
-          ))}
-        </FilterRow>
+        <ChipGroup
+          label="Muscle group"
+          name="Anatomy Group"
+          options={[{ value: 'all' as const, label: 'All' }, ...MUSCLE_GROUPS.map((m) => ({ value: m, label: ANATOMY_LABELS[m] }))]}
+          value={filters.muscle}
+          onChange={(v) => update('muscle', v)}
+        />
 
         <div className="grid grid-cols-1 gap-md lg:grid-cols-3">
-          <FilterRow label="Difficulty">
-            <PillButton active={filters.difficulty === 'all'} onClick={() => update('difficulty', 'all')}>All</PillButton>
-            {DIFFICULTIES.map((d) => (
-              <PillButton key={d} active={filters.difficulty === d} onClick={() => update('difficulty', d)}>
-                {DIFFICULTY_LABELS[d]}
-              </PillButton>
-            ))}
-          </FilterRow>
-          <FilterRow label="Equipment">
-            <PillButton active={filters.equipment === 'all'} onClick={() => update('equipment', 'all')}>All</PillButton>
-            {EQUIPMENT_TYPES.map((e) => (
-              <PillButton key={e} active={filters.equipment === e} onClick={() => update('equipment', e)}>
-                {EQUIPMENT_LABELS[e]}
-              </PillButton>
-            ))}
-          </FilterRow>
-          <FilterRow label="Mechanics">
-            <PillButton active={filters.mechanics === 'any'} onClick={() => update('mechanics', 'any')}>Any</PillButton>
-            {MECHANICS.map((m) => (
-              <PillButton key={m} active={filters.mechanics === m} onClick={() => update('mechanics', m)}>
-                {MECHANICS_LABELS[m]}
-              </PillButton>
-            ))}
-          </FilterRow>
+          <ChipGroup
+            label="Difficulty"
+            options={[{ value: 'all' as const, label: 'All' }, ...DIFFICULTIES.map((d) => ({ value: d, label: DIFFICULTY_LABELS[d] }))]}
+            value={filters.difficulty}
+            onChange={(v) => update('difficulty', v)}
+          />
+          <ChipGroup
+            label="Equipment"
+            options={[{ value: 'all' as const, label: 'All' }, ...EQUIPMENT_TYPES.map((e) => ({ value: e, label: EQUIPMENT_LABELS[e] }))]}
+            value={filters.equipment}
+            onChange={(v) => update('equipment', v)}
+          />
+          <ChipGroup
+            label="Mechanics"
+            options={[{ value: 'any' as const, label: 'Any' }, ...MECHANICS.map((m) => ({ value: m, label: MECHANICS_LABELS[m] }))]}
+            value={filters.mechanics}
+            onChange={(v) => update('mechanics', v)}
+          />
         </div>
 
         <Button variant="secondary" onClick={reset} className="self-start">
@@ -229,38 +222,5 @@ export function ExerciseLibrary() {
         />
       )}
     </PageLayout>
-  )
-}
-
-function FilterRow({ label, groupLabel = label, children }: { label: string; groupLabel?: string; children: ReactNode }) {
-  return (
-    <div className="flex min-w-0 flex-col gap-xs">
-      <span className="text-body-sm font-semibold text-on-surface-variant">{label}</span>
-      {/* one swipeable row on phones (bleeds to the card edge to show it scrolls); wraps from md up */}
-      <div
-        role="group"
-        aria-label={groupLabel}
-        className="-mx-md flex gap-xs overflow-x-auto px-md pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden"
-      >
-        {children}
-      </div>
-    </div>
-  )
-}
-
-function PillButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
-  return (
-    <Button
-      variant="pill"
-      aria-pressed={active}
-      onClick={onClick}
-      className={`h-10 shrink-0 whitespace-nowrap border px-md ${
-        active
-          ? 'border-primary-container bg-primary-container/15 text-primary-container'
-          : 'border-outline-variant text-on-surface-variant hover:border-outline hover:text-on-surface'
-      }`}
-    >
-      {children}
-    </Button>
   )
 }
