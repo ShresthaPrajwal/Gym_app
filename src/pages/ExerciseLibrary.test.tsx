@@ -19,12 +19,13 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Back Squat', level: 3 })).not.toBeInTheDocument()
 
-  // open the technique modal, check content, close it
+  // open the demo video dialog, check content, close it
+  // (the technique modal this once opened is no longer reachable — Watch demo plays the video in place)
   fireEvent.click(screen.getByRole('button', { name: /watch demo/i }))
   const dialog = screen.getByRole('dialog')
   expect(within(dialog).getByText('Bench Press')).toBeInTheDocument()
-  const searchLink = within(dialog).getByRole('link', { name: /watch on youtube/i })
-  expect(searchLink).toHaveAttribute('href', expect.stringContaining('youtube.com/results?search_query='))
+  const youtubeLink = within(dialog).getByRole('link', { name: /watch on youtube/i })
+  expect(youtubeLink).toHaveAttribute('href', expect.stringContaining('youtube.com/'))
   fireEvent.click(within(dialog).getByRole('button', { name: /close/i }))
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
@@ -41,7 +42,7 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   expect(screen.queryByRole('heading', { name: 'Lunge', level: 3 })).not.toBeInTheDocument()
 
   // reset restores the full list
-  fireEvent.click(screen.getByRole('button', { name: 'Reset Matrix' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }))
   expect(screen.getByRole('heading', { name: 'Lunge', level: 3 })).toBeInTheDocument()
 
   // a combination with no matches shows the no-results state
@@ -51,7 +52,7 @@ test('search/filter narrows results, resets, shows no-results, syncs the anatomy
   fireEvent.click(within(equipmentGroup).getByRole('button', { name: 'Dumbbell' }))
   expect(screen.getByText(/no matching exercises/i)).toBeInTheDocument()
   expect(screen.queryByRole('heading', { level: 3 })).not.toBeInTheDocument()
-  fireEvent.click(screen.getByRole('button', { name: /reset filter matrix/i }))
+  fireEvent.click(screen.getAllByRole('button', { name: 'Reset filters' })[0])
   expect(screen.getByRole('heading', { name: 'Bench Press', level: 3 })).toBeInTheDocument()
 
   // anatomy inspector stays in sync with the selected anatomy group.
@@ -81,11 +82,12 @@ test('selecting a specific muscle region narrows the listing and the reported co
   expect(listed).not.toContain('Back Squat')
 
   // the count the page reports is the count it actually rendered
-  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+  const count = screen.getByText('Exercises', { selector: 'div' }).parentElement as HTMLElement
+  expect(within(count).getByText(String(listed.length))).toBeInTheDocument()
 
   // and the active-sector readout names the chosen region back to the user (scoped, since
   // the region's name also appears on its filter control)
-  const sector = screen.getByText('Active Sector').parentElement as HTMLElement
+  const sector = screen.getByText('Muscle group', { selector: 'div' }).parentElement as HTMLElement
   expect(within(sector).getByText('Calves')).toBeInTheDocument()
 })
 
@@ -102,7 +104,8 @@ test('clicking a region on the anatomy diagram narrows the listing and the legen
   expect(listed).toContain('Barbell Hip Thrust')
   expect(listed).not.toContain('Bench Press')
 
-  expect(screen.getByText(`Indexed Drills: ${listed.length}`)).toBeInTheDocument()
+  const count = screen.getByText('Exercises', { selector: 'div' }).parentElement as HTMLElement
+  expect(within(count).getByText(String(listed.length))).toBeInTheDocument()
   expect(screen.getByTestId('anatomy-legend').textContent).toMatch(/glutes/i)
 
   // The diagram is a two-panel landscape figure, so the owner's decision was to present it as a

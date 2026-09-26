@@ -122,3 +122,48 @@ test('the inert head and feet are drawn, but expose no control', () => {
   const labels = screen.queryAllByRole('button').map((el) => (el.getAttribute('aria-label') ?? '').toLowerCase())
   expect(labels.filter((l) => l.includes('head') || l.includes('feet') || l.includes('foot'))).toEqual([])
 })
+
+// 0007 B-1: AC-1/AC-2: on a narrow viewport the diagram shows one enlarged body at a time with a
+// Front/Back switch; wide viewports keep both bodies side by side (the tests above, AC-3).
+function stubViewport(narrow: boolean) {
+  vi.stubGlobal('matchMedia', (query: string) => ({
+    matches: narrow,
+    media: query,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }))
+}
+
+describe('narrow viewport', () => {
+  beforeEach(() => stubViewport(true))
+  afterEach(() => vi.unstubAllGlobals())
+
+  const regionNames = () =>
+    screen.queryAllByRole('button').map((el) => (el.getAttribute('aria-label') ?? '').toLowerCase())
+
+  test('shows one side at a time, switched with Front/Back', () => {
+    const onSelect = vi.fn()
+    render(<AnatomyInspector selected="all" onSelect={onSelect} />)
+
+    expect(screen.getByRole('button', { name: 'Front' })).toHaveAttribute('aria-pressed', 'true')
+    expect(regionNames()).toContain('chest region')
+    expect(regionNames()).not.toContain('glutes region')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Back' }))
+
+    expect(screen.getByRole('button', { name: 'Back' })).toHaveAttribute('aria-pressed', 'true')
+    expect(regionNames()).not.toContain('chest region')
+    fireEvent.click(screen.getByRole('button', { name: /glutes region/i }))
+    expect(onSelect).toHaveBeenCalledWith('glutes')
+  })
+
+  test('selecting a back-only muscle while Front is shown flips to Back', () => {
+    const { rerender } = render(<AnatomyInspector selected="all" onSelect={() => {}} />)
+    expect(regionNames()).not.toContain('hamstrings region')
+
+    rerender(<AnatomyInspector selected="hamstrings" onSelect={() => {}} />)
+
+    expect(screen.getByRole('button', { name: 'Back' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: /hamstrings region/i })).toHaveAttribute('aria-pressed', 'true')
+  })
+})
