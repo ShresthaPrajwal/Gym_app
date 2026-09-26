@@ -167,3 +167,15 @@ describe('narrow viewport', () => {
     expect(screen.getByRole('button', { name: /hamstrings region/i })).toHaveAttribute('aria-pressed', 'true')
   })
 })
+
+// 0007 AC-3: wide viewports keep both bodies side by side, so there is no side switch to operate.
+test('wide viewport draws both sides with no Front/Back switch', () => {
+  stubViewport(false)
+  render(<AnatomyInspector selected="all" onSelect={() => {}} />)
+
+  expect(screen.queryByRole('button', { name: 'Front' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: 'Back' })).not.toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /chest region/i })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /glutes region/i })).toBeInTheDocument()
+  vi.unstubAllGlobals()
+})
