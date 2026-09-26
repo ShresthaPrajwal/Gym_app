@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-26"
+approved_sha256: "d555ce764ed7d42cb391a37f9cbd564326ca72fe00e0da5df510a06e1c6acc66"
+---
 ## Verification — T-visual-ui-redesign-4ksxi5 — 2026-09-26
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
 
