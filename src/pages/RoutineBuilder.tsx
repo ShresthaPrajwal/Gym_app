@@ -72,7 +72,7 @@ export function RoutineBuilder() {
   return (
     <PageLayout>
       <div className="flex flex-col gap-xs">
-        <h1 className="font-display text-headline-xl leading-none tracking-tight text-white">
+        <h1 className="font-display text-headline-lg md:text-headline-xl leading-none tracking-tight text-white">
           Routine Generator
         </h1>
         <p className="max-w-2xl text-body-md text-on-surface-variant">
@@ -105,7 +105,7 @@ export function RoutineBuilder() {
         <p className="text-body-sm text-on-surface-variant">
           Training goal <span className="text-outline">— pick one</span>
         </p>
-        <div className="mt-sm grid grid-cols-2 gap-sm sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-sm grid grid-cols-2 gap-sm md:grid-cols-3 lg:grid-cols-6">
           {GOALS.map((g) => {
             const active = g === goal
             const meta = GOAL_META[g]
@@ -117,7 +117,7 @@ export function RoutineBuilder() {
                   setGoal(g)
                   setDayIndex(0)
                 }}
-                className={`flex flex-col items-start gap-xs ${
+                className={`flex flex-col items-start gap-xs text-left ${
                   active ? 'bg-surface-container shadow-[0_0_24px_rgba(195,244,0,0.15)]' : 'bg-surface-container-low hover:bg-surface-container'
                 }`}
               >
@@ -133,44 +133,47 @@ export function RoutineBuilder() {
 
       {plan && day && (
         <div className="grid grid-cols-1 items-start gap-md lg:grid-cols-[280px_1fr]">
-          <div className="flex flex-col gap-xs">
+          <div className="flex min-w-0 flex-col gap-xs">
             <p className="text-body-sm text-on-surface-variant">7-day plan</p>
-            {plan.map((d, i) => {
-              const selected = i === dayIndex
-              return (
-                <Button
-                  key={d.day}
-                  variant="card"
-                  onClick={() => setDayIndex(i)}
-                  className={`flex items-center justify-between gap-sm ${
-                    d.isRest
-                      ? 'bg-surface-container-lowest opacity-80 hover:bg-surface-container-low'
-                      : selected
-                        ? 'bg-surface-container-high shadow-[inset_0_-2px_0_0_#c3f400]'
-                        : 'bg-surface-container-low hover:bg-surface-container'
-                  }`}
-                >
-                  <div className="flex flex-col">
-                    <span className="font-display text-label-md font-bold text-white">{d.day}</span>
-                    {!d.isRest && (
-                      <span className="font-body text-body-sm text-on-surface-variant">
-                        {d.exercises.length} exercises / {[...new Set(d.exercises.map((e) => e.targetMuscle))].join(', ')}
+            {/* swipeable day strip on phones and tablets, vertical list beside the day from lg up */}
+            <div className="-mx-md flex gap-xs overflow-x-auto px-md pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+              {plan.map((d, i) => {
+                const selected = i === dayIndex
+                return (
+                  <Button
+                    key={d.day}
+                    variant="card"
+                    onClick={() => setDayIndex(i)}
+                    className={`flex min-w-[180px] shrink-0 items-center justify-between gap-sm text-left lg:min-w-0 ${
+                      d.isRest
+                        ? 'bg-surface-container-lowest opacity-80 hover:bg-surface-container-low'
+                        : selected
+                          ? 'bg-surface-container-high shadow-[inset_0_-2px_0_0_#c3f400]'
+                          : 'bg-surface-container-low hover:bg-surface-container'
+                    }`}
+                  >
+                    <div className="flex flex-col">
+                      <span className="font-display text-label-md font-bold text-white">{d.day}</span>
+                      {!d.isRest && (
+                        <span className="font-body text-body-sm text-on-surface-variant">
+                          {d.exercises.length} exercises / {[...new Set(d.exercises.map((e) => e.targetMuscle))].join(', ')}
+                        </span>
+                      )}
+                    </div>
+                    {d.isRest ? (
+                      <Badge>rest</Badge>
+                    ) : (
+                      <span className="rounded bg-surface-container-lowest px-sm py-0.5 font-display text-body-sm text-on-surface-variant">
+                        {d.exercises.reduce((s, e) => s + e.sets, 0)} sets
                       </span>
                     )}
-                  </div>
-                  {d.isRest ? (
-                    <Badge>rest</Badge>
-                  ) : (
-                    <span className="rounded bg-surface-container-lowest px-sm py-0.5 font-display text-body-sm text-on-surface-variant">
-                      {d.exercises.reduce((s, e) => s + e.sets, 0)} sets
-                    </span>
-                  )}
-                </Button>
-              )
-            })}
+                  </Button>
+                )
+              })}
+            </div>
           </div>
 
-          <div className="flex flex-col gap-sm">
+          <div className="flex min-w-0 flex-col gap-sm">
             {day.isRest ? (
               <Card>
                 <h2 className="font-display text-headline-lg text-white">{day.day}</h2>
@@ -182,10 +185,10 @@ export function RoutineBuilder() {
               <>
                 <Card>
                   <h2 className="font-display text-headline-lg text-white">{day.day}</h2>
-                  <div className="mt-sm grid grid-cols-3 gap-sm">
+                  <div className="mt-sm grid grid-cols-2 gap-sm md:grid-cols-3">
                     <Stat label="Total sets" value={String(day.exercises.reduce((s, e) => s + e.sets, 0))} />
                     <Stat label="Exercises" value={String(day.exercises.length)} />
-                    <Stat label="Muscles" value={[...new Set(day.exercises.map((e) => e.targetMuscle))].join(', ')} />
+                    <Stat className="col-span-2 md:col-span-1" label="Muscles" value={[...new Set(day.exercises.map((e) => e.targetMuscle))].join(', ')} />
                   </div>
                 </Card>
 
@@ -286,9 +289,9 @@ function PillGroup<T extends string | number>({
   )
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, className = '' }: { label: string; value: string; className?: string }) {
   return (
-    <div className="rounded bg-surface-container-lowest p-sm">
+    <div className={`rounded bg-surface-container-lowest p-sm ${className}`}>
       <div className="text-body-sm text-on-surface-variant">{label}</div>
       <div className="mt-1 truncate font-display text-metric-md text-white">{value}</div>
     </div>

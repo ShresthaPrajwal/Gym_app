@@ -84,7 +84,7 @@ export function NutritionPlan() {
   return (
     <PageLayout>
       <div className="flex flex-col gap-xs">
-        <h1 className="font-display text-headline-xl tracking-tight text-white">Nutrition &amp; Macros</h1>
+        <h1 className="font-display text-headline-lg md:text-headline-xl tracking-tight text-white">Nutrition &amp; Macros</h1>
         <p className="max-w-2xl text-body-md text-on-surface-variant">
           Enter your details and goal to get daily calorie and macro targets — calculated entirely in your browser.
         </p>
