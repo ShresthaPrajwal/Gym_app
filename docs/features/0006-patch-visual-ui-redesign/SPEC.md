@@ -1,49 +1,51 @@
 ---
-approved_by: ""
-approved_at: ""
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-26"
+approved_sha256: "ff05e34205d51f320a2ce959cde90313c94de4bc64d7df15a10b9e5f5f591e47"
 ---
-# Patch 0006 — <short title>
-> A `patch` iteration — the TWO-STAMP ceremony for small, known-scope work (a bug fix, a
-> tweak, one behavior, one PR). This ONE document is the ticket + TSD + task card + exec
-> plan: your single `lane approve` stamp covers all of it (stamp 1 of 2; stamp 2 is the
-> verification report at the end). The TDD ledger, Critic snapshot, and verify replay are
-> unchanged — a patch removes redundant signatures, never proof.
-> Too big for a patch? More than one story, more than ~3 behaviors, or more than one task
-> → use `lane new fix` / `lane new enhancement` instead (agents: CALL THIS OUT when
-> drafting; the human decides at the stamp).
+# Patch 0006 — Visual polish: remove generic AI design tells, improve nav and typography
 
-**Severity:** <blocker | major | minor>
-**Source:** <where this came from — bug report, monitoring, review feedback>   ← audit chain
+**Severity:** minor
+**Source:** user request + frontend-design audit
 
-**Current behavior:** <what happens now — the scenario that triggers it, not just the error message>
-**Expected behavior:** <what should happen instead>
-**Must NOT change:** <behavior/contracts that stay intact — guards against regression>
+**Current behavior:** The app hits several well-known AI-generated design tells: ALL-CAPS eyebrow labels on every section, acid-green accent on a near-black background, nav tabs styled as stacked-icon pill buttons, and a verbose "ALGORITHMIC PROGRAM ENGINE" eyebrow above the routine builder title. Every card uses the same border/radius/shadow, making sections feel undifferentiated.
 
-## TSD S-0006.01 — <title>
-> Behavior + contracts ONLY — never the library/method/pattern. The Critic anchors to THIS
-> section (snapshot frozen at `lane start`), exactly as it would to a TSD.md section.
+**Expected behavior:** A cleaner, more distinctive visual identity: nav tabs use a horizontal underline-indicator pattern (no filled background), ALL-CAPS section labels are replaced with sentence-case text, the routine builder eyebrow is removed, and stat cards in the nutrition section have stronger typographic presence. No logic, data, or accessibility changes.
+
+**Must NOT change:** Tailwind design tokens (tailwind.config.ts), component logic, domain functions, routing/state, accessibility attributes (aria-*), or the existing color palette values.
+
+## TSD S-0006.01 — Visual polish: nav tabs, typography, label hierarchy
 
 | Aspect | Spec |
 |--------|------|
-| Interfaces | <contracts touched — endpoint, CLI flag, function/SDK signature> |
-| Data / State | <state it touches — empty if none> |
-| Behavior | <the observable behavior after the patch> |
-| Boundaries | <external deps we DON'T own, faked in tests — empty if none> |
-| Tests | <unit/integration — what proves the fix> |
+| Interfaces | No API or component prop changes — only className strings and JSX structure inside existing components |
+| Data / State | No state changes |
+| Behavior | App navigates identically; all three sections render identically in terms of content and interaction. Visual output differs: nav uses underline-indicator tabs; section labels are sentence case; RoutineBuilder eyebrow label removed |
+| Boundaries | None |
+| Tests | Tests: N/A — pure visual/presentational change, no logic altered |
 
-## Task T-visual-ui-redesign-4ksxi5 — <short title>
-**Slice:** a complete observable behavior end-to-end + tests (full vertical)
-**Acceptance criteria:** (tag each: `behavior` | `invariant` | `non-functional` | `e2e`)
-- [ ] AC-1 [behavior]: <observable outcome through an interface that proves the fix>
-**Tests:** AC-1  ← ordered; first = tracer bullet
-<!-- exception: Tests: N/A — reason: config | scaffolding | spike | refactor | tooling — the opt-out is part of what you stamp -->
+## Task T-visual-ui-redesign-4ksxi5 — Visual polish
+
+**Slice:** All visual changes shipped together as one presentational PR
+**Acceptance criteria:**
+- [ ] AC-1 [behavior]: Nav tabs show an underline indicator on the active tab instead of a filled background; inactive tabs have no background fill
+- [ ] AC-2 [behavior]: No ALL-CAPS section labels remain in RoutineBuilder, NutritionPlan, or ExerciseLibrary (form field labels that are short words like "Age", "Height", "Weight" are already sentence-case and stay; only the ALL-CAPS eyebrow/section labels change)
+- [ ] AC-3 [behavior]: "Algorithmic Program Engine" eyebrow label is removed from RoutineBuilder
+- [ ] AC-4 [behavior]: Nutrition stat cards (BMR, TDEE, Target Calories) have more visual presence — larger metric numbers, sentence-case labels
+- [ ] AC-5 [non-functional]: No TypeScript errors introduced
+
+**Tests:** Tests: N/A — pure visual/presentational change, no logic altered
 
 ## Execution Plan
-> Approved BY the spec stamp: `lane start` copies this section verbatim into the worktree's
-> exec-plan.md and carries your stamp onto it — no separate plan gate. Keep it last in this file.
 
-**Approach:** <high-level how — NOT implementation prescription>
-**Boundaries & mocks:** <what's FAKED vs REAL — empty if none>
+**Approach:** Edit className strings and a small amount of JSX in five files. No new components, no new files, no logic changes.
+
+**Boundaries & mocks:** None
+
 **Behaviors (TDD order):**
-- B-1: <the failing test that proves the bug/behavior, then the change that fixes it>
-**Open questions:** <MUST be resolved (or say "none") before the stamp>
+- B-1: Redesign nav tabs in App.tsx — replace Button variant="primary/secondary" with plain button elements using an underline-indicator active state (border-b-2 border-primary-container for active, transparent for inactive, no background fill on any tab)
+- B-2: Remove "Algorithmic Program Engine" eyebrow from RoutineBuilder.tsx; change ALL-CAPS section label strings to sentence case (e.g. "Training goal", "7-day plan", "Cues"); simplify meta strings
+- B-3: In NutritionPlan.tsx, change ALL-CAPS field labels and section labels to sentence case; give stat cards (BMR/TDEE/Calories) larger metric number size using text-metric-lg/text-metric-huge
+- B-4: In ExerciseLibrary.tsx, change ALL-CAPS filter/section labels to sentence case
+
+**Open questions:** none
