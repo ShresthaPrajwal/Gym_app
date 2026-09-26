@@ -1,3 +1,8 @@
+---
+approved_by: "ShresthaPrajwal"
+approved_at: "2026-09-26"
+approved_sha256: "eb83006d58aabae4a7c5ea0b7b77f91cdd45a2c9b715d229c6ed42c2cbf40b09"
+---
 ## Verification — Task T-mobile-layout-20er3b — 2026-09-26
 > Critic anchored to TSD (external spec), NOT to the code. ★GATE: owner confirms/dismisses every flag.
 > Critic: a fresh-context subagent given only snapshot-TSD.md, the task card, and `git diff main...` (src/).
